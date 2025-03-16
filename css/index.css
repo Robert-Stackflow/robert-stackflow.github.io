@@ -7755,7 +7755,7 @@ ul.menus_item_child {
 }
 #article-container .table-wrap {
   overflow-x: auto;
-  margin: 0 30px 20px;
+  margin: 0 0px 20px;
 }
 #article-container .table-wrap table {
   border: 0px solid var(--km-tab-border);

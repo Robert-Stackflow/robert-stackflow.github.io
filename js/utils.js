@@ -4892,7 +4892,7 @@ var blank_memos = {
   creatorNickName: "暂无Memos",
   creatorUsername: "暂无Memos",
   avatar: RANDOM_MEMO_SETTINGS.default_memos_avatar,
-  hash: "",
+  name: "",
 };
 const memosFn = {
   updateSelectMemosState: () => {
@@ -4970,7 +4970,8 @@ const memosFn = {
     }
     // window.open(`${RANDOM_MEMO_SETTINGS.memosApi}/?tag=${tag}`);
   },
-  onTimeClicked: (hash) => {
+  onTimeClicked: (name) => {
+    hash = name.split("/")[1];
     window.open(`${RANDOM_MEMO_SETTINGS.memosApi}/m/${hash}`);
   },
   pushQuery: (n) => {
@@ -5110,9 +5111,8 @@ const memosFn = {
   getApiUrl: (creator) => {
     const memoAmount = RANDOM_MEMO_SETTINGS.memoAmount || 100;
     let filters = [
-      `row_status == "NORMAL"`,
       `visibilities == ${JSON.stringify(RANDOM_MEMO_SETTINGS.memoKinds)}`,
-      `order_by_pinned == true`,
+      // `order_by_pinned == true`,
     ];
     let search_query = [];
     MEMOS_QUERY.query.forEach((e) => {
@@ -5130,9 +5130,7 @@ const memosFn = {
     }
     var apiUrl = `${
       RANDOM_MEMO_SETTINGS.memosApi
-    }/api/v2/memos?pageSize=${memoAmount}&filter=${encodeURIComponent(
-      filters.join(" && ")
-    )}`;
+    }/api/v1/memos?pageSize=${memoAmount}&state=NORMAL`;
     return apiUrl;
   },
   fetchUserMemos: async (creator) => {
@@ -5188,8 +5186,9 @@ const memosFn = {
                 creatorUsername: current_user.name,
                 content: resValue.content,
                 resourceList: resValue.resources,
-                hash: resValue.uid,
+                name: resValue.name,
                 reactions: reactions,
+                location: resValue.location!=undefined?resValue.location.placeholder:resValue.location,
                 pinned: resValue.pinned,
               };
               items.push(item);
@@ -5226,6 +5225,15 @@ const memosFn = {
           reactionsHtml += `<div class="talk_meta_reaction"><span class="talk_reaction_icon">${k}</span><span class="talk_reaction">${v}</span></div>`;
         });
       }
+      locationHtml ="";
+      if(item.location!=undefined){
+        locationHtml=String.raw`
+        <div class="talk_meta_date">
+                <i class="fa fa-location"></i>
+                <span class="talk_date" title="${item.location}">${item.location.split(",")[0]}</span>
+              </div>
+        `
+      }
       pinnedHtml = item.pinned
         ? `<div class="talk_meta_pinned"><i class="fas fa-thumbtack"></i><span class="talk_pinned"/>置顶</div>`
         : "";
@@ -5233,7 +5241,8 @@ const memosFn = {
       dateList = dateString.split("-");
       if (dateList.length == 3)
         dateString = dateList[0] + "/" + dateList[1] + "/" + dateList[2];
-      if (item.hash == "") {
+      console.log(item);
+      if (item.name == "") {
         html += String.raw`
         <div class="talk_item">
           <div class="talk_content">${item.content}</div>
@@ -5251,10 +5260,11 @@ const memosFn = {
                 <img class="no-lightbox no-lazyload talk_avatar" src="${item.avatar}">
                 <span class="talk_nick">${item.nickname}</span>
               </div>
-              <div class="talk_meta_date" onclick="memosFn.onTimeClicked('${item.hash}')">
+              <div class="talk_meta_date" onclick="memosFn.onTimeClicked('${item.name}')">
                 <i class="fa fa-clock"></i>
                 <span class="talk_date">${dateString}</span>
               </div>
+              ${locationHtml}
               ${tagHtml}
               ${reactionsHtml}
             </div>
@@ -5421,7 +5431,8 @@ const memosFn = {
       nickname: item.creatorNickname,
       username: item.creatorUsername,
       avatar: item.avatar,
-      hash: item.hash,
+      location: item.location,
+      name: item.name,
       pinned: item.pinned,
     };
   },

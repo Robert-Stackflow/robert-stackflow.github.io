@@ -50,8 +50,17 @@ window.posts=[{
       title: "五月 2024",
       url: "/archives/2024/05/"
     },{
+      title: "十一月 2024",
+      url: "/archives/2024/11/"
+    },{
       title: "2024",
       url: "/archives/2024/"
+    },{
+      title: "一月 2025",
+      url: "/archives/2025/01/"
+    },{
+      title: "2025",
+      url: "/archives/2025/"
     },{
       title: "归档",
       url: "/archives/"
@@ -61,6 +70,9 @@ window.posts=[{
     },{
       title: "归档",
       url: "/archives/page/3/"
+    },{
+      title: "归档",
+      url: "/archives/page/4/"
     },{
       title: "追番",
       url: "/bangumi/"
@@ -72,22 +84,49 @@ window.posts=[{
       url: "/categories/"
     },{
       title: "Cloudchewie",
-      url: "/categories/专业核心/"
+      url: "/categories/博客教程/"
     },{
       title: "Cloudchewie",
-      url: "/categories/专业核心/page/2/"
+      url: "/categories/大语言模型系列/"
     },{
       title: "Cloudchewie",
-      url: "/categories/专业核心/page/3/"
+      url: "/categories/强化学习/"
     },{
       title: "Cloudchewie",
-      url: "/categories/教程/"
+      url: "/categories/操作系统原理笔记/"
+    },{
+      title: "Cloudchewie",
+      url: "/categories/数据库系统概论笔记/"
     },{
       title: "Cloudchewie",
       url: "/categories/文档/"
     },{
       title: "Cloudchewie",
+      url: "/categories/文档/微调系列/"
+    },{
+      title: "Cloudchewie",
+      url: "/categories/机器学习/"
+    },{
+      title: "Cloudchewie",
+      url: "/categories/玩机技巧/"
+    },{
+      title: "Cloudchewie",
+      url: "/categories/环境配置教程/"
+    },{
+      title: "Cloudchewie",
       url: "/categories/珠玑/"
+    },{
+      title: "Cloudchewie",
+      url: "/categories/算法设计与分析笔记/"
+    },{
+      title: "Cloudchewie",
+      url: "/categories/编译原理笔记/"
+    },{
+      title: "Cloudchewie",
+      url: "/categories/计算机组成原理笔记/"
+    },{
+      title: "Cloudchewie",
+      url: "/categories/计算机网络与通信笔记/"
     },{
       title: "装备",
       url: "/equipment/"
@@ -151,6 +190,9 @@ window.posts=[{
     },{
       title: "Cloudchewie",
       url: "/page/3/"
+    },{
+      title: "Cloudchewie",
+      url: "/page/4/"
     },{
       title: "计算机组成原理笔记(一)",
       url: "/posts/2022/06/12/notes/Principles-of-Computer-Composition-1/"
@@ -234,13 +276,52 @@ window.posts=[{
       url: "/posts/2024/03/07/tutorial/Anaconda/"
     },{
       title: "卸载小米系列机型的预装软件",
-      url: "/posts/2024/05/04/tutorial/Uninstall-Pre-installed-Apps-on-Xiaomi-Phones/"
+      url: "/posts/2024/05/04/trick/Uninstall-Pre-installed-Apps-on-Xiaomi-Phones/"
+    },{
+      title: "大语言模型微调综述",
+      url: "/posts/2024/11/19/llm/Fine-Tuning-Survey/"
+    },{
+      title: "大模型微调BUG记录",
+      url: "/posts/2024/11/20/bug/LLM-Finetuning-Bugs/"
+    },{
+      title: "LLaMA-Factory参数说明",
+      url: "/posts/2024/11/22/documention/LLaMA-Factory-Parameters/"
+    },{
+      title: "分布式训练",
+      url: "/posts/2025/01/05/llm/Distributed-Training/"
+    },{
+      title: "机器学习笔记",
+      url: "/posts/2025/01/05/notes/Machine-Learning/"
+    },{
+      title: "强化学习笔记（一）",
+      url: "/posts/2025/01/16/notes/Reinforcement-Learning-1/"
+    },{
+      title: "强化学习笔记（二）",
+      url: "/posts/2025/01/16/notes/Reinforcement-Learning-2/"
+    },{
+      title: "强化学习笔记（三）",
+      url: "/posts/2025/01/16/notes/Reinforcement-Learning-3/"
+    },{
+      title: "强化学习笔记（四）",
+      url: "/posts/2025/01/16/notes/Reinforcement-Learning-4/"
     },{
       title: "最新评论",
       url: "/recentcomments/"
     },{
       title: "Cloudchewie",
+      url: "/tags/Anaconda/"
+    },{
+      title: "Cloudchewie",
+      url: "/tags/Android/"
+    },{
+      title: "Cloudchewie",
       url: "/tags/API文档/"
+    },{
+      title: "Cloudchewie",
+      url: "/tags/conda/"
+    },{
+      title: "Cloudchewie",
+      url: "/tags/Fine-Tuning/"
     },{
       title: "Cloudchewie",
       url: "/tags/Hexo/"
@@ -249,16 +330,43 @@ window.posts=[{
       url: "/tags/"
     },{
       title: "Cloudchewie",
+      url: "/tags/Linux/"
+    },{
+      title: "Cloudchewie",
+      url: "/tags/LLM/"
+    },{
+      title: "Cloudchewie",
       url: "/tags/WSL/"
+    },{
+      title: "Cloudchewie",
+      url: "/tags/予挚爱/"
+    },{
+      title: "Cloudchewie",
+      url: "/tags/分布式/"
     },{
       title: "Cloudchewie",
       url: "/tags/博客搭建/"
     },{
       title: "Cloudchewie",
+      url: "/tags/哲思/"
+    },{
+      title: "Cloudchewie",
+      url: "/tags/大语言模型/"
+    },{
+      title: "Cloudchewie",
       url: "/tags/安装教程/"
     },{
       title: "Cloudchewie",
+      url: "/tags/小米/"
+    },{
+      title: "Cloudchewie",
       url: "/tags/小说/"
+    },{
+      title: "Cloudchewie",
+      url: "/tags/强化学习/"
+    },{
+      title: "Cloudchewie",
+      url: "/tags/微调/"
     },{
       title: "Cloudchewie",
       url: "/tags/操作系统/"
@@ -270,7 +378,16 @@ window.posts=[{
       url: "/tags/数据库系统/"
     },{
       title: "Cloudchewie",
+      url: "/tags/机器学习/"
+    },{
+      title: "Cloudchewie",
       url: "/tags/环境配置/"
+    },{
+      title: "Cloudchewie",
+      url: "/tags/神经网络/"
+    },{
+      title: "Cloudchewie",
+      url: "/tags/笔记/"
     },{
       title: "Cloudchewie",
       url: "/tags/算法/"
@@ -283,9 +400,6 @@ window.posts=[{
     },{
       title: "Cloudchewie",
       url: "/tags/计算机网络/"
-    },{
-      title: "Cloudchewie",
-      url: "/tags/让移动设备变得更好/"
     },{
       title: "Cloudchewie",
       url: "/tags/课程笔记/"
