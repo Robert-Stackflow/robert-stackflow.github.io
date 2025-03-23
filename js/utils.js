@@ -4834,7 +4834,7 @@ const RANDOM_MEMO_SETTINGS = {
   // Amount of memos to cache
   memoAmount: 100,
   // Kinds of memos to cache: PUBLIC = visible to everyone, PROTECTED = logged in users, PRIVATE = only the creator
-  memoKinds: ["PUBLIC", "PROTECTED", "PRIVATE"],
+  memoKinds: ["PUBLIC", "PROTECTED", "PRIVATE"],//"PUBLIC", "PROTECTED", 
   // Time in minutes to cache the memos
   memoCacheTimeMinutes: 60,
   // Username of the memo creator to filter the memos
@@ -5110,27 +5110,34 @@ const memosFn = {
   },
   getApiUrl: (creator) => {
     const memoAmount = RANDOM_MEMO_SETTINGS.memoAmount || 100;
-    let filters = [
-      `visibilities == ${JSON.stringify(RANDOM_MEMO_SETTINGS.memoKinds)}`,
-      // `order_by_pinned == true`,
+    const filters = [
+        `visibility in [${RANDOM_MEMO_SETTINGS.memoKinds.filter(kind => kind !== "PRIVATE").map(kind => `"${kind}"`).join(", ")}]`
     ];
-    let search_query = [];
-    MEMOS_QUERY.query.forEach((e) => {
-      if (e.type == "content") {
-        search_query.push(e.content);
-      } else if (e.type == "tag") {
-        search_query.push(`#${e.content}`);
-      }
-    });
-    if (search_query.length > 0) {
-      filters.push(`content_search == ${JSON.stringify(search_query)}`);
+
+    const content_search_query = MEMOS_QUERY.query
+        .filter(e => e.type === "content")
+        .map(e => e.content);
+
+    const tag_search_query = MEMOS_QUERY.query
+        .filter(e => e.type === "tag")
+        .map(e => e.content);
+
+    if (content_search_query.length) {
+        for (const query of content_search_query) {
+          filters.push(`content.contains("${query}")`);
+        }
     }
+
+    if (tag_search_query.length) {
+        filters.push(`tag in ${JSON.stringify(tag_search_query)}`);
+    }
+
+    let apiUrl = `${RANDOM_MEMO_SETTINGS.memosApi}/api/v1/memos?pageSize=${memoAmount}&state=NORMAL&filter=${encodeURIComponent(filters.join(" && "))}`;
+
     if (utilsFn.isNotEmpty(creator)) {
-      filters.push(`creator=="${creator}"`);
+        apiUrl += `&parent=${creator}`;
     }
-    var apiUrl = `${
-      RANDOM_MEMO_SETTINGS.memosApi
-    }/api/v1/memos?pageSize=${memoAmount}&state=NORMAL`;
+
     return apiUrl;
   },
   fetchUserMemos: async (creator) => {
@@ -5165,9 +5172,6 @@ const memosFn = {
                 resReactions.get(e.reactionType) + 1
               );
             });
-            resReactions.forEach((v, k, m) =>
-              reactions.set(MEMOS_REACTIONS.get(k), v)
-            );
             var resUpdateTs = Date.parse(resValue.updateTime);
             var resDisplayTs = Date.parse(resValue.displayTime);
             var dayDiff = Math.floor(
@@ -5187,7 +5191,7 @@ const memosFn = {
                 content: resValue.content,
                 resourceList: resValue.resources,
                 name: resValue.name,
-                reactions: reactions,
+                reactions: resReactions,
                 location: resValue.location!=undefined?resValue.location.placeholder:resValue.location,
                 pinned: resValue.pinned,
               };
@@ -5241,7 +5245,6 @@ const memosFn = {
       dateList = dateString.split("-");
       if (dateList.length == 3)
         dateString = dateList[0] + "/" + dateList[1] + "/" + dateList[2];
-      console.log(item);
       if (item.name == "") {
         html += String.raw`
         <div class="talk_item">
