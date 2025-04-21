@@ -2318,7 +2318,7 @@ const cloudchewieFn = {
     var randomIndex = Math.floor(Math.random() * posts.length);
     while (
       posts[randomIndex].url != window.location.pathname &&
-      posts[randomIndex].url.startsWith("/posts/")==false
+      posts[randomIndex].url.startsWith("/posts/") == false
     ) {
       randomIndex = Math.floor(Math.random() * posts.length);
     }
@@ -4834,7 +4834,7 @@ const RANDOM_MEMO_SETTINGS = {
   // Amount of memos to cache
   memoAmount: 100,
   // Kinds of memos to cache: PUBLIC = visible to everyone, PROTECTED = logged in users, PRIVATE = only the creator
-  memoKinds: ["PUBLIC", "PROTECTED", "PRIVATE"],//"PUBLIC", "PROTECTED", 
+  memoKinds: ["PUBLIC", "PROTECTED", "PRIVATE"], //"PUBLIC", "PROTECTED",
   // Time in minutes to cache the memos
   memoCacheTimeMinutes: 60,
   // Username of the memo creator to filter the memos
@@ -5111,31 +5111,38 @@ const memosFn = {
   getApiUrl: (creator) => {
     const memoAmount = RANDOM_MEMO_SETTINGS.memoAmount || 100;
     const filters = [
-        `visibility in [${RANDOM_MEMO_SETTINGS.memoKinds.filter(kind => kind !== "PRIVATE").map(kind => `"${kind}"`).join(", ")}]`
+      `visibility in [${RANDOM_MEMO_SETTINGS.memoKinds
+        .filter((kind) => kind !== "PRIVATE")
+        .map((kind) => `"${kind}"`)
+        .join(", ")}]`,
     ];
 
     const content_search_query = MEMOS_QUERY.query
-        .filter(e => e.type === "content")
-        .map(e => e.content);
+      .filter((e) => e.type === "content")
+      .map((e) => e.content);
 
     const tag_search_query = MEMOS_QUERY.query
-        .filter(e => e.type === "tag")
-        .map(e => e.content);
+      .filter((e) => e.type === "tag")
+      .map((e) => e.content);
 
     if (content_search_query.length) {
-        for (const query of content_search_query) {
-          filters.push(`content.contains("${query}")`);
-        }
+      for (const query of content_search_query) {
+        filters.push(`content.contains("${query}")`);
+      }
     }
 
     if (tag_search_query.length) {
-        filters.push(`tag in ${JSON.stringify(tag_search_query)}`);
+      filters.push(`tag in ${JSON.stringify(tag_search_query)}`);
     }
 
-    let apiUrl = `${RANDOM_MEMO_SETTINGS.memosApi}/api/v1/memos?pageSize=${memoAmount}&state=NORMAL&filter=${encodeURIComponent(filters.join(" && "))}`;
+    let apiUrl = `${
+      RANDOM_MEMO_SETTINGS.memosApi
+    }/api/v1/memos?pageSize=${memoAmount}&state=NORMAL&filter=${encodeURIComponent(
+      filters.join(" && ")
+    )}`;
 
     if (utilsFn.isNotEmpty(creator)) {
-        apiUrl += `&parent=${creator}`;
+      apiUrl += `&parent=${creator}`;
     }
 
     return apiUrl;
@@ -5177,7 +5184,7 @@ const memosFn = {
             var dayDiff = Math.floor(
               (new Date().getTime() - resCreateTs) / (24 * 3600 * 1000)
             );
-            if (dayDiff < 365) {
+            if (dayDiff < 3650) {
               let current_user = memosFn.getUser(resValue.creator, true);
               item = {
                 id: resValue.uid,
@@ -5192,7 +5199,10 @@ const memosFn = {
                 resourceList: resValue.resources,
                 name: resValue.name,
                 reactions: resReactions,
-                location: resValue.location!=undefined?resValue.location.placeholder:resValue.location,
+                location:
+                  resValue.location != undefined
+                    ? resValue.location.placeholder
+                    : resValue.location,
                 pinned: resValue.pinned,
               };
               items.push(item);
@@ -5229,14 +5239,16 @@ const memosFn = {
           reactionsHtml += `<div class="talk_meta_reaction"><span class="talk_reaction_icon">${k}</span><span class="talk_reaction">${v}</span></div>`;
         });
       }
-      locationHtml ="";
-      if(item.location!=undefined){
-        locationHtml=String.raw`
+      locationHtml = "";
+      if (item.location != undefined) {
+        locationHtml = String.raw`
         <div class="talk_meta_date">
                 <i class="fa fa-location"></i>
-                <span class="talk_date" title="${item.location}">${item.location.split(",")[0]}</span>
+                <span class="talk_date" title="${item.location}">${
+          item.location.split(",")[0]
+        }</span>
               </div>
-        `
+        `;
       }
       pinnedHtml = item.pinned
         ? `<div class="talk_meta_pinned"><i class="fas fa-thumbtack"></i><span class="talk_pinned"/>置顶</div>`

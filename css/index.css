@@ -255,7 +255,7 @@ span.categoryBar-list-count::before,
 .layout > div:first-child:not(.recent-posts),
 #recent-posts > .recent-post-item,
 #aside-content .card-widget,
-.layout > .recent-posts .pagination > *:not(.space) {
+.layout > .recent-posts .pagination *:not(.space):not(.page-numbers):not(i) {
   border-radius: 8px;
   background: var(--card-bg);
   -webkit-box-shadow: var(--card-box-shadow);
@@ -271,7 +271,7 @@ span.categoryBar-list-count::before,
 .layout > div:first-child:not(.recent-posts):hover,
 #recent-posts > .recent-post-item:hover,
 #aside-content .card-widget:hover,
-.layout > .recent-posts .pagination > *:not(.space):hover {
+.layout > .recent-posts .pagination *:not(.space):not(.page-numbers):not(i):hover {
   -webkit-box-shadow: var(--card-hover-box-shadow);
   box-shadow: var(--card-hover-box-shadow);
 }
@@ -6073,7 +6073,7 @@ rect[data-level="4"] {
 #page-header #post-info {
   position: absolute;
   bottom: 100px;
-  padding: 0 8%;
+  padding: 0 calc((100% - 1370px) / 2);
   width: 100%;
 }
 @media screen and (max-width: 900px) {
@@ -7610,7 +7610,7 @@ ul.menus_item_child {
   margin-top: 20px;
   text-align: center;
 }
-#pagination .page-number.current {
+#pagination div .page-number.current {
   background: var(--cloudchewie-theme);
   color: var(--white);
 }
@@ -7681,21 +7681,28 @@ ul.menus_item_child {
   width: 100%;
   background: #000;
 }
-.layout > .recent-posts .pagination > * {
+.layout > .recent-posts .pagination > *:not(.page-numbers):not(i),
+.layout > .recent-posts .pagination > div > * {
   display: inline-block;
   margin: 0 6px;
   width: 2.5em;
   height: 2.5em;
   line-height: 2.5em;
 }
-.layout > .recent-posts .pagination > *:not(.space) {
+.layout > .recent-posts .pagination > .prev {
+  margin-left: 0px !important;
+}
+.layout > .recent-posts .pagination > .next {
+  margin-right: 0px !important;
+}
+.layout > .recent-posts .pagination *:not(.space):not(.page-numbers):not(i) {
   border: none !important;
 }
-.layout > .recent-posts .pagination > *:not(.space):hover {
+.layout > .recent-posts .pagination *:not(.space):not(.page-numbers):not(i):hover {
   background: var(--btn-hover-color);
   color: var(--btn-color);
 }
-.layout > div:not(.recent-posts) .pagination .page-number {
+.layout > div:not(.recent-posts) .pagination div .page-number {
   display: inline-block;
   margin: 0 4px;
   min-width: 24px;
@@ -7704,8 +7711,8 @@ ul.menus_item_child {
   line-height: 24px;
   cursor: pointer;
 }
-.layout #category .pagination .page-number,
-.layout #tag .pagination .page-number {
+.layout #category .pagination div .page-number,
+.layout #tag .pagination div .page-number {
   border-radius: 3px !important;
 }
 #twikoo .tk-comments {
@@ -15496,6 +15503,7 @@ i.cloudchewiefont.cloudchewie-icon-hashtag {
 #catalog-list {
   display: flex;
   white-space: nowrap;
+  flex-flow: row wrap;
 }
 #category #catalog-list .catalog-list-item:first-child {
   margin-left: 5px;
@@ -15503,6 +15511,7 @@ i.cloudchewiefont.cloudchewie-icon-hashtag {
 .catalog-list-item {
   display: flex;
   align-items: center;
+  margin: 0.25rem;
 }
 .catalog-list-item a {
   margin-right: 0.3rem;
@@ -15726,7 +15735,7 @@ body[data-type="tags"] #tag #tag-page-tags {
 .back-home-button a.back-menu-item {
   color: var(--cloudchewie-font-color) !important;
 }
-[data-theme="dark"] #pagination > div > a.page-number {
+[data-theme="dark"] #pagination > div > div > a.page-number {
   color: var(--btn-color) !important;
 }
 [data-theme="dark"] #pagination > div > a.extend.next {
@@ -16278,7 +16287,7 @@ body {
 #textbtn {
   cursor: pointer;
 }
-.layout > .recent-posts .pagination > *:not(.space) {
+.layout > .recent-posts .pagination *:not(.space):not(.page-numbers):not(i) {
   border: var(--card-border) !important;
 }
 #pageNumInput:hover {
@@ -16320,11 +16329,15 @@ body {
   justify-items: center;
   width: 100%;
 }
-.pagination > * {
+.pagination > *:not(.page-numbers):not(i),
+.pagination > div > * {
   display: inline-block;
 }
 #pagination .pagination {
   position: relative;
+  width: 100%;
+  display: flex;
+  justify-content: space-evenly;
 }
 #pageNumInput {
   display: inline-flex;
@@ -16387,7 +16400,7 @@ body {
 .layout > div:first-child:not(.recent-posts),
 #recent-posts > .recent-post-item,
 #aside-content .card-widget,
-.layout > .recent-posts .pagination > *:not(.space) {
+.layout > .recent-posts .pagination *:not(.space):not(.page-numbers):not(i) {
   border: var(--card-border) !important;
 }
 #page:has(#about-page) {
@@ -17734,6 +17747,7 @@ body:has(.hidden#nav-music):not(:has(#cloudMusic-page)) #fps {
     display: none !important;
   }
 }
+
 /*****************************************
 即刻
 *****************************************/
