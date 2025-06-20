@@ -1,5 +1,7 @@
 window.meting_api =
   "https://meting.api.cloudchewie.com/api?server=:server&type=:type&id=:id&r=:r";
+window.cloudchewie_api_base_url = "https://api.cloudchewie.com";
+// window.cloudchewie_api_base_url = "http://localhost:3009";
 var adjectives = [
   "美丽的",
   "英俊的",
@@ -1989,9 +1991,9 @@ const cloudchewieFn = {
             document.body.clientHeight,
             document.documentElement.clientHeight
           ) - document.documentElement.clientHeight, // 整个网页高度
-        result = Math.round((a / b) * 100), // 计算百分比
-        up = document.querySelector("#go-up"); // 获取按钮
-      down = document.querySelector("#go-down"); // 获取按钮
+        result = Math.round((a / b) * 100); // 计算百分比
+      let up = document.querySelector("#go-up");
+      let down = document.querySelector("#go-down");
       if (up != null) {
         if (result <= 95) {
           up.childNodes[0].style.display = "none";
@@ -2003,9 +2005,9 @@ const cloudchewieFn = {
         }
       }
       if (result <= 95 && document.documentElement.scrollTop > 20) {
-        down.style.display = "block";
+        down.style.transform = "translateY(0px)";
       } else {
-        down.style.display = "none";
+        down.style.transform = "translateY(200px)";
       }
       if (
         cloudchewieFn.isInViewPortOfOne(document.getElementById("post-comment"))
@@ -2021,12 +2023,16 @@ const cloudchewieFn = {
         $("#menuCommentBarrage").show();
       }
       cloudchewieFn.percentageScrollFn(a);
+      if (result > 95) {
+        document
+          .querySelectorAll(".needEndHide")
+          .forEach((item) => (item.style.transform = "translateY(200px)"));
+      } else {
+        document
+          .querySelectorAll(".needEndHide")
+          .forEach((item) => (item.style.transform = "translateY(0px)"));
+      }
     });
-    if (document.documentElement.scrollTop > 20) {
-      document.querySelector("#go-down").style.display = "block";
-    } else {
-      document.querySelector("#go-down").style.display = "none";
-    }
   },
   /**
    * 跳转到评论
@@ -2532,7 +2538,7 @@ const cloudchewieFn = {
           "[链接]"
         )).replace(/<pre.*?>.*?<\/pre>/g, "[代码块]")).replace(/<.*?>/g, ""));
       }
-      fetch("https://twikoo.api.cloudchewie.com/", {
+      fetch("https://api.cloudchewie.com/twikoo", {
         method: "POST",
         body: JSON.stringify({
           event: "GET_RECENT_COMMENTS",
@@ -3058,32 +3064,73 @@ const cloudchewieFn = {
     try {
       const title = document.title;
       const container = document.querySelector(cloudGPT_postSelector);
-      if (!container) {
-        return "";
-      }
-      const paragraphs = container.getElementsByTagName("p");
-      const headings = container.querySelectorAll("h1, h2, h3, h4, h5");
-      let content = "";
+      if (!container) return "";
 
-      for (let h of headings) {
-        content += h.innerText + " ";
+      const elements = container.querySelectorAll(
+        "h1, h2, h3, h4, h5, p, li, blockquote, pre"
+      );
+
+      let headersList = [];
+      let bodyMarkdown = "";
+
+      elements.forEach((el) => {
+        const tag = el.tagName.toLowerCase();
+        let text = el.innerText.trim();
+        if (!text) return;
+
+        text = text.replace(/https?:\/\/[^\s]+/g, "[链接]");
+
+        if (["h1", "h2", "h3", "h4", "h5"].includes(tag)) {
+          const prefix = "#".repeat(parseInt(tag.slice(1)));
+          headersList.push(`${prefix} ${text}`);
+        }
+
+        switch (tag) {
+          case "h1":
+            bodyMarkdown += `# ${text}\n\n`;
+            break;
+          case "h2":
+            bodyMarkdown += `## ${text}\n\n`;
+            break;
+          case "h3":
+            bodyMarkdown += `### ${text}\n\n`;
+            break;
+          case "h4":
+            bodyMarkdown += `#### ${text}\n\n`;
+            break;
+          case "h5":
+            bodyMarkdown += `##### ${text}\n\n`;
+            break;
+          case "p":
+            bodyMarkdown += `${text}\n\n`;
+            break;
+          case "li":
+            bodyMarkdown += `- ${text}\n`;
+            break;
+          case "blockquote":
+            bodyMarkdown += `> ${text}\n\n`;
+            break;
+          case "pre":
+            bodyMarkdown += `\`\`\`\n${text}\n\`\`\`\n\n`;
+            break;
+        }
+      });
+
+      let markdown = `# ${title}\n\n`;
+
+      if (headersList.length > 0) {
+        markdown += `## 文章目录\n\n`;
+        headersList.forEach((header) => {
+          markdown += `- ${header}\n`;
+        });
+        markdown += `\n---\n\n`;
       }
 
-      for (let p of paragraphs) {
-        // 移除包含'http'的链接
-        const filteredText = p.innerText.replace(/https?:\/\/[^\s]+/g, "");
-        content += filteredText;
-      }
+      markdown += bodyMarkdown.trim();
 
-      const combinedText = title + " " + content;
-      let wordLimit = 1000;
-      if (typeof cloudGPT_wordLimit !== "undefined") {
-        wordLimit = cloudGPT_wordLimit;
-      }
-      const truncatedText = combinedText.slice(0, wordLimit);
-      return truncatedText;
+      return markdown.length > 2048 ? markdown.slice(0, 2048) : markdown;
     } catch (e) {
-      //   console.error('cloudGPT错误：可能由于一个或多个错误导致没有正常运行，原因出在获取文章容器中的内容失败，或者可能是在文章转换过程中失败。', e);
+      console.error("读取文章失败:", e);
       return "";
     }
   },
@@ -3091,44 +3138,39 @@ const cloudchewieFn = {
    * 获取数据
    */
   fetchcloudGPT: async function (content) {
-    if (!cloudGPT_key) {
-      return "没有获取到key，代码可能没有安装正确。如果你需要在cloudchewieCPT文件引用前定义cloudGPT_key变量。详细请查看文档。";
-    }
-
-    if (cloudGPT_key === "5Q5mpqRK5DkwT1X9Gi5e") {
-      return "请购买 key 使用，如果你能看到此条内容，则说明代码安装正确。";
-    }
-
-    const apiUrl = `https://summary.tianli0.top/?content=${encodeURIComponent(
-      content
-    )}&key=${encodeURIComponent(cloudGPT_key)}`;
-    const timeout = 20000;
+    const apiUrl = `${window.cloudchewie_api_base_url}/blog/summary`;
 
     try {
-      const controller = new AbortController();
-      const timeoutId = setTimeout(() => controller.abort(), timeout);
-      const response = await fetch(apiUrl, { signal: controller.signal });
-      if (response.ok) {
-        const data = await response.json();
-        return data.summary;
-      } else {
-        if (response.status === 402) {
-          document.querySelectorAll(".post-cloudGPT").forEach((el) => {
-            el.style.display = "none";
-          });
-        }
-        throw new Error("CloudGPT：余额不足，请充值后请求新的文章");
-      }
-    } catch (error) {
-      if (error.name === "AbortError") {
-        if (window.location.hostname === "localhost") {
-          return "获取文章摘要超时。请勿在本地主机上测试 API 密钥。";
-        } else {
-          return "获取文章摘要超时。当你出现这个问题时，可能是key或者绑定的域名不正确。也可能是因为文章过长导致的 AI 运算量过大，您可以稍等一下然后刷新页面重试。";
-        }
-      } else {
+      const response = await fetch(apiUrl, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ content }),
+      });
+
+      if (!response.ok || !response.body) {
         return "获取文章摘要失败，请稍后再试。";
       }
+
+      const reader = response.body.getReader();
+      const decoder = new TextDecoder("utf-8");
+      let result = "";
+
+      while (true) {
+        const { done, value } = await reader.read();
+        if (done) break;
+        const chunk = decoder.decode(value, { stream: true });
+        result += chunk;
+
+        // 可选：实时更新 UI
+        // updateUI(chunk);
+      }
+
+      return result.trim();
+    } catch (error) {
+      console.error("获取失败:", error);
+      return "获取文章摘要失败，请稍后再试。";
     }
   },
   /**
@@ -3946,67 +3988,30 @@ const consoleFn = {
    * 打开/关闭功能
    */
   toggleConsole: () => {
-    $("#consoleWindow").fadeToggle("fast");
-    $("#console-mask").fadeToggle("fast");
-    if ($("#consoleWindow").css("display") != "none")
-      $("#consoleWindow").css("display", "flex");
-    if ($("#consoleWindow").css("display") == "none") {
-      //取消模糊效果
-      document.getElementById("settingStyle").innerText = `
-    *,*:not(.card-info)::before,*::after{
-        -webkit-backdrop-filter: none!important;
-        backdrop-filter: none!important;
-        -webkit-filter: none!important;
-        filter: none!important;
-    }`;
+    const consoleEl = document.getElementById("console");
+    if (consoleEl.classList.contains("show")) {
+      consoleEl.classList.remove("show");
+      document.body.classList.remove("modal-open");
     } else {
-      document.getElementById("settingStyle").innerText = "";
+      consoleEl.classList.add("show");
+      document.body.classList.add("modal-open");
     }
   },
   showConsole: () => {
-    $("#consoleWindow").fadeIn("fast");
-    $("#console-mask").fadeIn("fast");
-    if ($("#consoleWindow").css("display") != "none")
-      $("#consoleWindow").css("display", "flex");
-    if ($("#consoleWindow").css("display") == "none") {
-      //取消模糊效果
-      document.getElementById("settingStyle").innerText = `
-  *,*:not(.card-info)::before,*::after{
-      -webkit-backdrop-filter: none!important;
-      backdrop-filter: none!important;
-      -webkit-filter: none!important;
-      filter: none!important;
-  }`;
-    } else {
-      document.getElementById("settingStyle").innerText = "";
-    }
+    const consoleEl = document.getElementById("console");
+    consoleEl.classList.add("show");
+    document.body.classList.add("modal-open");
   },
   closeConsole: () => {
-    $("#consoleWindow").fadeOut("fast");
-    $("#console-mask").fadeOut("fast");
-    if ($("#consoleWindow").css("display") != "none")
-      $("#consoleWindow").css("display", "flex");
-    if ($("#consoleWindow").css("display") == "none") {
-      //取消模糊效果
-      document.getElementById("settingStyle").innerText = `
-  *,*:not(.card-info)::before,*::after{
-      -webkit-backdrop-filter: none!important;
-      backdrop-filter: none!important;
-      -webkit-filter: none!important;
-      filter: none!important;
-  }`;
-    } else {
-      document.getElementById("settingStyle").innerText = "";
-    }
+    const consoleEl = document.getElementById("console");
+    consoleEl.classList.remove("show");
+    document.body.classList.remove("modal-open");
   },
   /**
    * 加载设置
    */
   // 加载设置
   loadSetting: () => {
-    $("#consoleBackButton").css("visibility", "hidden");
-    $(".consoleSetting").hide();
-    $("#consoleWindow").hide();
     //加载是否适应文章封面颜色
     if (utilsFn.getLocalStorage("enableAutoColor") == undefined) {
       utilsFn.setLocalStorage("enableAutoColor", "false");
@@ -4032,14 +4037,14 @@ const consoleFn = {
       $("#page-header").addClass("nav-fixed nav-visible");
       document.getElementById("con-toggleFixedNav").checked = true;
     }
-    //侧栏居左
-    if (utilsFn.getLocalStorage("asideLeft") == undefined) {
-      utilsFn.setLocalStorage("asideLeft", "true");
+    //侧栏居右
+    if (utilsFn.getLocalStorage("asideRight") == undefined) {
+      utilsFn.setLocalStorage("asideRight", "true");
     }
-    if (utilsFn.getLocalStorage("asideLeft") == "false") {
-      document.documentElement.setAttribute("aside-position", "right");
-    } else {
+    if (utilsFn.getLocalStorage("asideRight") == "false") {
       document.documentElement.setAttribute("aside-position", "left");
+    } else {
+      document.documentElement.setAttribute("aside-position", "true");
       document.getElementById("con-toggleAsidePosition").checked = true;
     }
     //加载是否打开右键菜单功能
@@ -4071,7 +4076,8 @@ const consoleFn = {
           document.getElementById("nav-music").classList.add("hidden");
         }
         $(".music-wrapper .aplayer").show();
-        document.getElementById("con-toggleAPlayer").checked = true;
+        if (document.getElementById("con-toggleAPlayer"))
+          document.getElementById("con-toggleAPlayer").checked = true;
       } else {
         navMusic.hide();
         document.getElementById("nav-music").classList.add("hidden");
@@ -4469,15 +4475,15 @@ const consoleFn = {
     }
   },
   /**
-   * 是否侧栏居左
+   * 是否侧栏居右
    */
   toggleAsidePosition: () => {
-    if (utilsFn.getLocalStorage("asideLeft") == "false") {
-      utilsFn.setLocalStorage("asideLeft", "true");
-      document.documentElement.setAttribute("aside-position", "left");
-    } else {
-      utilsFn.setLocalStorage("asideLeft", "false");
+    if (utilsFn.getLocalStorage("asideRight") == "false") {
+      utilsFn.setLocalStorage("asideRight", "true");
       document.documentElement.setAttribute("aside-position", "right");
+    } else {
+      utilsFn.setLocalStorage("asideRight", "false");
+      document.documentElement.setAttribute("aside-position", "left");
     }
   },
   /**
@@ -4672,62 +4678,73 @@ function runOne() {
  * =================================================
  */
 class ThemeToggle extends HTMLElement {
-  button;
   constructor() {
-    super(), (this.button = this.querySelector("button"));
-    const i = (n) => {
-      const o = !this.isDark();
+    super();
+
+    const toggleHandler = (event) => {
+      const isDarkNext = !this.isDark();
+
       if (!document.startViewTransition || this.isReducedMotion()) {
-        this.toggleTheme(o);
+        this.toggleTheme(isDarkNext);
         return;
       }
-      const a = document.startViewTransition(() => {
-        this.toggleTheme(o);
+
+      const transition = document.startViewTransition(() => {
+        this.toggleTheme(isDarkNext);
       });
-      let t, e;
-      typeof n > "u"
-        ? ((t = this.button.getBoundingClientRect().x),
-          (e = this.button.getBoundingClientRect().y))
-        : ((t = n.clientX), (e = n.clientY));
-      const r = Math.hypot(
-        Math.max(t, innerWidth - t),
-        Math.max(e, innerHeight - e)
+
+      let x, y;
+      if (event?.clientX != null && event?.clientY != null) {
+        x = event.clientX;
+        y = event.clientY;
+      } else {
+        const rect = this.getBoundingClientRect();
+        x = rect.left + rect.width / 2;
+        y = rect.top + rect.height / 2;
+      }
+
+      const radius = Math.hypot(
+        Math.max(x, innerWidth - x),
+        Math.max(y, innerHeight - y)
       );
-      a.ready.then(() => {
-        const s = [
-          `circle(0px at ${t}px ${e}px)`,
-          `circle(${r}px at ${t}px ${e}px)`,
+
+      transition.ready.then(() => {
+        const clipPaths = [
+          `circle(0px at ${x}px ${y}px)`,
+          `circle(${radius}px at ${x}px ${y}px)`,
         ];
         document.documentElement.animate(
           {
-            clipPath: o ? s : [...s].reverse(),
+            clipPath: isDarkNext ? clipPaths : [...clipPaths].reverse(),
           },
           {
             duration: 500,
             easing: "ease-in",
-            pseudoElement: o
+            pseudoElement: isDarkNext
               ? "::view-transition-new(root)"
               : "::view-transition-old(root)",
           }
         );
       });
     };
-    this.button.addEventListener("click", (n) => i(n));
+    this.addEventListener("click", (event) => toggleHandler(event));
   }
-  toggleTheme(i) {
-    document.documentElement.setAttribute("data-theme", i ? "dark" : "light");
+
+  toggleTheme(toDark) {
+    document.documentElement.setAttribute(
+      "data-theme",
+      toDark ? "dark" : "light"
+    );
     cloudchewieFn.toggleDarkMode(true);
-    if (i) {
-      saveToLocal.set("theme", "dark", 2);
-    } else {
-      saveToLocal.set("theme", "light", 2);
-    }
+    saveToLocal.set("theme", toDark ? "dark" : "light", 2);
   }
+
   isDark() {
-    return document.documentElement.getAttribute("data-theme") == "dark";
+    return document.documentElement.getAttribute("data-theme") === "dark";
   }
+
   isReducedMotion() {
-    return window.matchMedia("(prefers-reduced-motion: reduce)").matches === !0;
+    return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   }
 }
 customElements.define("theme-toggle", ThemeToggle);
@@ -4740,7 +4757,7 @@ document.startViewTransition();
  * =================================================
  */
 async function fetchNewestComments() {
-  fetch("https://twikoo.api.cloudchewie.com/", {
+  fetch("https://api.cloudchewie.com/twikoo", {
     method: "POST",
     body: JSON.stringify({
       event: "GET_RECENT_COMMENTS",
@@ -4830,47 +4847,20 @@ function renderNewestComments(data) {
  * =================================================
  */
 const RANDOM_MEMO_SETTINGS = {
-  memosApi: "https://memos.cloudchewie.com",
-  // Amount of memos to cache
+  memosHost: "https://memos.cloudchewie.com",
   memoAmount: 100,
-  // Kinds of memos to cache: PUBLIC = visible to everyone, PROTECTED = logged in users, PRIVATE = only the creator
   memoKinds: ["PUBLIC", "PROTECTED", "PRIVATE"], //"PUBLIC", "PROTECTED",
-  // Time in minutes to cache the memos
-  memoCacheTimeMinutes: 60,
-  // Username of the memo creator to filter the memos
-  memoCreatorUsername: "",
-  // Button text
-  buttonText: "Random",
-  // Button tooltip
-  buttonTooltip: "Show a random memo",
-  // Local storage key to store the memo uids
-  cacheKey: "randomMemoUuidCache",
-  // Local storage key to store the last update timestamp
-  cacheLastUpdateKey: "randomMemoUuidCacheLastUpdate",
   memos_logo: "https://picbed.cloudchewie.com/icon/memos.webp!mini",
   default_memos_avatar:
     "https://picbed.cloudchewie.com/icon/memos-user.webp!mini",
+  mine_username: "Robert-Stackflow",
 };
 const MEMOS_QUERY = {
   userlist: [],
   current_option: 0, //0-total,1-user,2-randomuser
-  current_uid: -1,
+  current_user_username: -1,
   query: [],
 };
-const MEMOS_REACTIONS = new Map([
-  ["THUMBS_UP", "👍"],
-  ["THUMBS_DOWN", "👎"],
-  ["HEART", "💛"],
-  ["FIRE", "🔥"],
-  ["CLAPPING_HANDS", "👏"],
-  ["LAUGH", "😂"],
-  ["OK_HAND", "👌"],
-  ["ROCKET", "🚀"],
-  ["EYES", "👀"],
-  ["THINKING_FACE", "🤔"],
-  ["CLOWN_FACE", "🤡"],
-  ["QUESTION_MARK", "❓"],
-]);
 const MEMOS_DOM = {
   $search_memos: undefined,
   $search_input: undefined,
@@ -4920,12 +4910,12 @@ const memosFn = {
     if (username != "") {
       $(MEMOS_DOM.$memos_bar_avatar_link).attr(
         "href",
-        `${RANDOM_MEMO_SETTINGS.memosApi}/u/${username}`
+        `${RANDOM_MEMO_SETTINGS.memosHost}/u/${username}`
       );
     } else {
       $(MEMOS_DOM.$memos_bar_avatar_link).attr(
         "href",
-        `${RANDOM_MEMO_SETTINGS.memosApi}/`
+        `${RANDOM_MEMO_SETTINGS.memosHost}/`
       );
     }
     $(MEMOS_DOM.$memos_bar_name).html(nickname);
@@ -4938,20 +4928,20 @@ const memosFn = {
   onMineMemosClicked: () => {
     if (MEMOS_QUERY.current_option == 1) return;
     MEMOS_QUERY.current_option = 1;
-    MEMOS_QUERY.current_uid = 1;
+    MEMOS_QUERY.current_user_username = RANDOM_MEMO_SETTINGS.mine_username;
     memosFn.fetchMemos();
   },
   onRandomUserMemosClicked: async () => {
     await memosFn.fetchUserList();
     MEMOS_QUERY.current_option = 2;
-    var tmp = MEMOS_QUERY.current_uid;
-    while (tmp == MEMOS_QUERY.current_uid) {
+    var tmp = MEMOS_QUERY.current_user_username;
+    while (tmp == MEMOS_QUERY.current_user_username) {
       var r =
         Math.round(Math.random() * MEMOS_QUERY.userlist.length) %
         MEMOS_QUERY.userlist.length;
-      tmp = MEMOS_QUERY.userlist[r].id;
+      tmp = MEMOS_QUERY.userlist[r].username;
     }
-    MEMOS_QUERY.current_uid = tmp;
+    MEMOS_QUERY.current_user_username = tmp;
     memosFn.fetchMemos();
   },
   onUserListMemosClicked: () => {
@@ -4960,19 +4950,17 @@ const memosFn = {
       MEMOS_DOM.$userlist_memos.classList.toggle("checked");
   },
   onUserClicked: (user) => {
-    window.open(
-      `${RANDOM_MEMO_SETTINGS.memosApi}/u/${user.replace("users/", "")}`
-    );
+    window.open(`${RANDOM_MEMO_SETTINGS.memosHost}/u/${user}`);
   },
   onTagClicked: (tag) => {
     if (!memosFn.pushQuery({ type: "tag", content: tag })) {
       utilsFn.snack(`筛选过标签「${tag}」啦`);
     }
-    // window.open(`${RANDOM_MEMO_SETTINGS.memosApi}/?tag=${tag}`);
+    // window.open(`${RANDOM_MEMO_SETTINGS.memosHost}/?tag=${tag}`);
   },
   onTimeClicked: (name) => {
     hash = name.split("/")[1];
-    window.open(`${RANDOM_MEMO_SETTINGS.memosApi}/m/${hash}`);
+    window.open(`${RANDOM_MEMO_SETTINGS.memosHost}/m/${hash}`);
   },
   pushQuery: (n) => {
     var exist = false;
@@ -5055,19 +5043,23 @@ const memosFn = {
       }
     });
   },
-  getUser: (uid, split = false) => {
+  getUser: (username) => {
     var find = {};
-    if (split) {
-      uid = uid.split("/")[1];
-    }
     MEMOS_QUERY.userlist.forEach((user) => {
-      if (user.id == uid) find = user;
+      if (user.username == username) find = user;
+    });
+    return find;
+  },
+  getUserByName: (name) => {
+    var find = {};
+    MEMOS_QUERY.userlist.forEach((user) => {
+      if (user.name == name) find = user;
     });
     return find;
   },
   fetchUserList: async () => {
     if (MEMOS_QUERY.userlist.length > 0) return;
-    await fetch("/memos_user.json")
+    await fetch(`${cloudchewie_api_base_url}/memos/user/list`)
       .then((res) => res.json())
       .then(async (users) => {
         MEMOS_QUERY.userlist = users;
@@ -5075,9 +5067,9 @@ const memosFn = {
         userlistDom.empty();
         users.forEach((user) => {
           userlistDom.append(
-            `<div onclick="MEMOS_QUERY.current_option = 2;MEMOS_QUERY.current_uid = ${
-              user.id
-            };memosFn.fetchMemos();" class="item-avatar" style="background-image:url(${
+            `<div onclick="MEMOS_QUERY.current_option = 2;MEMOS_QUERY.current_user_username = '${
+              user.username
+            }';memosFn.fetchMemos();" class="item-avatar" style="background-image:url(${
               utilsFn.isNotEmpty(user.avatarUrl)
                 ? user.avatarUrl
                 : RANDOM_MEMO_SETTINGS.default_memos_avatar
@@ -5096,7 +5088,7 @@ const memosFn = {
         break;
       case 1:
       case 2:
-        var current_user = memosFn.getUser(MEMOS_QUERY.current_uid);
+        var current_user = memosFn.getUser(MEMOS_QUERY.current_user_username);
         memosFn.updateMemosBarMeta(
           utilsFn.isNotEmpty(current_user.avatarUrl)
             ? current_user.avatarUrl
@@ -5104,7 +5096,7 @@ const memosFn = {
           current_user.nickname,
           current_user.username
         );
-        memosFn.fetchUserMemos(`users/${current_user.id}`);
+        memosFn.fetchUserMemos(current_user.name);
         break;
     }
   },
@@ -5135,9 +5127,7 @@ const memosFn = {
       filters.push(`tag in ${JSON.stringify(tag_search_query)}`);
     }
 
-    let apiUrl = `${
-      RANDOM_MEMO_SETTINGS.memosApi
-    }/api/v1/memos?pageSize=${memoAmount}&state=NORMAL&filter=${encodeURIComponent(
+    let apiUrl = `${cloudchewie_api_base_url}/memos/memo/list?pageSize=${memoAmount}&state=NORMAL&filter=${encodeURIComponent(
       filters.join(" && ")
     )}`;
 
@@ -5153,11 +5143,7 @@ const memosFn = {
     utilsFn
       .withTimeout(
         2000,
-        fetch(memosFn.getApiUrl(creator))
-          .then((response) => response.json())
-          .then((resdata) => {
-            return resdata;
-          })
+        fetch(memosFn.getApiUrl(creator)).then((response) => response.json())
       )
       .then((resdata) => {
         var result_memos = resdata.memos;
@@ -5168,8 +5154,9 @@ const memosFn = {
           for (var j = 0; j < result_memos.length; j++) {
             var resValue = result_memos[j];
             var resCreateTs = Date.parse(resValue.createTime);
+            var resUpdateTs = Date.parse(resValue.updateTime);
+            var resDisplayTs = Date.parse(resValue.displayTime);
             var resReactions = new Map();
-            var reactions = new Map();
             resValue.reactions.forEach((e) => {
               if (resReactions.get(e.reactionType) == undefined) {
                 resReactions.set(e.reactionType, 0);
@@ -5179,31 +5166,31 @@ const memosFn = {
                 resReactions.get(e.reactionType) + 1
               );
             });
-            var resUpdateTs = Date.parse(resValue.updateTime);
-            var resDisplayTs = Date.parse(resValue.displayTime);
+
             var dayDiff = Math.floor(
               (new Date().getTime() - resCreateTs) / (24 * 3600 * 1000)
             );
             if (dayDiff < 3650) {
-              let current_user = memosFn.getUser(resValue.creator, true);
+              let current_user = memosFn.getUserByName(resValue.creator);
               item = {
-                id: resValue.uid,
+                name: resValue.name,
                 avatar: utilsFn.isNotEmpty(current_user.avatarUrl)
                   ? current_user.avatarUrl
                   : RANDOM_MEMO_SETTINGS.default_memos_avatar,
                 createTs: resCreateTs,
-                creatorId: current_user.id,
+                updateTs: resUpdateTs,
+                displayTs: resDisplayTs,
+                creatorName: current_user.name,
                 creatorNickname: current_user.nickname,
-                creatorUsername: current_user.name,
+                creatorUsername: current_user.username,
+                pinned: resValue.pinned,
                 content: resValue.content,
                 resourceList: resValue.resources,
-                name: resValue.name,
                 reactions: resReactions,
                 location:
                   resValue.location != undefined
                     ? resValue.location.placeholder
                     : resValue.location,
-                pinned: resValue.pinned,
               };
               items.push(item);
             }
@@ -5253,7 +5240,7 @@ const memosFn = {
       pinnedHtml = item.pinned
         ? `<div class="talk_meta_pinned"><i class="fas fa-thumbtack"></i><span class="talk_pinned"/>置顶</div>`
         : "";
-      dateString = item.date.split(" ")[0].replaceAll("/", "-");
+      dateString = item.createTs.split(" ")[0].replaceAll("/", "-");
       dateList = dateString.split("-");
       if (dateList.length == 3)
         dateString = dateList[0] + "/" + dateList[1] + "/" + dateList[2];
@@ -5413,7 +5400,7 @@ const memosFn = {
         } else {
           imgsWithCaption.push({
             caption: text,
-            url: `${RANDOM_MEMO_SETTINGS.memosApi}/o/r/${e.id}/${e.publicId}/${e.filename}`,
+            url: `${RANDOM_MEMO_SETTINGS.memosHost}/o/r/${e.id}/${e.publicId}/${e.filename}`,
           });
         }
       });
@@ -5438,11 +5425,14 @@ const memosFn = {
       tags: tags,
       reactions: item.reactions,
       raw_content: raw_content,
-      date: new Date(item.createTs).toLocaleString(),
+      createTs: new Date(item.createTs).toLocaleString(),
+      updateTs: new Date(item.updateTs).toLocaleString(),
+      displayTs: new Date(item.displayTs).toLocaleString(),
       text: text.replace(
         /\[(.*?)\]\((.*?)\)/g,
         "[链接]" + `${imgsWithCaption ? "[图片]" : ""}`
       ),
+      creatorName: item.creatorName,
       nickname: item.creatorNickname,
       username: item.creatorUsername,
       avatar: item.avatar,
@@ -5452,3 +5442,5 @@ const memosFn = {
     };
   },
 };
+
+utilsFn.setLocalStorage("enableAPlayer", "true");

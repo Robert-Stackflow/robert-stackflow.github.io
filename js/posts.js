@@ -59,6 +59,9 @@ window.posts=[{
       title: "一月 2025",
       url: "/archives/2025/01/"
     },{
+      title: "六月 2025",
+      url: "/archives/2025/06/"
+    },{
       title: "2025",
       url: "/archives/2025/"
     },{
@@ -90,22 +93,7 @@ window.posts=[{
       url: "/categories/大语言模型系列/"
     },{
       title: "Cloudchewie",
-      url: "/categories/强化学习/"
-    },{
-      title: "Cloudchewie",
-      url: "/categories/操作系统原理笔记/"
-    },{
-      title: "Cloudchewie",
-      url: "/categories/数据库系统概论笔记/"
-    },{
-      title: "Cloudchewie",
       url: "/categories/文档/"
-    },{
-      title: "Cloudchewie",
-      url: "/categories/文档/微调系列/"
-    },{
-      title: "Cloudchewie",
-      url: "/categories/机器学习/"
     },{
       title: "Cloudchewie",
       url: "/categories/玩机技巧/"
@@ -117,16 +105,13 @@ window.posts=[{
       url: "/categories/珠玑/"
     },{
       title: "Cloudchewie",
-      url: "/categories/算法设计与分析笔记/"
+      url: "/categories/课程笔记/"
     },{
       title: "Cloudchewie",
-      url: "/categories/编译原理笔记/"
+      url: "/categories/课程笔记/page/2/"
     },{
       title: "Cloudchewie",
-      url: "/categories/计算机组成原理笔记/"
-    },{
-      title: "Cloudchewie",
-      url: "/categories/计算机网络与通信笔记/"
+      url: "/categories/课程笔记/page/3/"
     },{
       title: "装备",
       url: "/equipment/"
@@ -278,12 +263,6 @@ window.posts=[{
       title: "卸载小米系列机型的预装软件",
       url: "/posts/2024/05/04/trick/Uninstall-Pre-installed-Apps-on-Xiaomi-Phones/"
     },{
-      title: "大语言模型微调综述",
-      url: "/posts/2024/11/19/llm/Fine-Tuning-Survey/"
-    },{
-      title: "大模型微调BUG记录",
-      url: "/posts/2024/11/20/bug/LLM-Finetuning-Bugs/"
-    },{
       title: "LLaMA-Factory参数说明",
       url: "/posts/2024/11/22/documention/LLaMA-Factory-Parameters/"
     },{
@@ -304,6 +283,12 @@ window.posts=[{
     },{
       title: "强化学习笔记（四）",
       url: "/posts/2025/01/16/notes/Reinforcement-Learning-4/"
+    },{
+      title: "大模型微调BUG记录",
+      url: "/posts/2025/06/16/bug/LLM-Finetuning-Bugs/"
+    },{
+      title: "大语言模型微调综述",
+      url: "/posts/2025/06/19/llm/Fine-Tuning-Survey/"
     },{
       title: "最新评论",
       url: "/recentcomments/"
