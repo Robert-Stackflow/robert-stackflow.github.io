@@ -59,9 +59,6 @@ window.posts=[{
       title: "一月 2025",
       url: "/archives/2025/01/"
     },{
-      title: "六月 2025",
-      url: "/archives/2025/06/"
-    },{
       title: "2025",
       url: "/archives/2025/"
     },{
@@ -263,6 +260,12 @@ window.posts=[{
       title: "卸载小米系列机型的预装软件",
       url: "/posts/2024/05/04/trick/Uninstall-Pre-installed-Apps-on-Xiaomi-Phones/"
     },{
+      title: "大模型微调BUG记录",
+      url: "/posts/2024/11/19/bug/LLM-Finetuning-Bugs/"
+    },{
+      title: "大语言模型微调综述",
+      url: "/posts/2024/11/19/llm/Fine-Tuning-Survey/"
+    },{
       title: "LLaMA-Factory参数说明",
       url: "/posts/2024/11/22/documention/LLaMA-Factory-Parameters/"
     },{
@@ -283,12 +286,6 @@ window.posts=[{
     },{
       title: "强化学习笔记（四）",
       url: "/posts/2025/01/16/notes/Reinforcement-Learning-4/"
-    },{
-      title: "大模型微调BUG记录",
-      url: "/posts/2025/06/16/bug/LLM-Finetuning-Bugs/"
-    },{
-      title: "大语言模型微调综述",
-      url: "/posts/2025/06/19/llm/Fine-Tuning-Survey/"
     },{
       title: "最新评论",
       url: "/recentcomments/"
