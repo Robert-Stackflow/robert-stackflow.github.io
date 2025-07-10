@@ -306,13 +306,13 @@
       
         <tags>
             
-            <tag> 安装教程 </tag>
-            
-            <tag> 环境配置 </tag>
-            
             <tag> Anaconda </tag>
             
             <tag> conda </tag>
+            
+            <tag> 安装教程 </tag>
+            
+            <tag> 环境配置 </tag>
             
         </tags>
       
@@ -416,13 +416,13 @@
       
         <tags>
             
-            <tag> WSL </tag>
-            
-            <tag> Linux </tag>
-            
             <tag> 安装教程 </tag>
             
             <tag> 环境配置 </tag>
+            
+            <tag> WSL </tag>
+            
+            <tag> Linux </tag>
             
         </tags>
       
