@@ -206,6 +206,7 @@ if (true) {
         <i class="cloudchewiefont cloudchewie-icon-angle-right"></i>
     </div>
     </a></div>
+
 <h2 id="五、贪心算法"><a href="#五、贪心算法" class="headerlink" title="五、贪心算法"></a>五、贪心算法</h2><h3 id="1-基本原理"><a href="#1-基本原理" class="headerlink" title="1.基本原理"></a>1.基本原理</h3><h4 id="1-基本概念"><a href="#1-基本概念" class="headerlink" title="(1)基本概念"></a>(1)基本概念</h4><ul>
 <li>分步骤实施，它在每一步仅作出当时看起来最佳的选择，即<strong>局部最优的选择</strong>，并寄希望这样的选择最终能导致<strong>全局最优解</strong>。</li>
 <li>实例：最小生成树问题的$ Prim $算法、$ Kruskal $算法，单源最短路径$ Dijkstra $算法，<strong>分数背包</strong>。</li>
@@ -230,8 +231,7 @@ if (true) {
 <li><p><strong>活动选择问题</strong>：假设活动按照结束时间单调递增排序，对给定的包含$ n $个活动的集合$ S $，在已知每个活动开始时间和结束时间的条件下，从中选出最多可兼容活动的子集合，称为<strong>最大兼容活动集合</strong>。</p>
 <blockquote>
 <p>考虑下列活动集合$ S $：</p>
-<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://picbed.cloudchewie.com/blog/post/Algorithm-Design-and-Analysis-3/Chp5-%E6%B4%BB%E5%8A%A8%E9%80%89%E6%8B%A9%E9%97%AE%E9%A2%98SAMPLE.png!blogimg" class="" width="400" title="活动选择问题SAMPLE">
-</blockquote>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://picbed.cloudchewie.com/blog/post/Algorithm-Design-and-Analysis-3/Chp5-%E6%B4%BB%E5%8A%A8%E9%80%89%E6%8B%A9%E9%97%AE%E9%A2%98SAMPLE.png!blogimg" class="" width="400" title="活动选择问题SAMPLE"></blockquote>
 </li>
 </ul>
 <h4 id="2-问题分析"><a href="#2-问题分析" class="headerlink" title="(2)问题分析"></a>(2)问题分析</h4><ul>
@@ -262,6 +262,7 @@ $ A_{ij}=A_{ik}∪{a_k}∪A_{kj} $
 <p>首先做出一个选择，然后求解剩下的子问题。每次选择将问题转化成一个规模更小的问题。</p>
 <p>伪代码如下：</p>
 <img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://picbed.cloudchewie.com/blog/post/Algorithm-Design-and-Analysis-3/Chp5-RECURSIVE-ACTIVITY-SELECTOR.png!blogimg" class="" width="400" title="RECURSIVE-ACTIVITY-SELECTOR">
+
 <blockquote>
 <p>第$ 2\thicksim 3 $行查找$ S_k $中最早结束的活动，循环检查$ a_{k+1},a_{k+2},\dots,a_n $，直至找到第一个与$ a_k $兼容的活动$ a_m $，也即满足$ s_m\geq f_k $。</p>
 <p>如果成功找到$ m $（也即$ m\leq n $），则返回$ {a_m} $与$ RECURSIVE-ACTIVITY-SELECTOR(s,f,m,n) $返回的$ S_m $的最大子集的并集。</p>
@@ -273,8 +274,10 @@ $ A_{ij}=A_{ik}∪{a_k}∪A_{kj} $
 <blockquote>
 <p>伪代码如下：</p>
 <img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://picbed.cloudchewie.com/blog/post/Algorithm-Design-and-Analysis-3/Chp5-GREEDY-ACTIVITY-SELECTOR.png!blogimg" class="" width="400" title="GREEDY-ACTIVITY-SELECTOR">
+
 <blockquote>
-<p>$ k $对应最后一个加入$ A $的活动，$ f_k $是$ A $中活动的最大结束时间，若$ m $的开始时间大于$ f_k $，则$ m $就是下一个被选中的活动。</p>
+$ k $对应最后一个加入$ A $的活动，$ f_k $是$ A $中活动的最大结束时间，若$ m $的开始时间大于$ f_k $，则$ m $就是下一个被选中的活动。
+
 <p>算法的运行时间是$ O(n) $。</p>
 </blockquote>
 </blockquote>
@@ -320,6 +323,7 @@ $ A_{ij}=A_{ik}∪{a_k}∪A_{kj} $
 <li><p>编码树：一种为表示字符二进制编码而构造的二叉树。</p>
 <blockquote>
 <img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://picbed.cloudchewie.com/blog/post/Algorithm-Design-and-Analysis-3/Chp5-%E8%B5%AB%E5%A4%AB%E6%9B%BC%E7%BC%96%E7%A0%81%E6%A0%91-SAMPLE.png!blogimg" class="" width="400" title="赫夫曼编码树-SAMPLE">
+
 <p>叶子结点：对应给定的字符，每个字符对应一个叶子结点。</p>
 <p>编码构造：字符的二进制码字由根结点到该字符叶子结点的简单路径</p>
 <p>路径表示：0代表转向左孩子，1代表转向右孩子</p>
@@ -341,7 +345,7 @@ $ A_{ij}=A_{ik}∪{a_k}∪A_{kj} $
 </li>
 <li><p>设$ d_T(c) $表示c的叶子结点在树T中的深度（根到叶子结点的路径长度）</p>
 <blockquote>
-<p>$ d_T(c) $也表示字符$ c $的码字长度</p>
+$ d_T(c) $也表示字符$ c $的码字长度
 </blockquote>
 </li>
 <li><p>设$ B(T) $表示采用$ T $编码时的文件编码长度，即$ B(T)=\sum\limits_{c\in C}c.freq\cdot d_T(c) $，称$ B(T) $为T的代价。</p>
@@ -358,6 +362,7 @@ $ A_{ij}=A_{ik}∪{a_k}∪A_{kj} $
 <blockquote>
 <p>伪代码如下：</p>
 <img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://picbed.cloudchewie.com/blog/post/Algorithm-Design-and-Analysis-3/Chp5-HUFFMAN.png!blogimg" class="" width="400" title="HUFFMAN">
+
 <p>第2行用$ C $中字符初始化最小优先队列$ Q $；</p>
 <p>第$ 3\thicksim 8 $行的循环反复从队列中合并频率最低的结点$ x $和$ y $，合并为新结点$ z $并替代之；</p>
 <p>经过$ n-1 $次合并后，最后返回剩下的唯一结点——编码树的根结点</p>
@@ -373,7 +378,7 @@ $ A_{ij}=A_{ik}∪{a_k}∪A_{kj} $
 </li>
 <li><p>循环的总代价是$ O(n\lg n) $</p>
 <blockquote>
-<p>$ for $循环共执行了$ n-1 $次，每次从堆中找出当前频率最小的两个结 点及把合并得到的新结点插入到堆中均花费$ O(\lg n) $，所以循环的总代价是$ O(n\lg n) $。</p>
+$ for $循环共执行了$ n-1 $次，每次从堆中找出当前频率最小的两个结 点及把合并得到的新结点插入到堆中均花费$ O(\lg n) $，所以循环的总代价是$ O(n\lg n) $。
 </blockquote>
 </li>
 <li><p>因此，$ HUFFMAN $的总运行时间$ O(n\lg n) $</p>
@@ -398,7 +403,9 @@ $ A_{ij}=A_{ik}∪{a_k}∪A_{kj} $
 <li><p>伪代码如下</p>
 <blockquote>
 $ FractionalKnapsack(n,p,v,C) $
+
 <img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://picbed.cloudchewie.com/blog/post/Algorithm-Design-and-Analysis-3/Chp5-FractionlKnapsack.png!blogimg" class="" width="400" title="FractionlKnapsack">
+
 <p>当背包未装满且商品未装完时填入商品，商品体积不大于容量则全部装入，否则装入部分商品填满背包</p>
 </blockquote>
 </li>
@@ -410,9 +417,12 @@ $ FractionalKnapsack(n,p,v,C) $
 <p>图可以表示为一个二元组$ G=\langle V,E\rangle $</p>
 <blockquote>
 <p>相关术语：</p>
-<p>$ V $表示非空顶点集，其元素称为顶点(Vertex) ，$ \vert V\vert $表示顶点数；</p>
-<p>$ E $表示边集，其元素称为边(Edge)，$ \vert E $表示顶点数 ；</p>
-<p>$ e=(u,v) $表示一条边，其中$ u\in V,v\in V,e\in E $；</p>
+$ V $表示非空顶点集，其元素称为顶点(Vertex) ，$ \vert V\vert $表示顶点数；
+
+$ E $表示边集，其元素称为边(Edge)，$ \vert E $表示顶点数 ；
+
+$ e=(u,v) $表示一条边，其中$ u\in V,v\in V,e\in E $；
+
 <p>相邻$ (Adjacent) $：边$ (u,v) $连接的顶点$ u $和$ v $相邻；</p>
 <p>关联$ (Incident) $：边$ (u,v) $和其连接的顶点$ u(or\,\,v) $相互关联。</p>
 </blockquote>
@@ -470,6 +480,7 @@ $ FractionalKnapsack(n,p,v,C) $
 <li><p>算法伪代码</p>
 <blockquote>
 <img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://picbed.cloudchewie.com/blog/post/Algorithm-Design-and-Analysis-3/Chp6-BFS-1.png!blogimg" class="" width="400" title="BFS-1">
+
 <img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://picbed.cloudchewie.com/blog/post/Algorithm-Design-and-Analysis-3/Chp6-BFS-2.png!blogimg" class="" width="400" title="BFS-2">
 </blockquote>
 </li>
@@ -486,8 +497,7 @@ $ FractionalKnapsack(n,p,v,C) $
 </li>
 <li><p>算法伪代码</p>
 <blockquote>
-<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://picbed.cloudchewie.com/blog/post/Algorithm-Design-and-Analysis-3/Chp6-BFT.png!blogimg" class="" width="400" title="BFT">
-</blockquote>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://picbed.cloudchewie.com/blog/post/Algorithm-Design-and-Analysis-3/Chp6-BFT.png!blogimg" class="" width="400" title="BFT"></blockquote>
 </li>
 </ul>
 <h5 id="③宽度优先生成树"><a href="#③宽度优先生成树" class="headerlink" title="③宽度优先生成树"></a>③宽度优先生成树</h5><ul>
@@ -497,8 +507,7 @@ $ FractionalKnapsack(n,p,v,C) $
 </li>
 <li><p>对于图$ G=(V,E) $和源结点$ s $，定义图$ G $的<strong>前驱子图</strong>为$ G_\pi=(V_\pi,E_\pi) $，其中$ V_\pi=\{v\in V:v.\pi\ne NIL\}\cup\{s\} $，$ E_\pi=\{(v.\pi,v):v\in V_\pi-\{s\}\} $。该前驱子图构成一棵广度优先树。</p>
 <blockquote>
-<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://picbed.cloudchewie.com/blog/post/Algorithm-Design-and-Analysis-3/Chp6-BFS-PRINT-PATH.png!blogimg" class="" width="400" title="BFS-PRINT-PATH">
-</blockquote>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://picbed.cloudchewie.com/blog/post/Algorithm-Design-and-Analysis-3/Chp6-BFS-PRINT-PATH.png!blogimg" class="" width="400" title="BFS-PRINT-PATH"></blockquote>
 </li>
 </ul>
 <h4 id="2-深度优先搜索与周游"><a href="#2-深度优先搜索与周游" class="headerlink" title="(2)深度优先搜索与周游"></a>(2)深度优先搜索与周游</h4><h5 id="①深度优先搜索"><a href="#①深度优先搜索" class="headerlink" title="①深度优先搜索"></a>①深度优先搜索</h5><ul>
@@ -523,8 +532,7 @@ $ FractionalKnapsack(n,p,v,C) $
 <h5 id="②深度优先周游"><a href="#②深度优先周游" class="headerlink" title="②深度优先周游"></a>②深度优先周游</h5><ul>
 <li><p>算法伪代码</p>
 <blockquote>
-<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://picbed.cloudchewie.com/blog/post/Algorithm-Design-and-Analysis-3/Chp6-DFT.png!blogimg" class="" width="400" title="DFT">
-</blockquote>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://picbed.cloudchewie.com/blog/post/Algorithm-Design-and-Analysis-3/Chp6-DFT.png!blogimg" class="" width="400" title="DFT"></blockquote>
 </li>
 </ul>
 <h4 id="3-深度检索"><a href="#3-深度检索" class="headerlink" title="(3)深度检索"></a>(3)深度检索</h4><ul>
@@ -542,12 +550,15 @@ $ FractionalKnapsack(n,p,v,C) $
 </li>
 <li><p>每次向边集$ A $中新增加一条边，需保证边集$ A $仍是一个无环图，且仍是最小生成树的子集</p>
 <blockquote>
-<p>$ A $是某棵最小生成树$ T $边的子集，$ A\subseteq T $；</p>
-<p>$ A\cup\{(u,v)\} $仍是$ T $边的一个子集，则称$ (u,v) $是$ A $的安全边。</p>
+$ A $是某棵最小生成树$ T $边的子集，$ A\subseteq T $；
+
+$ A\cup\{(u,v)\} $仍是$ T $边的一个子集，则称$ (u,v) $是$ A $的安全边。
+
 <p>若每次向边集$ A $中新增安全边，可保证边集$ A $是最小生成树的子集</p>
 </blockquote>
 </li>
 <li>$ Generic-MST(G) $
+
 <blockquote>
 <img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://picbed.cloudchewie.com/blog/post/Algorithm-Design-and-Analysis-3/Chp7-GENERIC-MST.png!blogimg" class="" width="400" title="GENERIC-MST">
 </blockquote>
@@ -564,6 +575,7 @@ $ FractionalKnapsack(n,p,v,C) $
 <blockquote>
 <p>给定图$ G=\langle V,E\rangle $是一个带权的连通无向图，令$ A $为边集$ E $的一个子集，且$ A $包含在图$ G $的某棵最小生成树中。若割$ (S,V-S) $是图$ G $中不妨害边集$ A $的任意割，且$ (u,v) $是横跨该割的轻边，则对于边集$ A $，边$ (u,v) $是其安全边。</p>
 <img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://picbed.cloudchewie.com/blog/post/Algorithm-Design-and-Analysis-3/Chp6-%E5%AE%89%E5%85%A8%E8%BE%B9%E8%BE%A8%E8%AF%86%E5%AE%9A%E7%90%86.png!blogimg" class="" width="400" title="安全边辨识定理">
+
 <img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://picbed.cloudchewie.com/blog/post/Algorithm-Design-and-Analysis-3/Chp6-%E5%AE%89%E5%85%A8%E8%BE%B9%E8%BE%A8%E8%AF%86%E5%AE%9A%E7%90%86%E6%8E%A8%E8%AE%BA.png!blogimg" class="" width="400" title="安全边辨识定理推论">
 </blockquote>
 </li>
@@ -585,6 +597,7 @@ $ FractionalKnapsack(n,p,v,C) $
 <li><p>伪代码：</p>
 <blockquote>
 <img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://picbed.cloudchewie.com/blog/post/Algorithm-Design-and-Analysis-3/Chp6-MST-PRIM.png!blogimg" class="" width="400" title="MST-PRIM">
+
 <p>第$ 1\thicksim 5 $行将每个结点的$ key $值设为$ \infty $（除了根节点$ r $的$ key $值为0，以便其为第一个被处理的结点），将每个结点的父节点设为$ NIL $，并对最小优先队列$ Q $进行初始化；</p>
 <p>在每遍$ while $循环前，有</p>
 <ul>
@@ -593,7 +606,7 @@ $ FractionalKnapsack(n,p,v,C) $
 <li>对于所有结点$ v\in Q $，如果$ v.\pi\ne NIL $，则$ v.key\lt \infty $且$ v.key $是连接结点$ v $和最小生成树中某个结点的轻边$ (v,v.\pi) $的权重。</li>
 </ul>
 <p>第7行找出结点$ u\in Q $，该结点是某条横跨割$ (V-Q,Q) $的轻边的一个端点，将$ u $从$ Q $中删除并将$ (u,u.\pi) $加入集合$ A $中；</p>
-<p>$ for $循环对与$ u $相邻却不在树中的结点$ v $的属性进行更新。</p>
+$ for $循环对与$ u $相邻却不在树中的结点$ v $的属性进行更新。
 </blockquote>
 </li>
 <li><p>优先队列</p>
@@ -605,34 +618,30 @@ $ FractionalKnapsack(n,p,v,C) $
 </ul>
 </li>
 </ul>
-<div class="table-container">
 <table>
 <thead>
 <tr>
-<th style="text-align:center">算法</th>
-<th style="text-align:center">说明</th>
-<th style="text-align:center">时间复杂度</th>
+<th align="center">算法</th>
+<th align="center">说明</th>
+<th align="center">时间复杂度</th>
 </tr>
 </thead>
-<tbody>
-<tr>
-<td style="text-align:center">$ INSERT() $</td>
-<td style="text-align:center">向优先队列中插入元素</td>
-<td style="text-align:center">$ O(\log n) $</td>
+<tbody><tr>
+<td align="center">$ INSERT() $</td>
+<td align="center">向优先队列中插入元素</td>
+<td align="center">$ O(\log n) $</td>
 </tr>
 <tr>
-<td style="text-align:center">$ EXTRACT-MIN(Q) $</td>
-<td style="text-align:center">移除优先队列中的最小元素</td>
-<td style="text-align:center">$ O(\log n) $</td>
+<td align="center">$ EXTRACT-MIN(Q) $</td>
+<td align="center">移除优先队列中的最小元素</td>
+<td align="center">$ O(\log n) $</td>
 </tr>
 <tr>
-<td style="text-align:center">$ DECREASE-KEY(u,u.d) $</td>
-<td style="text-align:center">更新距离数组，调整优先队列</td>
-<td style="text-align:center">$ O(\log n) $</td>
+<td align="center">$ DECREASE-KEY(u,u.d) $</td>
+<td align="center">更新距离数组，调整优先队列</td>
+<td align="center">$ O(\log n) $</td>
 </tr>
-</tbody>
-</table>
-</div>
+</tbody></table>
 <ul>
 <li><p>算法复杂度</p>
 <ul>
@@ -649,6 +658,7 @@ $ FractionalKnapsack(n,p,v,C) $
 <li><p>伪代码：</p>
 <blockquote>
 <img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://picbed.cloudchewie.com/blog/post/Algorithm-Design-and-Analysis-3/Chp6-MST-KRUSKAL.png!blogimg" class="" width="400" title="MST-KRUSKAL">
+
 <p>第$ 1\thicksim 3 $行将$ A $初始化为空集，并创建$ \vert V\vert $棵树，每棵树只包含一个结点；</p>
 <p>第$ 5\thicksim 8 $行的$ for $循环按照权重从低到高的次序对每条边进行检查，如果不在同一棵树中，则加入到集合$ A $中，并将两棵树的结点进行合并。</p>
 <p>证明算法保证选择的边为安全边：</p>
@@ -658,21 +668,21 @@ $ FractionalKnapsack(n,p,v,C) $
 <li><p>不相交集合</p>
 <ul>
 <li>$ MAKE-SET(v) $
+
 <ul>
 <li><p>初始化集合：创建根结点，并设置一条指向自身的边</p>
 </li>
 <li><p>时间复杂度为$ O(1) $</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">x.parent=x</span><br><span class="line"><span class="keyword">return</span> x</span><br></pre></td></tr></table></figure>
-</li>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">x.parent=x</span><br><span class="line"><span class="keyword">return</span> x</span><br></pre></td></tr></table></figure></li>
 </ul>
 </li>
 <li>$ FIND-SET(v) $
+
 <ul>
 <li><p>判定顶点是否在同一集合：回溯查找树根，检查树根是否相同</p>
 </li>
 <li><p>时间复杂度为$ O(h) $，且$ \vert V\vert\geq 2^h $，则为$ O(\log\vert V\vert) $</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span> x.parent ≠ x <span class="keyword">do</span></span><br><span class="line">	x=x.parent</span><br><span class="line">end</span><br><span class="line"><span class="keyword">return</span> x</span><br></pre></td></tr></table></figure>
-</li>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span> x.parent ≠ x <span class="keyword">do</span></span><br><span class="line">	x=x.parent</span><br><span class="line">end</span><br><span class="line"><span class="keyword">return</span> x</span><br></pre></td></tr></table></figure></li>
 </ul>
 </li>
 <li>$ UNION(u,v) $
@@ -680,14 +690,11 @@ $ FractionalKnapsack(n,p,v,C) $
 <li><p>合并两棵树</p>
 </li>
 <li><p>时间复杂度为$ O(h) $，且$ \vert V\vert\geq 2^h $，则为$ O(\log\vert V\vert) $</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">a=FIND-SET(x)</span><br><span class="line">b=FIND-SET(y)</span><br><span class="line"><span class="keyword">if</span> a.height ≤ b.height then</span><br><span class="line">	<span class="keyword">if</span> a.height = b.height then</span><br><span class="line">		b.height=b.height+<span class="number">1</span></span><br><span class="line">	end</span><br><span class="line">	a.parent=b</span><br><span class="line">end</span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">	b.parent=a</span><br><span class="line">end</span><br></pre></td></tr></table></figure>
-</li>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">a=FIND-SET(x)</span><br><span class="line">b=FIND-SET(y)</span><br><span class="line"><span class="keyword">if</span> a.height ≤ b.height then</span><br><span class="line">	<span class="keyword">if</span> a.height = b.height then</span><br><span class="line">		b.height=b.height+<span class="number">1</span></span><br><span class="line">	end</span><br><span class="line">	a.parent=b</span><br><span class="line">end</span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">	b.parent=a</span><br><span class="line">end</span><br></pre></td></tr></table></figure></li>
 </ul>
 </li>
 </ul>
 </li>
-</ul>
-<ul>
 <li><p>算法复杂度</p>
 <ul>
 <li>将边按照权重升序排序的时间成本为$ O(E\log E) $；</li>
@@ -697,40 +704,36 @@ $ FractionalKnapsack(n,p,v,C) $
 </ul>
 </li>
 </ul>
-<h3 id="5-算法对比"><a href="#5-算法对比" class="headerlink" title="5.算法对比"></a>5.算法对比</h3><div class="table-container">
-<table>
+<h3 id="5-算法对比"><a href="#5-算法对比" class="headerlink" title="5.算法对比"></a>5.算法对比</h3><table>
 <thead>
 <tr>
-<th style="text-align:center"></th>
-<th style="text-align:center">Prim算法</th>
-<th style="text-align:center">Kruskal算法</th>
+<th align="center"></th>
+<th align="center">Prim算法</th>
+<th align="center">Kruskal算法</th>
 </tr>
 </thead>
-<tbody>
-<tr>
-<td style="text-align:center">核心思想</td>
-<td style="text-align:center">保持一颗树，不断扩展</td>
-<td style="text-align:center">子树森林，合并为一棵树</td>
+<tbody><tr>
+<td align="center">核心思想</td>
+<td align="center">保持一颗树，不断扩展</td>
+<td align="center">子树森林，合并为一棵树</td>
 </tr>
 <tr>
-<td style="text-align:center">数据结构</td>
-<td style="text-align:center">优先队列</td>
-<td style="text-align:center">不相交集合</td>
+<td align="center">数据结构</td>
+<td align="center">优先队列</td>
+<td align="center">不相交集合</td>
 </tr>
 <tr>
-<td style="text-align:center">求解视角</td>
-<td style="text-align:center">微观视角，基于当前点选边</td>
-<td style="text-align:center">宏观视角，基于全局顺序选边</td>
+<td align="center">求解视角</td>
+<td align="center">微观视角，基于当前点选边</td>
+<td align="center">宏观视角，基于全局顺序选边</td>
 </tr>
 <tr>
-<td style="text-align:center">算法策略</td>
-<td style="text-align:center">采用贪心策略的图算法</td>
-<td style="text-align:center">采用贪心策略的图算法</td>
+<td align="center">算法策略</td>
+<td align="center">采用贪心策略的图算法</td>
+<td align="center">采用贪心策略的图算法</td>
 </tr>
-</tbody>
-</table>
-</div>
-</article><script>enableGPT=true;</script><script>enableAside=true;</script><div class="post-copyright"><div class="post-copyright__author_box"><a class="post-copyright__author_img" href="/" title="头像"><img class="post-copyright__author_img_back" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://picbed.cloudchewie.com/blog/index/avatar.png!mini" title="头像" alt="头像"><img class="post-copyright__author_img_front" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://picbed.cloudchewie.com/blog/index/avatar.png!mini" title="头像" alt="头像"></a><div class="post-copyright__author_name">Robert-Stackflow</div><div class="post-copyright__author_desc">我之心扉，早已蒙尘；幸有良人，辟尘生辉</div></div><div class="post-copyright__post__info"><a class="post-copyright__original" title="该文章为原创文章，注意版权协议" href="https://blog.cloudchewie.com/posts/2022/08/21/notes/Algorithm-Design-and-Analysis-3/">原创</a><a class="post-copyright-title"><span onclick="rm.copyPageUrl('https://blog.cloudchewie.com/posts/2022/08/21/notes/Algorithm-Design-and-Analysis-3/')">算法设计与分析笔记(三)</span></a></div><div class="post-tools" id="post-tools"><div class="post-tools-left"><div class="shareRight"><div class="share-link mobile"><div class="share-qrcode"><div class="share-button" title="使用手机访问这篇文章"><i class="fas fa-qrcode"></i></div><div class="share-main"><div class="share-main-all"><div id="qrcode" title="https://blog.cloudchewie.com/posts/2022/08/21/notes/Algorithm-Design-and-Analysis-3/"></div><div class="reward-dec">使用手机访问这篇文章</div></div></div></div></div><div class="share-link weibo"><a class="share-button" target="_blank" href="https://service.weibo.com/share/share.php?title=算法设计与分析笔记(三)&amp;url=https://blog.cloudchewie.com/posts/2022/08/21/notes/Algorithm-Design-and-Analysis-3/&amp;pic=https://picbed.cloudchewie.com/blog/cover/algorithms.jpg!cover" rel="external nofollow noreferrer noopener"><i class="fa-brands fa-weibo"></i></a></div><div class="share-link copyurl"><div class="share-button" id="post-share-url" title="复制链接" onclick="cloudchewieFn.copyArticleLink()"><i class="fas fa-link"></i></div></div></div></div><div class="post-tools-right"><div class="post_share"></div></div></div><div class="post-copyright__notice"><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="external nofollow noreferrer" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://blog.cloudchewie.com" target="_blank">Cloudchewie</a>！</span></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/posts/2022/08/21/notes/Algorithm-Design-and-Analysis-2/"><img class="prev-cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://picbed.cloudchewie.com/blog/cover/algorithms.jpg!cover" onerror="onerror=null;src='https://picbed.cloudchewie.com/blog/index/404.png!cover'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">算法设计与分析笔记(二)</div></div></a></div><div class="next-post pull-right"><a href="/posts/2022/08/21/notes/Algorithm-Design-and-Analysis-4/"><img class="next-cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://picbed.cloudchewie.com/blog/cover/algorithms.jpg!cover" onerror="onerror=null;src='https://picbed.cloudchewie.com/blog/index/404.png!cover'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">算法设计与分析笔记(四)</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><span>阅读建议</span></div><div class="relatedPosts-list"><div class="relatedPosts-list-item"><a href="/posts/2022/08/21/notes/Algorithm-Design-and-Analysis-2/" title="算法设计与分析笔记(二)"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://picbed.cloudchewie.com/blog/cover/algorithms.jpg!cover" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-08-21</div><div class="title">算法设计与分析笔记(二)</div></div></a></div><div class="relatedPosts-list-item"><a href="/posts/2022/08/21/notes/Algorithm-Design-and-Analysis-1/" title="算法设计与分析笔记(一)"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://picbed.cloudchewie.com/blog/cover/algorithms.jpg!cover" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-08-21</div><div class="title">算法设计与分析笔记(一)</div></div></a></div><div class="relatedPosts-list-item"><a href="/posts/2022/08/21/notes/Algorithm-Design-and-Analysis-4/" title="算法设计与分析笔记(四)"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://picbed.cloudchewie.com/blog/cover/algorithms.jpg!cover" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-08-21</div><div class="title">算法设计与分析笔记(四)</div></div></a></div></div></div><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><span> 评论</span></div><div class="comment-randomInfo"><a onclick="cloudchewieFn.addRandomCommentInfo()" href="javascript:void(0)" rel="external nofollow noreferrer">匿名评论</a></div><div class="comment-commentTerm"><a href="javascript:pjax.loadUrl(&quot;/term&quot;);" rel="external nofollow noreferrer">评论条例</a></div></div><div class="comment-wrap"><div><div id="twikoo-wrap"></div></div></div></div><div class="comment-barrage"></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://picbed.cloudchewie.com/blog/index/avatar.png!mini" onerror="this.onerror=null;this.src='https://picbed.cloudchewie.com/blog/index/404.png!cover'" alt="avatar"/></div><div class="author-info__name">Robert-Stackflow</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">归档</div><div class="length-num">37</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">31</div></a><a href="/categories/"><div class="headline">专栏</div><div class="length-num">7</div></a></div><a id="card-info-btn" target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/Robert-stackflow"><i class="fab fa-github"></i><span>GitHub</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="tencent://Message/?Uin=2014027378&amp;amp;websiteName=local.edu.com:8888=&amp;amp;Menu=yes" rel="external nofollow noreferrer" target="_blank" title="QQ"><i class="fab fa-qq"></i></a><a class="social-icon" href="https://space.bilibili.com/651449217" rel="external nofollow noreferrer" target="_blank" title="Bilibili"><i class="fab fa-bilibili"></i></a><a class="social-icon" href="https://twitter.com/RobertStackflow" rel="external nofollow noreferrer" target="_blank" title="X"><i class="fab fa-twitter"></i></a><a class="social-icon" href="mailto:2014027378@qq.com" rel="external nofollow noreferrer" target="_blank" title="Email"><i class="fas fa-envelope"></i></a><a class="social-icon" href="/atom.xml" target="_blank" title="RSS"><i class="fas fa-square-rss"></i></a></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%94%E3%80%81%E8%B4%AA%E5%BF%83%E7%AE%97%E6%B3%95"><span class="toc-text">五、贪心算法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E5%9F%BA%E6%9C%AC%E5%8E%9F%E7%90%86"><span class="toc-text">1.基本原理</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5"><span class="toc-text">(1)基本概念</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-%E8%B4%AA%E5%BF%83%E7%AE%97%E6%B3%95%E7%9A%84%E6%AD%A5%E9%AA%A4"><span class="toc-text">(2)贪心算法的步骤</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-%E8%B4%AA%E5%BF%83%E9%80%89%E6%8B%A9%E6%80%A7%E8%B4%A8"><span class="toc-text">(3)贪心选择性质</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E6%B4%BB%E5%8A%A8%E9%80%89%E6%8B%A9%E9%97%AE%E9%A2%98"><span class="toc-text">2.活动选择问题</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-%E9%97%AE%E9%A2%98%E6%8F%8F%E8%BF%B0"><span class="toc-text">(1)问题描述</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-%E9%97%AE%E9%A2%98%E5%88%86%E6%9E%90"><span class="toc-text">(2)问题分析</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-%E8%B4%AA%E5%BF%83%E7%AE%97%E6%B3%95"><span class="toc-text">(3)贪心算法</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E5%B8%A6%E6%9D%83%E6%B4%BB%E5%8A%A8%E9%80%89%E6%8B%A9%E9%97%AE%E9%A2%98"><span class="toc-text">3.带权活动选择问题</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-%E9%97%AE%E9%A2%98%E6%8F%8F%E8%BF%B0-1"><span class="toc-text">(1)问题描述</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-%E9%97%AE%E9%A2%98%E5%88%86%E6%9E%90-1"><span class="toc-text">(2)问题分析</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92"><span class="toc-text">(3)动态规划</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-%E7%BC%96%E7%A0%81"><span class="toc-text">4.$ Huffman $编码</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5-1"><span class="toc-text">(1)基本概念</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-%E6%9C%80%E4%BC%98%E5%AD%97%E7%AC%A6%E7%BC%96%E7%A0%81%E6%96%B9%E6%A1%88"><span class="toc-text">(2)最优字符编码方案</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-%E7%BC%96%E7%A0%81"><span class="toc-text">(3)$ Huffman $编码</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-%E5%88%86%E6%95%B0%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98"><span class="toc-text">5.分数背包问题</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-%E9%97%AE%E9%A2%98%E6%8F%8F%E8%BF%B0-2"><span class="toc-text">(1)问题描述</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-%E9%97%AE%E9%A2%98%E5%88%86%E6%9E%90-2"><span class="toc-text">(2)问题分析</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%AD%E3%80%81%E5%9F%BA%E6%9C%AC%E5%9B%BE%E7%AE%97%E6%B3%95"><span class="toc-text">六、基本图算法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5-2"><span class="toc-text">1.基本概念</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E5%9B%BE%E7%9A%84%E6%90%9C%E7%B4%A2%E4%B8%8E%E5%91%A8%E6%B8%B8"><span class="toc-text">2.图的搜索与周游</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-%E5%AE%BD%E5%BA%A6%E4%BC%98%E5%85%88%E6%90%9C%E7%B4%A2%E4%B8%8E%E5%91%A8%E6%B8%B8"><span class="toc-text">(1)宽度优先搜索与周游</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E2%91%A0%E5%AE%BD%E5%BA%A6%E4%BC%98%E5%85%88%E6%90%9C%E7%B4%A2"><span class="toc-text">①宽度优先搜索</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E2%91%A1%E5%AE%BD%E5%BA%A6%E4%BC%98%E5%85%88%E5%91%A8%E6%B8%B8"><span class="toc-text">②宽度优先周游</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E2%91%A2%E5%AE%BD%E5%BA%A6%E4%BC%98%E5%85%88%E7%94%9F%E6%88%90%E6%A0%91"><span class="toc-text">③宽度优先生成树</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-%E6%B7%B1%E5%BA%A6%E4%BC%98%E5%85%88%E6%90%9C%E7%B4%A2%E4%B8%8E%E5%91%A8%E6%B8%B8"><span class="toc-text">(2)深度优先搜索与周游</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E2%91%A0%E6%B7%B1%E5%BA%A6%E4%BC%98%E5%85%88%E6%90%9C%E7%B4%A2"><span class="toc-text">①深度优先搜索</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E2%91%A1%E6%B7%B1%E5%BA%A6%E4%BC%98%E5%85%88%E5%91%A8%E6%B8%B8"><span class="toc-text">②深度优先周游</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-%E6%B7%B1%E5%BA%A6%E6%A3%80%E7%B4%A2"><span class="toc-text">(3)深度检索</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E5%9B%9E%E6%BA%AF%E6%B3%95"><span class="toc-text">3.回溯法</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-%E7%9A%87%E5%90%8E%E9%97%AE%E9%A2%98"><span class="toc-text">(1)$ n $-皇后问题</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-%E5%AD%90%E9%9B%86%E5%92%8C%E9%97%AE%E9%A2%98"><span class="toc-text">(2)子集和问题</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-%E5%88%86%E6%94%AF-%E9%99%90%E7%95%8C%E6%B3%95"><span class="toc-text">4.分支-限界法</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-%E7%9A%87%E5%90%8E%E9%97%AE%E9%A2%98-1"><span class="toc-text">(1)$ n $-皇后问题</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-%E5%AD%90%E9%9B%86%E5%92%8C%E9%97%AE%E9%A2%98-1"><span class="toc-text">(2)子集和问题</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%83%E3%80%81%E6%9C%80%E5%B0%8F%E7%94%9F%E6%88%90%E6%A0%91"><span class="toc-text">七、最小生成树</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E9%97%AE%E9%A2%98%E8%83%8C%E6%99%AF"><span class="toc-text">1.问题背景</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E9%80%9A%E7%94%A8%E6%A1%86%E6%9E%B6"><span class="toc-text">2.通用框架</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E7%AE%97%E6%B3%95"><span class="toc-text">3.$ Prim $算法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-%E7%AE%97%E6%B3%95"><span class="toc-text">4.$ Kruskal $算法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-%E7%AE%97%E6%B3%95%E5%AF%B9%E6%AF%94"><span class="toc-text">5.算法对比</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/posts/2025/01/16/notes/Reinforcement-Learning-4/" title="强化学习笔记（四）"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://picbed.cloudchewie.com/blog/cover/Reinforcement-Learning.jpg!cover" onerror="this.onerror=null;this.src='https://picbed.cloudchewie.com/blog/index/404.png!cover'" alt="强化学习笔记（四）"/></a><div class="content"><a class="title" href="/posts/2025/01/16/notes/Reinforcement-Learning-4/" title="强化学习笔记（四）">强化学习笔记（四）</a><time datetime="2025-01-16T01:13:56.000Z" title="发表于 2025-01-16 09:13:56">2025-01-16</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/2025/01/16/notes/Reinforcement-Learning-3/" title="强化学习笔记（三）"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://picbed.cloudchewie.com/blog/cover/Reinforcement-Learning.jpg!cover" onerror="this.onerror=null;this.src='https://picbed.cloudchewie.com/blog/index/404.png!cover'" alt="强化学习笔记（三）"/></a><div class="content"><a class="title" href="/posts/2025/01/16/notes/Reinforcement-Learning-3/" title="强化学习笔记（三）">强化学习笔记（三）</a><time datetime="2025-01-16T01:10:08.000Z" title="发表于 2025-01-16 09:10:08">2025-01-16</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/2025/01/16/notes/Reinforcement-Learning-2/" title="强化学习笔记（二）"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://picbed.cloudchewie.com/blog/cover/Reinforcement-Learning.jpg!cover" onerror="this.onerror=null;this.src='https://picbed.cloudchewie.com/blog/index/404.png!cover'" alt="强化学习笔记（二）"/></a><div class="content"><a class="title" href="/posts/2025/01/16/notes/Reinforcement-Learning-2/" title="强化学习笔记（二）">强化学习笔记（二）</a><time datetime="2025-01-16T01:08:28.000Z" title="发表于 2025-01-16 09:08:28">2025-01-16</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/2025/01/16/notes/Reinforcement-Learning-1/" title="强化学习笔记（一）"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://picbed.cloudchewie.com/blog/cover/Reinforcement-Learning.jpg!cover" onerror="this.onerror=null;this.src='https://picbed.cloudchewie.com/blog/index/404.png!cover'" alt="强化学习笔记（一）"/></a><div class="content"><a class="title" href="/posts/2025/01/16/notes/Reinforcement-Learning-1/" title="强化学习笔记（一）">强化学习笔记（一）</a><time datetime="2025-01-16T01:07:08.000Z" title="发表于 2025-01-16 09:07:08">2025-01-16</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/2025/01/05/llm/Distributed-Training/" title="分布式训练"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://picbed.cloudchewie.com/blog/cover/Distributed-Training.png!cover" onerror="this.onerror=null;this.src='https://picbed.cloudchewie.com/blog/index/404.png!cover'" alt="分布式训练"/></a><div class="content"><a class="title" href="/posts/2025/01/05/llm/Distributed-Training/" title="分布式训练">分布式训练</a><time datetime="2025-01-05T15:53:24.000Z" title="发表于 2025-01-05 23:53:24">2025-01-05</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div id="footer_deal"><a class="deal_link" href="tencent://Message/?Uin=2014027378&amp;amp;websiteName=local.edu.com:8888=&amp;amp;Menu=yes" rel="external nofollow noreferrer" title="QQ"><i class="cloudchewiefont cloudchewie-icon-qq"></i></a><a class="deal_link" href="mailto:2014027378@qq.com" rel="external nofollow noreferrer" title="email"><i class="cloudchewiefont cloudchewie-icon-envelope"></i></a><a class="deal_link" target="_blank" rel="noopener external nofollow noreferrer" href="https://memos.cloudchewie.com" title="Memos"><i class="cloudchewiefont cloudchewie-icon-plant-fill"></i></a><a class="deal_link" href="/atom.xml" title="RSS"><i class="cloudchewiefont cloudchewie-icon-rss"></i></a><img class="footer_mini_logo" title="返回顶部" alt="返回顶部" onclick="cloudchewieFn.scrollToDest(0, 500)" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://picbed.cloudchewie.com/blog/index/avatar.png!mini" size="50px"/><a class="deal_link" target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/Robert-Stackflow" title="Github"><i class="cloudchewiefont cloudchewie-icon-github"></i></a><a class="deal_link" target="_blank" rel="noopener external nofollow noreferrer" href="https://space.bilibili.com/651449217" title="Bilibili"><i class="cloudchewiefont cloudchewie-icon-bilibili"></i></a><a class="deal_link" target="_blank" rel="noopener external nofollow noreferrer" href="https://twitter.com/RobertStackflow" title="Twitter"><i class="fab fa-twitter"></i></a><a class="deal_link" target="_blank" rel="noopener external nofollow noreferrer" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="Copyright"><i class="cloudchewiefont cloudchewie-icon-copyright-line"></i></a></div></div><div id="footer-bar"><div class="footer-bar-links"><div class="footer-bar-left"><div id="footer-bar-tips"><div class="copyright">&copy;2022 - 2025 By <a class="footer-bar-link" href="https://cloudchewie.com" rel="external nofollow noreferrer" title="Robert-Stackflow" target="_blank">Robert-Stackflow</a></div></div><div id="footer-type-tips"></div><div class="js-pjax"><script>function subtitleType () {
+</tbody></table>
+</article><script>enableGPT=true;</script><script>enableAside=true;</script><div class="post-copyright"><div class="post-copyright__author_box"><a class="post-copyright__author_img" href="/" title="头像"><img class="post-copyright__author_img_back" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://picbed.cloudchewie.com/blog/index/avatar.png!mini" title="头像" alt="头像"><img class="post-copyright__author_img_front" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://picbed.cloudchewie.com/blog/index/avatar.png!mini" title="头像" alt="头像"></a><div class="post-copyright__author_name">Robert-Stackflow</div><div class="post-copyright__author_desc">我之心扉，早已蒙尘；幸有良人，辟尘生辉</div></div><div class="post-copyright__post__info"><a class="post-copyright__original" title="该文章为原创文章，注意版权协议" href="https://blog.cloudchewie.com/posts/2022/08/21/notes/Algorithm-Design-and-Analysis-3/">原创</a><a class="post-copyright-title"><span onclick="rm.copyPageUrl('https://blog.cloudchewie.com/posts/2022/08/21/notes/Algorithm-Design-and-Analysis-3/')">算法设计与分析笔记(三)</span></a></div><div class="post-tools" id="post-tools"><div class="post-tools-left"><div class="shareRight"><div class="share-link mobile"><div class="share-qrcode"><div class="share-button" title="使用手机访问这篇文章"><i class="fas fa-qrcode"></i></div><div class="share-main"><div class="share-main-all"><div id="qrcode" title="https://blog.cloudchewie.com/posts/2022/08/21/notes/Algorithm-Design-and-Analysis-3/"></div><div class="reward-dec">使用手机访问这篇文章</div></div></div></div></div><div class="share-link weibo"><a class="share-button" target="_blank" href="https://service.weibo.com/share/share.php?title=算法设计与分析笔记(三)&amp;url=https://blog.cloudchewie.com/posts/2022/08/21/notes/Algorithm-Design-and-Analysis-3/&amp;pic=https://picbed.cloudchewie.com/blog/cover/algorithms.jpg!cover" rel="external nofollow noreferrer noopener"><i class="fa-brands fa-weibo"></i></a></div><div class="share-link copyurl"><div class="share-button" id="post-share-url" title="复制链接" onclick="cloudchewieFn.copyArticleLink()"><i class="fas fa-link"></i></div></div></div></div><div class="post-tools-right"><div class="post_share"></div></div></div><div class="post-copyright__notice"><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="external nofollow noreferrer" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://blog.cloudchewie.com" target="_blank">Cloudchewie</a>！</span></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/posts/2022/08/21/notes/Algorithm-Design-and-Analysis-2/"><img class="prev-cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://picbed.cloudchewie.com/blog/cover/algorithms.jpg!cover" onerror="onerror=null;src='https://picbed.cloudchewie.com/blog/index/404.png!cover'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">算法设计与分析笔记(二)</div></div></a></div><div class="next-post pull-right"><a href="/posts/2022/08/21/notes/Algorithm-Design-and-Analysis-4/"><img class="next-cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://picbed.cloudchewie.com/blog/cover/algorithms.jpg!cover" onerror="onerror=null;src='https://picbed.cloudchewie.com/blog/index/404.png!cover'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">算法设计与分析笔记(四)</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><span>阅读建议</span></div><div class="relatedPosts-list"><div class="relatedPosts-list-item"><a href="/posts/2022/08/21/notes/Algorithm-Design-and-Analysis-1/" title="算法设计与分析笔记(一)"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://picbed.cloudchewie.com/blog/cover/algorithms.jpg!cover" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-08-21</div><div class="title">算法设计与分析笔记(一)</div></div></a></div><div class="relatedPosts-list-item"><a href="/posts/2022/08/21/notes/Algorithm-Design-and-Analysis-2/" title="算法设计与分析笔记(二)"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://picbed.cloudchewie.com/blog/cover/algorithms.jpg!cover" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-08-21</div><div class="title">算法设计与分析笔记(二)</div></div></a></div><div class="relatedPosts-list-item"><a href="/posts/2022/08/21/notes/Algorithm-Design-and-Analysis-4/" title="算法设计与分析笔记(四)"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://picbed.cloudchewie.com/blog/cover/algorithms.jpg!cover" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-08-21</div><div class="title">算法设计与分析笔记(四)</div></div></a></div></div></div><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><span> 评论</span></div><div class="comment-randomInfo"><a onclick="cloudchewieFn.addRandomCommentInfo()" href="javascript:void(0)" rel="external nofollow noreferrer">匿名评论</a></div><div class="comment-commentTerm"><a href="javascript:pjax.loadUrl(&quot;/term&quot;);" rel="external nofollow noreferrer">评论条例</a></div></div><div class="comment-wrap"><div><div id="twikoo-wrap"></div></div></div></div><div class="comment-barrage"></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://picbed.cloudchewie.com/blog/index/avatar.png!mini" onerror="this.onerror=null;this.src='https://picbed.cloudchewie.com/blog/index/404.png!cover'" alt="avatar"/></div><div class="author-info__name">Robert-Stackflow</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">归档</div><div class="length-num">37</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">31</div></a><a href="/categories/"><div class="headline">专栏</div><div class="length-num">7</div></a></div><a id="card-info-btn" target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/Robert-stackflow"><i class="fab fa-github"></i><span>GitHub</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="tencent://Message/?Uin=2014027378&amp;amp;websiteName=local.edu.com:8888=&amp;amp;Menu=yes" rel="external nofollow noreferrer" target="_blank" title="QQ"><i class="fab fa-qq"></i></a><a class="social-icon" href="https://space.bilibili.com/651449217" rel="external nofollow noreferrer" target="_blank" title="Bilibili"><i class="fab fa-bilibili"></i></a><a class="social-icon" href="https://twitter.com/RobertStackflow" rel="external nofollow noreferrer" target="_blank" title="X"><i class="fab fa-twitter"></i></a><a class="social-icon" href="mailto:2014027378@qq.com" rel="external nofollow noreferrer" target="_blank" title="Email"><i class="fas fa-envelope"></i></a><a class="social-icon" href="/atom.xml" target="_blank" title="RSS"><i class="fas fa-square-rss"></i></a></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%94%E3%80%81%E8%B4%AA%E5%BF%83%E7%AE%97%E6%B3%95"><span class="toc-text">五、贪心算法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E5%9F%BA%E6%9C%AC%E5%8E%9F%E7%90%86"><span class="toc-text">1.基本原理</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5"><span class="toc-text">(1)基本概念</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-%E8%B4%AA%E5%BF%83%E7%AE%97%E6%B3%95%E7%9A%84%E6%AD%A5%E9%AA%A4"><span class="toc-text">(2)贪心算法的步骤</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-%E8%B4%AA%E5%BF%83%E9%80%89%E6%8B%A9%E6%80%A7%E8%B4%A8"><span class="toc-text">(3)贪心选择性质</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E6%B4%BB%E5%8A%A8%E9%80%89%E6%8B%A9%E9%97%AE%E9%A2%98"><span class="toc-text">2.活动选择问题</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-%E9%97%AE%E9%A2%98%E6%8F%8F%E8%BF%B0"><span class="toc-text">(1)问题描述</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-%E9%97%AE%E9%A2%98%E5%88%86%E6%9E%90"><span class="toc-text">(2)问题分析</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-%E8%B4%AA%E5%BF%83%E7%AE%97%E6%B3%95"><span class="toc-text">(3)贪心算法</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E5%B8%A6%E6%9D%83%E6%B4%BB%E5%8A%A8%E9%80%89%E6%8B%A9%E9%97%AE%E9%A2%98"><span class="toc-text">3.带权活动选择问题</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-%E9%97%AE%E9%A2%98%E6%8F%8F%E8%BF%B0-1"><span class="toc-text">(1)问题描述</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-%E9%97%AE%E9%A2%98%E5%88%86%E6%9E%90-1"><span class="toc-text">(2)问题分析</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92"><span class="toc-text">(3)动态规划</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-%E7%BC%96%E7%A0%81"><span class="toc-text">4.$ Huffman $编码</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5-1"><span class="toc-text">(1)基本概念</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-%E6%9C%80%E4%BC%98%E5%AD%97%E7%AC%A6%E7%BC%96%E7%A0%81%E6%96%B9%E6%A1%88"><span class="toc-text">(2)最优字符编码方案</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-%E7%BC%96%E7%A0%81"><span class="toc-text">(3)$ Huffman $编码</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-%E5%88%86%E6%95%B0%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98"><span class="toc-text">5.分数背包问题</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-%E9%97%AE%E9%A2%98%E6%8F%8F%E8%BF%B0-2"><span class="toc-text">(1)问题描述</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-%E9%97%AE%E9%A2%98%E5%88%86%E6%9E%90-2"><span class="toc-text">(2)问题分析</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%AD%E3%80%81%E5%9F%BA%E6%9C%AC%E5%9B%BE%E7%AE%97%E6%B3%95"><span class="toc-text">六、基本图算法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5-2"><span class="toc-text">1.基本概念</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E5%9B%BE%E7%9A%84%E6%90%9C%E7%B4%A2%E4%B8%8E%E5%91%A8%E6%B8%B8"><span class="toc-text">2.图的搜索与周游</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-%E5%AE%BD%E5%BA%A6%E4%BC%98%E5%85%88%E6%90%9C%E7%B4%A2%E4%B8%8E%E5%91%A8%E6%B8%B8"><span class="toc-text">(1)宽度优先搜索与周游</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E2%91%A0%E5%AE%BD%E5%BA%A6%E4%BC%98%E5%85%88%E6%90%9C%E7%B4%A2"><span class="toc-text">①宽度优先搜索</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E2%91%A1%E5%AE%BD%E5%BA%A6%E4%BC%98%E5%85%88%E5%91%A8%E6%B8%B8"><span class="toc-text">②宽度优先周游</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E2%91%A2%E5%AE%BD%E5%BA%A6%E4%BC%98%E5%85%88%E7%94%9F%E6%88%90%E6%A0%91"><span class="toc-text">③宽度优先生成树</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-%E6%B7%B1%E5%BA%A6%E4%BC%98%E5%85%88%E6%90%9C%E7%B4%A2%E4%B8%8E%E5%91%A8%E6%B8%B8"><span class="toc-text">(2)深度优先搜索与周游</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E2%91%A0%E6%B7%B1%E5%BA%A6%E4%BC%98%E5%85%88%E6%90%9C%E7%B4%A2"><span class="toc-text">①深度优先搜索</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E2%91%A1%E6%B7%B1%E5%BA%A6%E4%BC%98%E5%85%88%E5%91%A8%E6%B8%B8"><span class="toc-text">②深度优先周游</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-%E6%B7%B1%E5%BA%A6%E6%A3%80%E7%B4%A2"><span class="toc-text">(3)深度检索</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E5%9B%9E%E6%BA%AF%E6%B3%95"><span class="toc-text">3.回溯法</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-%E7%9A%87%E5%90%8E%E9%97%AE%E9%A2%98"><span class="toc-text">(1)$ n $-皇后问题</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-%E5%AD%90%E9%9B%86%E5%92%8C%E9%97%AE%E9%A2%98"><span class="toc-text">(2)子集和问题</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-%E5%88%86%E6%94%AF-%E9%99%90%E7%95%8C%E6%B3%95"><span class="toc-text">4.分支-限界法</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-%E7%9A%87%E5%90%8E%E9%97%AE%E9%A2%98-1"><span class="toc-text">(1)$ n $-皇后问题</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-%E5%AD%90%E9%9B%86%E5%92%8C%E9%97%AE%E9%A2%98-1"><span class="toc-text">(2)子集和问题</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%83%E3%80%81%E6%9C%80%E5%B0%8F%E7%94%9F%E6%88%90%E6%A0%91"><span class="toc-text">七、最小生成树</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E9%97%AE%E9%A2%98%E8%83%8C%E6%99%AF"><span class="toc-text">1.问题背景</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E9%80%9A%E7%94%A8%E6%A1%86%E6%9E%B6"><span class="toc-text">2.通用框架</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E7%AE%97%E6%B3%95"><span class="toc-text">3.$ Prim $算法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-%E7%AE%97%E6%B3%95"><span class="toc-text">4.$ Kruskal $算法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-%E7%AE%97%E6%B3%95%E5%AF%B9%E6%AF%94"><span class="toc-text">5.算法对比</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/posts/2025/01/16/notes/Reinforcement-Learning-4/" title="强化学习笔记（四）"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://picbed.cloudchewie.com/blog/cover/Reinforcement-Learning.jpg!cover" onerror="this.onerror=null;this.src='https://picbed.cloudchewie.com/blog/index/404.png!cover'" alt="强化学习笔记（四）"/></a><div class="content"><a class="title" href="/posts/2025/01/16/notes/Reinforcement-Learning-4/" title="强化学习笔记（四）">强化学习笔记（四）</a><time datetime="2025-01-16T01:13:56.000Z" title="发表于 2025-01-16 09:13:56">2025-01-16</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/2025/01/16/notes/Reinforcement-Learning-3/" title="强化学习笔记（三）"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://picbed.cloudchewie.com/blog/cover/Reinforcement-Learning.jpg!cover" onerror="this.onerror=null;this.src='https://picbed.cloudchewie.com/blog/index/404.png!cover'" alt="强化学习笔记（三）"/></a><div class="content"><a class="title" href="/posts/2025/01/16/notes/Reinforcement-Learning-3/" title="强化学习笔记（三）">强化学习笔记（三）</a><time datetime="2025-01-16T01:10:08.000Z" title="发表于 2025-01-16 09:10:08">2025-01-16</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/2025/01/16/notes/Reinforcement-Learning-2/" title="强化学习笔记（二）"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://picbed.cloudchewie.com/blog/cover/Reinforcement-Learning.jpg!cover" onerror="this.onerror=null;this.src='https://picbed.cloudchewie.com/blog/index/404.png!cover'" alt="强化学习笔记（二）"/></a><div class="content"><a class="title" href="/posts/2025/01/16/notes/Reinforcement-Learning-2/" title="强化学习笔记（二）">强化学习笔记（二）</a><time datetime="2025-01-16T01:08:28.000Z" title="发表于 2025-01-16 09:08:28">2025-01-16</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/2025/01/16/notes/Reinforcement-Learning-1/" title="强化学习笔记（一）"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://picbed.cloudchewie.com/blog/cover/Reinforcement-Learning.jpg!cover" onerror="this.onerror=null;this.src='https://picbed.cloudchewie.com/blog/index/404.png!cover'" alt="强化学习笔记（一）"/></a><div class="content"><a class="title" href="/posts/2025/01/16/notes/Reinforcement-Learning-1/" title="强化学习笔记（一）">强化学习笔记（一）</a><time datetime="2025-01-16T01:07:08.000Z" title="发表于 2025-01-16 09:07:08">2025-01-16</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/2025/01/05/llm/Distributed-Training/" title="分布式训练"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://picbed.cloudchewie.com/blog/cover/Distributed-Training.png!cover" onerror="this.onerror=null;this.src='https://picbed.cloudchewie.com/blog/index/404.png!cover'" alt="分布式训练"/></a><div class="content"><a class="title" href="/posts/2025/01/05/llm/Distributed-Training/" title="分布式训练">分布式训练</a><time datetime="2025-01-05T15:53:24.000Z" title="发表于 2025-01-05 23:53:24">2025-01-05</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div id="footer_deal"><a class="deal_link" href="tencent://Message/?Uin=2014027378&amp;amp;websiteName=local.edu.com:8888=&amp;amp;Menu=yes" rel="external nofollow noreferrer" title="QQ"><i class="cloudchewiefont cloudchewie-icon-qq"></i></a><a class="deal_link" href="mailto:2014027378@qq.com" rel="external nofollow noreferrer" title="email"><i class="cloudchewiefont cloudchewie-icon-envelope"></i></a><a class="deal_link" target="_blank" rel="noopener external nofollow noreferrer" href="https://memos.cloudchewie.com" title="Memos"><i class="cloudchewiefont cloudchewie-icon-plant-fill"></i></a><a class="deal_link" href="/atom.xml" title="RSS"><i class="cloudchewiefont cloudchewie-icon-rss"></i></a><img class="footer_mini_logo" title="返回顶部" alt="返回顶部" onclick="cloudchewieFn.scrollToDest(0, 500)" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://picbed.cloudchewie.com/blog/index/avatar.png!mini" size="50px"/><a class="deal_link" target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/Robert-Stackflow" title="Github"><i class="cloudchewiefont cloudchewie-icon-github"></i></a><a class="deal_link" target="_blank" rel="noopener external nofollow noreferrer" href="https://space.bilibili.com/651449217" title="Bilibili"><i class="cloudchewiefont cloudchewie-icon-bilibili"></i></a><a class="deal_link" target="_blank" rel="noopener external nofollow noreferrer" href="https://twitter.com/RobertStackflow" title="Twitter"><i class="fab fa-twitter"></i></a><a class="deal_link" target="_blank" rel="noopener external nofollow noreferrer" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="Copyright"><i class="cloudchewiefont cloudchewie-icon-copyright-line"></i></a></div></div><div id="footer-bar"><div class="footer-bar-links"><div class="footer-bar-left"><div id="footer-bar-tips"><div class="copyright">&copy;2022 - 2025 By <a class="footer-bar-link" href="https://cloudchewie.com" rel="external nofollow noreferrer" title="Robert-Stackflow" target="_blank">Robert-Stackflow</a></div></div><div id="footer-type-tips"></div><div class="js-pjax"><script>function subtitleType () {
   if (false) { 
     window.typed = new Typed("#footer-type-tips", {
       strings: ["昼夜交替的低语，暗藏着谁人的心迹"],

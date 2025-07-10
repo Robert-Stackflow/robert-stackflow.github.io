@@ -5185,7 +5185,7 @@ const memosFn = {
                 creatorUsername: current_user.username,
                 pinned: resValue.pinned,
                 content: resValue.content,
-                resourceList: resValue.resources,
+                resourceList: resValue.attachments,
                 reactions: resReactions,
                 location:
                   resValue.location != undefined

@@ -1605,21 +1605,33 @@ body {
   -webkit-tap-highlight-color: rgba(0,0,0,0);
 }
 *::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
+  width: 10px;
+  height: 10px;
+}
+*::-webkit-scrollbar-button {
+  display: none;
 }
 *::-webkit-scrollbar-thumb {
   background: var(--scrollbar-color);
-  border-radius: 8px;
+  -webkit-background-clip: content;
+  -moz-background-clip: content;
+  background-clip: content-box;
+  border: 2px solid rgba(0,0,0,0);
+  border-radius: 9999px;
+  -webkit-transition: background-color 0.2s;
+  -moz-transition: background-color 0.2s;
+  -o-transition: background-color 0.2s;
+  -ms-transition: background-color 0.2s;
+  transition: background-color 0.2s;
   cursor: pointer;
 }
 *::-webkit-scrollbar-track {
-  background-color: transparent;
+  background: transparent;
 }
 ::-webkit-scrollbar-corner {
-  background-color: transparent;
+  background: transparent;
 }
-* {
+*.test {
   scrollbar-width: thin;
   scrollbar-color: var(--scrollbar-color) transparent;
 }

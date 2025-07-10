@@ -225,7 +225,8 @@ if (true) {
     \mathbb{E}_{s \sim \rho^\pi, a \sim \pi_\theta} [r(s, a)]
     $$
     </li>
-<li>信赖域约束
+<li><p>信赖域约束</p>
+
     $$
     \begin{aligned}
     \text{max}_{\theta} &\quad \mathbb{E}_{s \sim \rho^\pi} \left[ \frac{\pi_\theta(a\mid s)}{\pi_{\theta_{\text{old}}}(a\mid s)} A^{\pi_{\theta_{\text{old}}}}(s, a) \right]\\
@@ -233,7 +234,8 @@ if (true) {
     \end{aligned}
     $$
     </li>
-<li>优势函数
+<li><p>优势函数</p>
+
     $$
     A^{\pi_{\theta_{\text{old}}}}(s, a) = Q^{\pi_{\theta_{\text{old}}}}(s, a) - V^{\pi_{\theta_{\text{old}}}}(s)
     $$
@@ -276,6 +278,7 @@ if (true) {
       $$
 
       
+
 <p>其中：</p>
 <ul>
 <li>$ \epsilon $ 是一个超参数，通常取 0.1 到 0.2，用于控制裁剪范围。</li>
@@ -288,8 +291,7 @@ if (true) {
       $$
       \mathcal{L}_{\text{PG}}(\theta) = - \min \left( \mathcal{L}(\theta), \mathcal{L}_{clip}(\theta) \right)
       $$
-      
-</li>
+      </li>
 </ul>
 </li>
 <li><p><strong>b. 值函数损失（Value Function Loss）</strong>：值函数的损失通过最小化预测值 $ V_{\phi}(s_t) $ 与实际折扣回报 $ \hat{R}_t $ 之间的误差来优化：</p>
@@ -310,6 +312,7 @@ if (true) {
     $$
 
     
+
 <ul>
 <li>$ c_1 $ 和 $ c_2 $ 是权重系数，用于平衡各个损失项</li>
 <li>$ \mathcal{H}(\pi_{\theta}) $​ 是策略的熵，鼓励策略的多样性，从而促进探索</li>
@@ -358,8 +361,7 @@ if (true) {
   \end{aligned}
   $$
 
-  
-</li>
+  </li>
 </ul>
 <h5 id="3-3-3-RLOO"><a href="#3-3-3-RLOO" class="headerlink" title="3.3.3 RLOO"></a>3.3.3 RLOO</h5><ul>
 <li>与 POO 的区别<ul>
@@ -396,8 +398,7 @@ if (true) {
   $$
   \hat{A}_{i,t}=\widetilde{r_{i}}=\frac{r_{i}-\mathrm{mean}(\mathbf{r})}{\mathrm{std}(\mathbf{r})}
   $$
-  
-</li>
+  </li>
 </ul>
 <h3 id="四、强化学习与大语言模型"><a href="#四、强化学习与大语言模型" class="headerlink" title="四、强化学习与大语言模型"></a>四、强化学习与大语言模型</h3><h4 id="4-1-RLHF-范式"><a href="#4-1-RLHF-范式" class="headerlink" title="4.1 RLHF 范式"></a>4.1 RLHF 范式</h4><ul>
 <li><p>RLHF 的流程</p>
@@ -434,8 +435,7 @@ if (true) {
       ​
       \mathbb{E}_{x,y\sim\mathcal{D}}\left[r_{\phi}(x,y)\right]
       $$
-      
-</li>
+      </li>
 </ul>
 <img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://picbed.cloudchewie.com/blog/post/Reinforcement-Learning-4/%E5%A5%96%E5%8A%B1%E6%A8%A1%E5%9E%8B%E5%BB%BA%E6%A8%A1%E9%98%B6%E6%AE%B5.png!blogimg" class="" width="400" title="奖励模型建模阶段">
 </li>
@@ -450,7 +450,7 @@ if (true) {
 
       
 </li>
-<li><p>$ \beta $用于控制策略模型和参考模型之间的偏差</p>
+<li>$ \beta $用于控制策略模型和参考模型之间的偏差
 </li>
 <li><p>策略模型和参考模型均使用$ \pi^{SFT} $初始化</p>
 </li>
@@ -459,13 +459,11 @@ if (true) {
       $$
       r(x,y)=r_{\phi}(x,y)-\beta(\log\pi_{\theta}(y\mid x)-\log\pi_{\mathrm{ref}}(y\mid x))
       $$
-      
-</li>
+      </li>
 </ul>
 </li>
 </ul>
-<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://picbed.cloudchewie.com/blog/post/Reinforcement-Learning-4/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E9%98%B6%E6%AE%B5.png!blogimg" class="" width="400" title="强化学习阶段">
-</li>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://picbed.cloudchewie.com/blog/post/Reinforcement-Learning-4/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E9%98%B6%E6%AE%B5.png!blogimg" class="" width="400" title="强化学习阶段"></li>
 </ul>
 <h4 id="4-2-直接偏好优化（DPO）"><a href="#4-2-直接偏好优化（DPO）" class="headerlink" title="4.2 直接偏好优化（DPO）"></a>4.2 直接偏好优化（DPO）</h4><ul>
 <li><p>直接偏好优化</p>
@@ -485,6 +483,7 @@ if (true) {
     $$
 
     
+
 <ul>
 <li>其中$ Z(x) $为配分函数</li>
 </ul>
@@ -554,6 +553,7 @@ if (true) {
     $$
 
     
+
 <ul>
 <li>其中 $ \pi_i $ 和 $ \pi_j $ 分别是 $ A_i $ 和 $ A_j $ 的能力值</li>
 </ul>
@@ -566,6 +566,7 @@ if (true) {
     $$
 
     
+
 <ul>
 <li>其中 $ l_{ij} = n_{ij} - w_{ij} $ 为 $ A_j $ 胜利的次数</li>
 </ul>
@@ -577,8 +578,7 @@ if (true) {
     \log L = \sum_{i \lt  j} w_{ij} \log \pi_i - (w_{ij} + l_{ij}) \log (\pi_i + \pi_j)
     $$
 
-    
-</li>
+    </li>
 </ul>
 </li>
 <li><p>Plackett-Luce 模型</p>
@@ -610,25 +610,30 @@ if (true) {
 </li>
 </ul>
 <h3 id="五、问题思考"><a href="#五、问题思考" class="headerlink" title="五、问题思考"></a>五、问题思考</h3><h4 id="5-1-强化学习亟待解决的问题"><a href="#5-1-强化学习亟待解决的问题" class="headerlink" title="5.1 强化学习亟待解决的问题"></a>5.1 强化学习亟待解决的问题</h4><ul>
-<li>样本效率低下<ul>
+<li><p>样本效率低下</p>
+<ul>
 <li>语言和视觉任务涉及庞大而复杂的状态-动作空间，这使得强化学习智能体难以学习有效的策略</li>
 <li>智能体必须理解任务并将其与相应的状态联系起来，这需要更广泛的交互</li>
 </ul>
 </li>
-<li>奖励函数设计<ul>
+<li><p>奖励函数设计</p>
+<ul>
 <li>在语言和视觉任务中，设计有效的奖励函数尤其具有挑战性。这些函数必须捕捉微妙的语言细微差别和复杂的视觉特征，这大大增加了本已困难的过程的复杂性。</li>
 <li>在这些领域中，将奖励与高级任务目标相结合通常需要领域专业知识和大量的反复试验</li>
 </ul>
 </li>
-<li>泛化<ul>
+<li><p>泛化</p>
+<ul>
 <li>强化学习代理通常会过度拟合训练数据，尤其是在基于视觉的环境中，导致在有干预（例如添加噪音）的状态下部署时性能不佳。代理必须学习对此类干预具有鲁棒性的不变特征，从而能够在不同的语言环境和视觉场景中实现泛化。 然而，这些领域的复杂性使得提取此类特征并适应新环境特别具有挑战性</li>
 </ul>
 </li>
-<li>自然语言理解<ul>
+<li><p>自然语言理解</p>
+<ul>
 <li>深度强化学习在自然语言处理和理解场景中面临困难，其中人类语言的细微差别和复杂性带来了独特的挑战，而当前的强化学习方法无法充分解决这些挑战</li>
 </ul>
 </li>
-<li>奖励黑客（Reward Hacking）<ul>
+<li><p>奖励黑客（Reward Hacking）</p>
+<ul>
 <li>当强化学习（RL）代理利用奖励函数中的缺陷或模糊性来获得高额奖励，而没有真正学习或完成预期任务时，奖励黑客就会发生</li>
 <li>奖励黑客行为的存在是因为强化学习环境通常不完美，并且准确设计奖励函数从根本上来说是一项重大挑战</li>
 <li>解决方法<ul>
@@ -678,23 +683,25 @@ if (true) {
 </li>
 <li><p>视频资源</p>
 <ul>
-<li><a target="_blank" rel="noopener external nofollow noreferrer" href="https://www.youtube.com/watch?v=2pWv7GOvuf0&amp;list=PLqYmG7hTraZDM-OYHWgPebj2MfCFzFObQ">RL Course by David Silver</a>：David Silver 的强化学习课程</li>
+<li><a target="_blank" rel="noopener external nofollow noreferrer" href="https://www.youtube.com/watch?v=2pWv7GOvuf0&list=PLqYmG7hTraZDM-OYHWgPebj2MfCFzFObQ">RL Course by David Silver</a>：David Silver 的强化学习课程</li>
 </ul>
 </li>
-<li>博客<ul>
+<li><p>博客</p>
+<ul>
 <li><a target="_blank" rel="noopener external nofollow noreferrer" href="https://lilianweng.github.io/tags/reinforcement-learning/">Reinforcement-Learning | Lil’Log</a>：Lil 的强化学习博客</li>
 <li><a target="_blank" rel="noopener external nofollow noreferrer" href="https://torres.ai/deep-reinforcement-learning-explained-series/">Deep Reinforcement Learning Explained</a>：Jordi Torries 的强化学习博客</li>
 <li><a target="_blank" rel="noopener external nofollow noreferrer" href="https://medium.com/@jonathan-hui/rl-deep-reinforcement-learning-series-833319a95530">Deep Reinforcement Learning &amp; Meta-Learning Series</a>：Jonathan Hui 的强化学习系列博客</li>
 <li><a target="_blank" rel="noopener external nofollow noreferrer" href="https://newfacade.github.io/notes-on-reinforcement-learning/01-intro.html">What is Reinforcement Learning?</a>：New Facade 的强化学习手册</li>
 </ul>
 </li>
-<li>框架<ul>
+<li><p>框架</p>
+<ul>
 <li><a target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/vwxyzjn/cleanrl">CleanRL</a>：强化学习算法的单文件实现</li>
 <li><a target="_blank" rel="noopener external nofollow noreferrer" href="https://stable-baselines3.readthedocs.io/en/master/">Stable-Baselines3 Docs</a>：Stable-Baselines3 的文档</li>
 </ul>
 </li>
 </ul>
-</article><script>enableGPT=true;</script><script>enableAside=true;</script><div class="post-copyright"><div class="post-copyright__author_box"><a class="post-copyright__author_img" href="/" title="头像"><img class="post-copyright__author_img_back" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://picbed.cloudchewie.com/blog/index/avatar.png!mini" title="头像" alt="头像"><img class="post-copyright__author_img_front" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://picbed.cloudchewie.com/blog/index/avatar.png!mini" title="头像" alt="头像"></a><div class="post-copyright__author_name">Robert-Stackflow</div><div class="post-copyright__author_desc">我之心扉，早已蒙尘；幸有良人，辟尘生辉</div></div><div class="post-copyright__post__info"><a class="post-copyright__original" title="该文章为原创文章，注意版权协议" href="https://blog.cloudchewie.com/posts/2025/01/16/notes/Reinforcement-Learning-4/">原创</a><a class="post-copyright-title"><span onclick="rm.copyPageUrl('https://blog.cloudchewie.com/posts/2025/01/16/notes/Reinforcement-Learning-4/')">强化学习笔记（四）</span></a></div><div class="post-tools" id="post-tools"><div class="post-tools-left"><div class="shareRight"><div class="share-link mobile"><div class="share-qrcode"><div class="share-button" title="使用手机访问这篇文章"><i class="fas fa-qrcode"></i></div><div class="share-main"><div class="share-main-all"><div id="qrcode" title="https://blog.cloudchewie.com/posts/2025/01/16/notes/Reinforcement-Learning-4/"></div><div class="reward-dec">使用手机访问这篇文章</div></div></div></div></div><div class="share-link weibo"><a class="share-button" target="_blank" href="https://service.weibo.com/share/share.php?title=强化学习笔记（四）&amp;url=https://blog.cloudchewie.com/posts/2025/01/16/notes/Reinforcement-Learning-4/&amp;pic=https://picbed.cloudchewie.com/blog/cover/Reinforcement-Learning.jpg!cover" rel="external nofollow noreferrer noopener"><i class="fa-brands fa-weibo"></i></a></div><div class="share-link copyurl"><div class="share-button" id="post-share-url" title="复制链接" onclick="cloudchewieFn.copyArticleLink()"><i class="fas fa-link"></i></div></div></div></div><div class="post-tools-right"><div class="post_share"></div></div></div><div class="post-copyright__notice"><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="external nofollow noreferrer" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://blog.cloudchewie.com" target="_blank">Cloudchewie</a>！</span></div></div><nav class="pagination-post" id="pagination"><div class="next-post pull-full"><a href="/posts/2025/01/16/notes/Reinforcement-Learning-3/"><img class="next-cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://picbed.cloudchewie.com/blog/cover/Reinforcement-Learning.jpg!cover" onerror="onerror=null;src='https://picbed.cloudchewie.com/blog/index/404.png!cover'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">强化学习笔记（三）</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><span>阅读建议</span></div><div class="relatedPosts-list"><div class="relatedPosts-list-item"><a href="/posts/2025/01/16/notes/Reinforcement-Learning-1/" title="强化学习笔记（一）"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://picbed.cloudchewie.com/blog/cover/Reinforcement-Learning.jpg!cover" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2025-01-16</div><div class="title">强化学习笔记（一）</div></div></a></div><div class="relatedPosts-list-item"><a href="/posts/2025/01/16/notes/Reinforcement-Learning-2/" title="强化学习笔记（二）"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://picbed.cloudchewie.com/blog/cover/Reinforcement-Learning.jpg!cover" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2025-01-16</div><div class="title">强化学习笔记（二）</div></div></a></div><div class="relatedPosts-list-item"><a href="/posts/2025/01/16/notes/Reinforcement-Learning-3/" title="强化学习笔记（三）"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://picbed.cloudchewie.com/blog/cover/Reinforcement-Learning.jpg!cover" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2025-01-16</div><div class="title">强化学习笔记（三）</div></div></a></div></div></div><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><span> 评论</span></div><div class="comment-randomInfo"><a onclick="cloudchewieFn.addRandomCommentInfo()" href="javascript:void(0)" rel="external nofollow noreferrer">匿名评论</a></div><div class="comment-commentTerm"><a href="javascript:pjax.loadUrl(&quot;/term&quot;);" rel="external nofollow noreferrer">评论条例</a></div></div><div class="comment-wrap"><div><div id="twikoo-wrap"></div></div></div></div><div class="comment-barrage"></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://picbed.cloudchewie.com/blog/index/avatar.png!mini" onerror="this.onerror=null;this.src='https://picbed.cloudchewie.com/blog/index/404.png!cover'" alt="avatar"/></div><div class="author-info__name">Robert-Stackflow</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">归档</div><div class="length-num">37</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">31</div></a><a href="/categories/"><div class="headline">专栏</div><div class="length-num">7</div></a></div><a id="card-info-btn" target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/Robert-stackflow"><i class="fab fa-github"></i><span>GitHub</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="tencent://Message/?Uin=2014027378&amp;amp;websiteName=local.edu.com:8888=&amp;amp;Menu=yes" rel="external nofollow noreferrer" target="_blank" title="QQ"><i class="fab fa-qq"></i></a><a class="social-icon" href="https://space.bilibili.com/651449217" rel="external nofollow noreferrer" target="_blank" title="Bilibili"><i class="fab fa-bilibili"></i></a><a class="social-icon" href="https://twitter.com/RobertStackflow" rel="external nofollow noreferrer" target="_blank" title="X"><i class="fab fa-twitter"></i></a><a class="social-icon" href="mailto:2014027378@qq.com" rel="external nofollow noreferrer" target="_blank" title="Email"><i class="fas fa-envelope"></i></a><a class="social-icon" href="/atom.xml" target="_blank" title="RSS"><i class="fas fa-square-rss"></i></a></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%89%E3%80%81%E6%B7%B1%E5%BA%A6%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0"><span class="toc-text">三、深度强化学习</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#3-1-%E5%80%BC%E5%87%BD%E6%95%B0%E6%96%B9%E6%B3%95%EF%BC%88DQN%EF%BC%89"><span class="toc-text">3.1 值函数方法（DQN）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-2-Actor-Critic%EF%BC%88AC%E3%80%81A3C%EF%BC%89"><span class="toc-text">3.2 Actor-Critic（AC、A3C）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-3-%E4%BF%A1%E8%B5%96%E5%9F%9F%E6%96%B9%E6%B3%95%EF%BC%88TRPO%E3%80%81PPO%EF%BC%89"><span class="toc-text">3.3 信赖域方法（TRPO、PPO）</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#3-3-1-%E4%BF%A1%E8%B5%96%E5%9F%9F%E6%96%B9%E6%B3%95"><span class="toc-text">3.3.1 信赖域方法</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3-3-1-%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0"><span class="toc-text">3.3.1 损失函数</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3-3-2-%E5%85%B7%E4%BD%93%E6%AD%A5%E9%AA%A4"><span class="toc-text">3.3.2 具体步骤</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3-3-3-RLOO"><span class="toc-text">3.3.3 RLOO</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3-3-4-%E7%BB%84%E7%9B%B8%E5%AF%B9%E7%AD%96%E7%95%A5%E4%BC%98%E5%8C%96%EF%BC%88GRPO%EF%BC%89"><span class="toc-text">3.3.4 组相对策略优化（GRPO）</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9B%9B%E3%80%81%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E4%B8%8E%E5%A4%A7%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B"><span class="toc-text">四、强化学习与大语言模型</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#4-1-RLHF-%E8%8C%83%E5%BC%8F"><span class="toc-text">4.1 RLHF 范式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-2-%E7%9B%B4%E6%8E%A5%E5%81%8F%E5%A5%BD%E4%BC%98%E5%8C%96%EF%BC%88DPO%EF%BC%89"><span class="toc-text">4.2 直接偏好优化（DPO）</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%94%E3%80%81%E9%97%AE%E9%A2%98%E6%80%9D%E8%80%83"><span class="toc-text">五、问题思考</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#5-1-%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E4%BA%9F%E5%BE%85%E8%A7%A3%E5%86%B3%E7%9A%84%E9%97%AE%E9%A2%98"><span class="toc-text">5.1 强化学习亟待解决的问题</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-2-LLM-%E4%BB%A3%E7%90%86%E4%BA%9F%E5%BE%85%E8%A7%A3%E5%86%B3%E7%9A%84%E9%97%AE%E9%A2%98"><span class="toc-text">5.2 LLM 代理亟待解决的问题</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AD%A6%E4%B9%A0%E8%B5%84%E6%BA%90"><span class="toc-text">学习资源</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/posts/2025/01/16/notes/Reinforcement-Learning-4/" title="强化学习笔记（四）"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://picbed.cloudchewie.com/blog/cover/Reinforcement-Learning.jpg!cover" onerror="this.onerror=null;this.src='https://picbed.cloudchewie.com/blog/index/404.png!cover'" alt="强化学习笔记（四）"/></a><div class="content"><a class="title" href="/posts/2025/01/16/notes/Reinforcement-Learning-4/" title="强化学习笔记（四）">强化学习笔记（四）</a><time datetime="2025-01-16T01:13:56.000Z" title="发表于 2025-01-16 09:13:56">2025-01-16</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/2025/01/16/notes/Reinforcement-Learning-3/" title="强化学习笔记（三）"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://picbed.cloudchewie.com/blog/cover/Reinforcement-Learning.jpg!cover" onerror="this.onerror=null;this.src='https://picbed.cloudchewie.com/blog/index/404.png!cover'" alt="强化学习笔记（三）"/></a><div class="content"><a class="title" href="/posts/2025/01/16/notes/Reinforcement-Learning-3/" title="强化学习笔记（三）">强化学习笔记（三）</a><time datetime="2025-01-16T01:10:08.000Z" title="发表于 2025-01-16 09:10:08">2025-01-16</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/2025/01/16/notes/Reinforcement-Learning-2/" title="强化学习笔记（二）"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://picbed.cloudchewie.com/blog/cover/Reinforcement-Learning.jpg!cover" onerror="this.onerror=null;this.src='https://picbed.cloudchewie.com/blog/index/404.png!cover'" alt="强化学习笔记（二）"/></a><div class="content"><a class="title" href="/posts/2025/01/16/notes/Reinforcement-Learning-2/" title="强化学习笔记（二）">强化学习笔记（二）</a><time datetime="2025-01-16T01:08:28.000Z" title="发表于 2025-01-16 09:08:28">2025-01-16</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/2025/01/16/notes/Reinforcement-Learning-1/" title="强化学习笔记（一）"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://picbed.cloudchewie.com/blog/cover/Reinforcement-Learning.jpg!cover" onerror="this.onerror=null;this.src='https://picbed.cloudchewie.com/blog/index/404.png!cover'" alt="强化学习笔记（一）"/></a><div class="content"><a class="title" href="/posts/2025/01/16/notes/Reinforcement-Learning-1/" title="强化学习笔记（一）">强化学习笔记（一）</a><time datetime="2025-01-16T01:07:08.000Z" title="发表于 2025-01-16 09:07:08">2025-01-16</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/2025/01/05/llm/Distributed-Training/" title="分布式训练"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://picbed.cloudchewie.com/blog/cover/Distributed-Training.png!cover" onerror="this.onerror=null;this.src='https://picbed.cloudchewie.com/blog/index/404.png!cover'" alt="分布式训练"/></a><div class="content"><a class="title" href="/posts/2025/01/05/llm/Distributed-Training/" title="分布式训练">分布式训练</a><time datetime="2025-01-05T15:53:24.000Z" title="发表于 2025-01-05 23:53:24">2025-01-05</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div id="footer_deal"><a class="deal_link" href="tencent://Message/?Uin=2014027378&amp;amp;websiteName=local.edu.com:8888=&amp;amp;Menu=yes" rel="external nofollow noreferrer" title="QQ"><i class="cloudchewiefont cloudchewie-icon-qq"></i></a><a class="deal_link" href="mailto:2014027378@qq.com" rel="external nofollow noreferrer" title="email"><i class="cloudchewiefont cloudchewie-icon-envelope"></i></a><a class="deal_link" target="_blank" rel="noopener external nofollow noreferrer" href="https://memos.cloudchewie.com" title="Memos"><i class="cloudchewiefont cloudchewie-icon-plant-fill"></i></a><a class="deal_link" href="/atom.xml" title="RSS"><i class="cloudchewiefont cloudchewie-icon-rss"></i></a><img class="footer_mini_logo" title="返回顶部" alt="返回顶部" onclick="cloudchewieFn.scrollToDest(0, 500)" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://picbed.cloudchewie.com/blog/index/avatar.png!mini" size="50px"/><a class="deal_link" target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/Robert-Stackflow" title="Github"><i class="cloudchewiefont cloudchewie-icon-github"></i></a><a class="deal_link" target="_blank" rel="noopener external nofollow noreferrer" href="https://space.bilibili.com/651449217" title="Bilibili"><i class="cloudchewiefont cloudchewie-icon-bilibili"></i></a><a class="deal_link" target="_blank" rel="noopener external nofollow noreferrer" href="https://twitter.com/RobertStackflow" title="Twitter"><i class="fab fa-twitter"></i></a><a class="deal_link" target="_blank" rel="noopener external nofollow noreferrer" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="Copyright"><i class="cloudchewiefont cloudchewie-icon-copyright-line"></i></a></div></div><div id="footer-bar"><div class="footer-bar-links"><div class="footer-bar-left"><div id="footer-bar-tips"><div class="copyright">&copy;2022 - 2025 By <a class="footer-bar-link" href="https://cloudchewie.com" rel="external nofollow noreferrer" title="Robert-Stackflow" target="_blank">Robert-Stackflow</a></div></div><div id="footer-type-tips"></div><div class="js-pjax"><script>function subtitleType () {
+</article><script>enableGPT=true;</script><script>enableAside=true;</script><div class="post-copyright"><div class="post-copyright__author_box"><a class="post-copyright__author_img" href="/" title="头像"><img class="post-copyright__author_img_back" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://picbed.cloudchewie.com/blog/index/avatar.png!mini" title="头像" alt="头像"><img class="post-copyright__author_img_front" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://picbed.cloudchewie.com/blog/index/avatar.png!mini" title="头像" alt="头像"></a><div class="post-copyright__author_name">Robert-Stackflow</div><div class="post-copyright__author_desc">我之心扉，早已蒙尘；幸有良人，辟尘生辉</div></div><div class="post-copyright__post__info"><a class="post-copyright__original" title="该文章为原创文章，注意版权协议" href="https://blog.cloudchewie.com/posts/2025/01/16/notes/Reinforcement-Learning-4/">原创</a><a class="post-copyright-title"><span onclick="rm.copyPageUrl('https://blog.cloudchewie.com/posts/2025/01/16/notes/Reinforcement-Learning-4/')">强化学习笔记（四）</span></a></div><div class="post-tools" id="post-tools"><div class="post-tools-left"><div class="shareRight"><div class="share-link mobile"><div class="share-qrcode"><div class="share-button" title="使用手机访问这篇文章"><i class="fas fa-qrcode"></i></div><div class="share-main"><div class="share-main-all"><div id="qrcode" title="https://blog.cloudchewie.com/posts/2025/01/16/notes/Reinforcement-Learning-4/"></div><div class="reward-dec">使用手机访问这篇文章</div></div></div></div></div><div class="share-link weibo"><a class="share-button" target="_blank" href="https://service.weibo.com/share/share.php?title=强化学习笔记（四）&amp;url=https://blog.cloudchewie.com/posts/2025/01/16/notes/Reinforcement-Learning-4/&amp;pic=https://picbed.cloudchewie.com/blog/cover/Reinforcement-Learning.jpg!cover" rel="external nofollow noreferrer noopener"><i class="fa-brands fa-weibo"></i></a></div><div class="share-link copyurl"><div class="share-button" id="post-share-url" title="复制链接" onclick="cloudchewieFn.copyArticleLink()"><i class="fas fa-link"></i></div></div></div></div><div class="post-tools-right"><div class="post_share"></div></div></div><div class="post-copyright__notice"><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="external nofollow noreferrer" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://blog.cloudchewie.com" target="_blank">Cloudchewie</a>！</span></div></div><nav class="pagination-post" id="pagination"><div class="next-post pull-full"><a href="/posts/2025/01/16/notes/Reinforcement-Learning-3/"><img class="next-cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://picbed.cloudchewie.com/blog/cover/Reinforcement-Learning.jpg!cover" onerror="onerror=null;src='https://picbed.cloudchewie.com/blog/index/404.png!cover'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">强化学习笔记（三）</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><span>阅读建议</span></div><div class="relatedPosts-list"><div class="relatedPosts-list-item"><a href="/posts/2025/01/16/notes/Reinforcement-Learning-2/" title="强化学习笔记（二）"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://picbed.cloudchewie.com/blog/cover/Reinforcement-Learning.jpg!cover" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2025-01-16</div><div class="title">强化学习笔记（二）</div></div></a></div><div class="relatedPosts-list-item"><a href="/posts/2025/01/16/notes/Reinforcement-Learning-1/" title="强化学习笔记（一）"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://picbed.cloudchewie.com/blog/cover/Reinforcement-Learning.jpg!cover" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2025-01-16</div><div class="title">强化学习笔记（一）</div></div></a></div><div class="relatedPosts-list-item"><a href="/posts/2025/01/16/notes/Reinforcement-Learning-3/" title="强化学习笔记（三）"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://picbed.cloudchewie.com/blog/cover/Reinforcement-Learning.jpg!cover" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2025-01-16</div><div class="title">强化学习笔记（三）</div></div></a></div></div></div><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><span> 评论</span></div><div class="comment-randomInfo"><a onclick="cloudchewieFn.addRandomCommentInfo()" href="javascript:void(0)" rel="external nofollow noreferrer">匿名评论</a></div><div class="comment-commentTerm"><a href="javascript:pjax.loadUrl(&quot;/term&quot;);" rel="external nofollow noreferrer">评论条例</a></div></div><div class="comment-wrap"><div><div id="twikoo-wrap"></div></div></div></div><div class="comment-barrage"></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://picbed.cloudchewie.com/blog/index/avatar.png!mini" onerror="this.onerror=null;this.src='https://picbed.cloudchewie.com/blog/index/404.png!cover'" alt="avatar"/></div><div class="author-info__name">Robert-Stackflow</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">归档</div><div class="length-num">37</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">31</div></a><a href="/categories/"><div class="headline">专栏</div><div class="length-num">7</div></a></div><a id="card-info-btn" target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/Robert-stackflow"><i class="fab fa-github"></i><span>GitHub</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="tencent://Message/?Uin=2014027378&amp;amp;websiteName=local.edu.com:8888=&amp;amp;Menu=yes" rel="external nofollow noreferrer" target="_blank" title="QQ"><i class="fab fa-qq"></i></a><a class="social-icon" href="https://space.bilibili.com/651449217" rel="external nofollow noreferrer" target="_blank" title="Bilibili"><i class="fab fa-bilibili"></i></a><a class="social-icon" href="https://twitter.com/RobertStackflow" rel="external nofollow noreferrer" target="_blank" title="X"><i class="fab fa-twitter"></i></a><a class="social-icon" href="mailto:2014027378@qq.com" rel="external nofollow noreferrer" target="_blank" title="Email"><i class="fas fa-envelope"></i></a><a class="social-icon" href="/atom.xml" target="_blank" title="RSS"><i class="fas fa-square-rss"></i></a></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%89%E3%80%81%E6%B7%B1%E5%BA%A6%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0"><span class="toc-text">三、深度强化学习</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#3-1-%E5%80%BC%E5%87%BD%E6%95%B0%E6%96%B9%E6%B3%95%EF%BC%88DQN%EF%BC%89"><span class="toc-text">3.1 值函数方法（DQN）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-2-Actor-Critic%EF%BC%88AC%E3%80%81A3C%EF%BC%89"><span class="toc-text">3.2 Actor-Critic（AC、A3C）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-3-%E4%BF%A1%E8%B5%96%E5%9F%9F%E6%96%B9%E6%B3%95%EF%BC%88TRPO%E3%80%81PPO%EF%BC%89"><span class="toc-text">3.3 信赖域方法（TRPO、PPO）</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#3-3-1-%E4%BF%A1%E8%B5%96%E5%9F%9F%E6%96%B9%E6%B3%95"><span class="toc-text">3.3.1 信赖域方法</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3-3-1-%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0"><span class="toc-text">3.3.1 损失函数</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3-3-2-%E5%85%B7%E4%BD%93%E6%AD%A5%E9%AA%A4"><span class="toc-text">3.3.2 具体步骤</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3-3-3-RLOO"><span class="toc-text">3.3.3 RLOO</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3-3-4-%E7%BB%84%E7%9B%B8%E5%AF%B9%E7%AD%96%E7%95%A5%E4%BC%98%E5%8C%96%EF%BC%88GRPO%EF%BC%89"><span class="toc-text">3.3.4 组相对策略优化（GRPO）</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9B%9B%E3%80%81%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E4%B8%8E%E5%A4%A7%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B"><span class="toc-text">四、强化学习与大语言模型</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#4-1-RLHF-%E8%8C%83%E5%BC%8F"><span class="toc-text">4.1 RLHF 范式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-2-%E7%9B%B4%E6%8E%A5%E5%81%8F%E5%A5%BD%E4%BC%98%E5%8C%96%EF%BC%88DPO%EF%BC%89"><span class="toc-text">4.2 直接偏好优化（DPO）</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%94%E3%80%81%E9%97%AE%E9%A2%98%E6%80%9D%E8%80%83"><span class="toc-text">五、问题思考</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#5-1-%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E4%BA%9F%E5%BE%85%E8%A7%A3%E5%86%B3%E7%9A%84%E9%97%AE%E9%A2%98"><span class="toc-text">5.1 强化学习亟待解决的问题</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-2-LLM-%E4%BB%A3%E7%90%86%E4%BA%9F%E5%BE%85%E8%A7%A3%E5%86%B3%E7%9A%84%E9%97%AE%E9%A2%98"><span class="toc-text">5.2 LLM 代理亟待解决的问题</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AD%A6%E4%B9%A0%E8%B5%84%E6%BA%90"><span class="toc-text">学习资源</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/posts/2025/01/16/notes/Reinforcement-Learning-4/" title="强化学习笔记（四）"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://picbed.cloudchewie.com/blog/cover/Reinforcement-Learning.jpg!cover" onerror="this.onerror=null;this.src='https://picbed.cloudchewie.com/blog/index/404.png!cover'" alt="强化学习笔记（四）"/></a><div class="content"><a class="title" href="/posts/2025/01/16/notes/Reinforcement-Learning-4/" title="强化学习笔记（四）">强化学习笔记（四）</a><time datetime="2025-01-16T01:13:56.000Z" title="发表于 2025-01-16 09:13:56">2025-01-16</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/2025/01/16/notes/Reinforcement-Learning-3/" title="强化学习笔记（三）"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://picbed.cloudchewie.com/blog/cover/Reinforcement-Learning.jpg!cover" onerror="this.onerror=null;this.src='https://picbed.cloudchewie.com/blog/index/404.png!cover'" alt="强化学习笔记（三）"/></a><div class="content"><a class="title" href="/posts/2025/01/16/notes/Reinforcement-Learning-3/" title="强化学习笔记（三）">强化学习笔记（三）</a><time datetime="2025-01-16T01:10:08.000Z" title="发表于 2025-01-16 09:10:08">2025-01-16</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/2025/01/16/notes/Reinforcement-Learning-2/" title="强化学习笔记（二）"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://picbed.cloudchewie.com/blog/cover/Reinforcement-Learning.jpg!cover" onerror="this.onerror=null;this.src='https://picbed.cloudchewie.com/blog/index/404.png!cover'" alt="强化学习笔记（二）"/></a><div class="content"><a class="title" href="/posts/2025/01/16/notes/Reinforcement-Learning-2/" title="强化学习笔记（二）">强化学习笔记（二）</a><time datetime="2025-01-16T01:08:28.000Z" title="发表于 2025-01-16 09:08:28">2025-01-16</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/2025/01/16/notes/Reinforcement-Learning-1/" title="强化学习笔记（一）"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://picbed.cloudchewie.com/blog/cover/Reinforcement-Learning.jpg!cover" onerror="this.onerror=null;this.src='https://picbed.cloudchewie.com/blog/index/404.png!cover'" alt="强化学习笔记（一）"/></a><div class="content"><a class="title" href="/posts/2025/01/16/notes/Reinforcement-Learning-1/" title="强化学习笔记（一）">强化学习笔记（一）</a><time datetime="2025-01-16T01:07:08.000Z" title="发表于 2025-01-16 09:07:08">2025-01-16</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/2025/01/05/llm/Distributed-Training/" title="分布式训练"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://picbed.cloudchewie.com/blog/cover/Distributed-Training.png!cover" onerror="this.onerror=null;this.src='https://picbed.cloudchewie.com/blog/index/404.png!cover'" alt="分布式训练"/></a><div class="content"><a class="title" href="/posts/2025/01/05/llm/Distributed-Training/" title="分布式训练">分布式训练</a><time datetime="2025-01-05T15:53:24.000Z" title="发表于 2025-01-05 23:53:24">2025-01-05</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div id="footer_deal"><a class="deal_link" href="tencent://Message/?Uin=2014027378&amp;amp;websiteName=local.edu.com:8888=&amp;amp;Menu=yes" rel="external nofollow noreferrer" title="QQ"><i class="cloudchewiefont cloudchewie-icon-qq"></i></a><a class="deal_link" href="mailto:2014027378@qq.com" rel="external nofollow noreferrer" title="email"><i class="cloudchewiefont cloudchewie-icon-envelope"></i></a><a class="deal_link" target="_blank" rel="noopener external nofollow noreferrer" href="https://memos.cloudchewie.com" title="Memos"><i class="cloudchewiefont cloudchewie-icon-plant-fill"></i></a><a class="deal_link" href="/atom.xml" title="RSS"><i class="cloudchewiefont cloudchewie-icon-rss"></i></a><img class="footer_mini_logo" title="返回顶部" alt="返回顶部" onclick="cloudchewieFn.scrollToDest(0, 500)" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://picbed.cloudchewie.com/blog/index/avatar.png!mini" size="50px"/><a class="deal_link" target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/Robert-Stackflow" title="Github"><i class="cloudchewiefont cloudchewie-icon-github"></i></a><a class="deal_link" target="_blank" rel="noopener external nofollow noreferrer" href="https://space.bilibili.com/651449217" title="Bilibili"><i class="cloudchewiefont cloudchewie-icon-bilibili"></i></a><a class="deal_link" target="_blank" rel="noopener external nofollow noreferrer" href="https://twitter.com/RobertStackflow" title="Twitter"><i class="fab fa-twitter"></i></a><a class="deal_link" target="_blank" rel="noopener external nofollow noreferrer" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="Copyright"><i class="cloudchewiefont cloudchewie-icon-copyright-line"></i></a></div></div><div id="footer-bar"><div class="footer-bar-links"><div class="footer-bar-left"><div id="footer-bar-tips"><div class="copyright">&copy;2022 - 2025 By <a class="footer-bar-link" href="https://cloudchewie.com" rel="external nofollow noreferrer" title="Robert-Stackflow" target="_blank">Robert-Stackflow</a></div></div><div id="footer-type-tips"></div><div class="js-pjax"><script>function subtitleType () {
   if (false) { 
     window.typed = new Typed("#footer-type-tips", {
       strings: ["昼夜交替的低语，暗藏着谁人的心迹"],
