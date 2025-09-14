@@ -5444,3 +5444,342 @@ const memosFn = {
 };
 
 utilsFn.setLocalStorage("enableAPlayer", "true");
+
+const pageFn = {
+  base_path: "/data/blog",
+  toStar: (num) => {
+    let tmp = "";
+    for (let i = 0; i < Math.floor(num); i++) {
+      tmp += '<i class="fa-solid fa-star"></i>';
+    }
+    if (num - Math.floor(num) != 0)
+      tmp += '<i class="fa-solid fa-star-half-alt"></i>';
+    for (let i = 0; i < 5 - Math.ceil(num); i++) {
+      tmp += '<i class="fa-regular fa-star"></i>';
+    }
+    return tmp;
+  },
+  renderBangumiPage: () => {
+    if (window.location.pathname == "/bangumi/") {
+      function renderBangumi(bangumiData) {
+        if (!bangumiData || !Array.isArray(bangumiData)) return "";
+
+        let result = "";
+        for (const i of bangumiData) {
+          const className = i.class_name
+            ? `<h2 ${i.class_desc ? "" : 'style="margin-bottom:12px"'}>${
+                i.class_name
+              } (${i.link_list.length})</h2>`
+            : "";
+          const classDesc = i.class_desc
+            ? `<div class="bangumi-desc">${i.class_desc}</div>`
+            : "";
+          let listResult = "";
+          for (const j of i.link_list) {
+            listResult += `
+          <div title="${
+            j.name
+          }" referrerPolicy="no-referrer" class="bangumi_box">
+            <div class="bangumi_cover" title="${j.name}">
+              <a href="${j.href}" rel="external nofollow" target="_blank">
+                <img src="${j.img}"/>
+              </a>
+            </div>
+            <div class="bangumi_content">
+              <div class="bangumi_title" title="${j.name}">
+                <a class="bangumi_title_link" target="_blank" href="${
+                  j.href
+                }" rel="external nofollow">
+                  ${j.name ? j.name : "未知"}
+                </a>
+              </div>
+              <div class="bangumi_meta">
+                <span title="${j.tip}">${j.tip}</span> / <span title="${
+              j.score
+            }">${j.score ? pageFn.toStar(j.score) : pageFn.toStar(0)}</span>
+              </div>
+              <div class="bangumi_description" title="${j.description}">
+                ${j.description ? j.description : "暂无简介"}
+              </div>
+            </div>
+          </div>
+        `;
+          }
+          result += `${className}${classDesc} <div class="bangumi-list">${listResult}</div>`;
+        }
+        return result;
+      }
+
+      fetch(
+        window.cloudchewie_api_base_url + pageFn.base_path + "/bangumi.json"
+      )
+        .then((res) => res.json())
+        .then((data) => {
+          document.getElementById("bangumi-lists-container").innerHTML =
+            renderBangumi(data);
+        })
+        .catch((err) => {
+          document.getElementById("bangumi-lists-container").innerHTML =
+            "<p>加载失败，请稍后再试。</p>";
+        });
+    }
+  },
+  renderVideoPage: () => {
+    if (window.location.pathname == "/video/") {
+      function renderVideo(videoData) {
+        if (!videoData || !Array.isArray(videoData)) return "";
+
+        let result = "";
+
+        for (const i of videoData) {
+          const className = i.class_name
+            ? `<h2 ${i.class_desc ? "" : 'style="margin-bottom:12px"'}>${
+                i.class_name
+              } (${i.link_list.length})</h2>`
+            : "";
+          const classDesc = i.class_desc
+            ? `<div class="video-desc">${i.class_desc}</div>`
+            : "";
+
+          let listResult = "";
+          for (const j of i.link_list) {
+            listResult += `
+          <div title="${j.name}" referrerPolicy="no-referrer" class="video_box">
+            <div class="video_cover" title="${j.name}">
+              <a href="${j.href}" rel="external nofollow" target="_blank">
+                <img src="${j.img}" />
+              </a>
+            </div>
+            <div class="video_content">
+              <div class="video_title" title="${j.name}">
+                <a class="video_title_link" target="_blank" href="${
+                  j.href
+                }" rel="external nofollow">
+                  ${j.name ? j.name : "未知"}
+                </a>
+              </div>
+              <div class="video_meta">
+                <span title="${j.tip}">${j.tip}</span> / <span title="${
+              j.score
+            }">${j.score ? pageFn.toStar(j.score) : pageFn.toStar(0)}</span>
+              </div>
+              <div class="video_description" title="${j.description}">
+                ${j.description ? j.description : "暂无简介"}
+              </div>
+            </div>
+          </div>
+        `;
+          }
+
+          result += `${className}${classDesc} <div class="video-list">${listResult}</div>`;
+        }
+
+        return result;
+      }
+
+      fetch(window.cloudchewie_api_base_url + pageFn.base_path + "/video.json")
+        .then((res) => res.json())
+        .then((data) => {
+          document.getElementById("video-lists").innerHTML += renderVideo(data);
+        })
+        .catch((err) => {
+          document.getElementById("video-lists").innerHTML +=
+            "<p>加载失败，请稍后再试。</p>";
+        });
+    }
+  },
+  renderGamePage: () => {
+    if (window.location.pathname == "/game/") {
+      function renderGame(gameData) {
+        if (!gameData || !Array.isArray(gameData)) return "";
+
+        let result = "";
+
+        for (const i of gameData) {
+          const className = i.class_name
+            ? `<h2 ${i.class_desc ? "" : 'style="margin-bottom:12px"'}>${
+                i.class_name
+              } (${i.link_list.length})</h2>`
+            : "";
+          const classDesc = i.class_desc
+            ? `<div class="game-desc">${i.class_desc}</div>`
+            : "";
+
+          let listResult = "";
+          for (const j of i.link_list) {
+            listResult += `
+          <div title="${
+            j.name
+          }" referrerPolicy="no-referrer" class="game_box" style="${
+              j.img
+                ? `background-image: url(${j.img})`
+                : "background-color: #333;"
+            }">
+            <div class="game_top">
+              <i class="${j.icon ? j.icon : "fa-solid fa-film"}"></i>
+              <span>${j.tip ? j.tip : "推荐"}</span>
+            </div>
+            <div class="game_content">
+              <a href="${j.href}">${j.name ? j.name : "未知"}</a>
+              <div>${j.score ? pageFn.toStar(j.score) : pageFn.toStar(0)}</div>
+            </div>
+          </div>
+        `;
+          }
+
+          result += `${className}${classDesc} <div class="game-list">${listResult}</div>`;
+        }
+
+        return result;
+      }
+
+      fetch(window.cloudchewie_api_base_url + pageFn.base_path + "/game.json")
+        .then((res) => res.json())
+        .then((data) => {
+          document.getElementById("game-lists").innerHTML += renderGame(data);
+        })
+        .catch((err) => {
+          document.getElementById("game-lists").innerHTML +=
+            "<p>加载失败，请稍后再试。</p>";
+        });
+    }
+  },
+  renderEquipmentPage: () => {
+    if (window.location.pathname == "/equipment/") {
+      function renderEquipment(equipmentData, themeConfig = {}) {
+        if (!equipmentData || !Array.isArray(equipmentData)) return "";
+
+        let result = "";
+
+        for (const i of equipmentData) {
+          let listResult = "";
+          for (const item of i.equipment_list) {
+            const isExternal =
+              item.link.includes("http://") || item.link.includes("https://");
+            listResult += `
+          <div class="equipment-item-content-item">
+            <div class="equipment-item-content-item-cover">
+              <img class="equipment-item-content-item-image"
+                   src="${item.image}"
+                   onerror="this.onerror=null;this.src='${
+                     themeConfig.error_img || "/images/error.png"
+                   }'"
+                   alt="${item.name}">
+            </div>
+            <div class="equipment-item-content-item-info">
+              <div class="equipment-item-content-item-name">${item.name}</div>
+              <div class="equipment-item-content-item-specification">${
+                item.specification || ""
+              }</div>
+              <div class="equipment-item-content-item-description">${
+                item.description || ""
+              }</div>
+              <div class="equipment-item-content-item-toolbar">
+                ${
+                  isExternal
+                    ? `<a class="equipment-item-content-item-link" href="${item.link}" target="_blank">详情</a>`
+                    : `<a class="equipment-item-content-item-link" href="${item.link}" target="_blank">查看文章</a>`
+                }
+                <div class="equipment-item-reply"
+                     onclick="cloudchewieFn.referToComment('${item.name}\\n${
+              item.specification
+            }\\n${item.description}')">
+                  <i class="fas fa-message"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+        `;
+          }
+
+          result += `
+        <div class="equipment-item">
+          <h2 class="equipment-item-title">${i.class_name}</h2>
+          <div class="equipment-item-description">${i.class_desc || ""}</div>
+          <div class="equipment-item-content">${listResult}</div>
+        </div>
+      `;
+        }
+
+        return result;
+      }
+
+      fetch(
+        window.cloudchewie_api_base_url + pageFn.base_path + "/equipment.json"
+      )
+        .then((res) => res.json())
+        .then((data) => {
+          document.getElementById("equipment").innerHTML += renderEquipment(
+            data,
+            {
+              error_img:
+                "https://picbed.cloudchewie.com/blog/index/404.png!cover",
+            }
+          );
+        })
+        .catch((err) => {
+          document.getElementById("equipment").innerHTML +=
+            "<p>加载失败，请稍后再试。</p>";
+        });
+    }
+  },
+  renderTreasurePage: () => {
+    if (window.location.pathname == "/treasure/") {
+      function renderTreasure(treasureData) {
+        if (!treasureData || !Array.isArray(treasureData)) return "";
+
+        let result = "";
+
+        for (const i of treasureData) {
+          const className = i.class_name
+            ? `<h2 ${i.class_desc ? "" : 'style="margin-bottom:12px"'}>${
+                i.class_name
+              } (${i.link_list.length})</h2>`
+            : "";
+          const classDesc = i.class_desc
+            ? `<div class="treasure-desc">${i.class_desc}</div>`
+            : "";
+
+          let listResult = "";
+          for (const j of i.link_list) {
+            listResult += `
+          <div title="${
+            j.name
+          }" referrerPolicy="no-referrer" class="treasure_box" style="${
+              j.img
+                ? `background-image: url(${j.img})`
+                : "background-color: #333;"
+            }">
+            <div class="treasure_top">
+              <i class="${j.icon ? j.icon : "fa-solid fa-film"}"></i>
+              <span>${j.tip ? j.tip : "推荐"}</span>
+            </div>
+            <div class="treasure_content">
+              <a href="${j.href}">${j.name ? j.name : "未知"}</a>
+              <div>${j.score ? pageFn.toStar(j.score) : pageFn.toStar(0)}</div>
+            </div>
+          </div>
+        `;
+          }
+
+          result += `${className}${classDesc} <div class="treasure-list">${listResult}</div>`;
+        }
+
+        return result;
+      }
+
+      fetch(
+        window.cloudchewie_api_base_url + pageFn.base_path + "/treasure.json"
+      )
+        .then((res) => res.json())
+        .then((data) => {
+          document.getElementById("treasure-lists").innerHTML +=
+            renderTreasure(data);
+        })
+        .catch((err) => {
+          document.getElementById("treasure-lists").innerHTML +=
+            "<p>加载失败，请稍后再试。</p>";
+        });
+    }
+  },
+};

@@ -205,7 +205,7 @@ document.addEventListener("DOMContentLoaded", function () {
       );
     utilsFn.isMemos() && memosFn.fetchMemos();
     utilsFn.isRecentComments() && fetchNewestComments();
-    
+
     GLOBAL_CONFIG.isPhotoFigcaption && cloudchewieFn.addPhotoFigcaption();
     document.getElementById("post-comment") && cloudchewieFn.enlargeEmoji();
 
@@ -284,6 +284,12 @@ document.addEventListener("DOMContentLoaded", function () {
       $("#menuAside").hide();
       $("#con-toggleaside").hide();
     }
+
+    pageFn.renderBangumiPage();
+    pageFn.renderGamePage();
+    pageFn.renderTreasurePage();
+    pageFn.renderEquipmentPage();
+    pageFn.renderVideoPage();
   };
 
   refreshFunction();
