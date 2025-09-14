@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://blog.cloudchewie.com/posts/2023/02/22/notes/Introduction-to-Database-System-3/</loc>
+    <lastmod>2025-08-19</lastmod>
+  </url>
+  <url>
     <loc>https://blog.cloudchewie.com/posts/2025/01/16/notes/Reinforcement-Learning-4/</loc>
     <lastmod>2025-06-29</lastmod>
   </url>
@@ -49,10 +53,6 @@
     <lastmod>2025-06-29</lastmod>
   </url>
   <url>
-    <loc>https://blog.cloudchewie.com/posts/2023/02/22/notes/Introduction-to-Database-System-3/</loc>
-    <lastmod>2025-06-29</lastmod>
-  </url>
-  <url>
     <loc>https://blog.cloudchewie.com/posts/2023/03/12/notes/Operating-System-Principles-2/</loc>
     <lastmod>2025-06-29</lastmod>
   </url>
@@ -81,11 +81,11 @@
     <lastmod>2025-06-22</lastmod>
   </url>
   <url>
-    <loc>https://blog.cloudchewie.com/posts/2022/11/12/notes/Computer-Network-and-Communication-3/</loc>
+    <loc>https://blog.cloudchewie.com/posts/2023/02/22/notes/Introduction-to-Database-System-1/</loc>
     <lastmod>2025-06-22</lastmod>
   </url>
   <url>
-    <loc>https://blog.cloudchewie.com/posts/2023/02/22/notes/Introduction-to-Database-System-1/</loc>
+    <loc>https://blog.cloudchewie.com/posts/2022/11/12/notes/Computer-Network-and-Communication-3/</loc>
     <lastmod>2025-06-22</lastmod>
   </url>
   <url>
