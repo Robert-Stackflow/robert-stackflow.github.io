@@ -20273,6 +20273,14 @@ a.tk-action-link,
 small.tk-actions a {
   cursor: pointer;
 }
+.tk-submit {
+  padding: 0 !important;
+}
+.twikoo .tk-comments .el-textarea__inner,
+.transparentpage input[type="text"],
+.transparentpage input[type="email"] {
+  background: var(--card-bg);
+}
 .transparentpage .tk-comments-container > .tk-comment {
   background: var(--card-bg);
   padding: 1rem;
@@ -20320,6 +20328,9 @@ small.tk-actions a {
 }
 .tk-avatar {
   margin-right: 0.5rem !important;
+}
+.twikoo .el-button {
+  transition: all 0.3s;
 }
 @media screen and (max-width: 768px) {
   .tk-avatar.tk-has-avatar {
