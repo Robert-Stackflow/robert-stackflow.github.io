@@ -206,6 +206,7 @@ if (true) {
         <i class="cloudchewiefont cloudchewie-icon-angle-right"></i>
     </div>
     </a></div>
+
 <h2 id="五、链路层"><a href="#五、链路层" class="headerlink" title="五、链路层"></a>五、链路层</h2><h3 id="5-1-概述"><a href="#5-1-概述" class="headerlink" title="5.1 概述"></a>5.1 概述</h3><h4 id="5-1-1-术语"><a href="#5-1-1-术语" class="headerlink" title="5.1.1 术语"></a>5.1.1 术语</h4><ul>
 <li><p>主要讨论传播时延：从输出链路的起点到目的地传播所需的时间</p>
 </li>
@@ -220,6 +221,7 @@ if (true) {
 </li>
 </ul>
 <h4 id="5-1-2-链路层基本模型"><a href="#5-1-2-链路层基本模型" class="headerlink" title="5.1.2 链路层基本模型"></a>5.1.2 链路层基本模型</h4><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://picbed.cloudchewie.com/blog/post/Computer-Network-and-Communication-5/Chp5-%E9%93%BE%E8%B7%AF%E5%B1%82%E6%A8%A1%E5%9E%8B.png!blogimg" class="" width="400" title="链路层模型">
+
 <ul>
 <li><p>数据报在不同链路上可能<strong>由不同的链路层协议</strong>进行处理</p>
 <blockquote>
@@ -248,14 +250,13 @@ if (true) {
 <li>单比特奇偶校验：检测单个比特错误</li>
 <li>二维奇偶校验：检测和纠正单个比特错误</li>
 <li>因特网检查和：用于$ TCP $、$ UDP $和$ IPv4 $协议中</li>
-<li>$ CRC $冗余校验：广泛应用于以太网、$ 802.11\enspace WiFi $、$ ATM $
-</li>
+<li>$ CRC $冗余校验：广泛应用于以太网、$ 802.11\enspace WiFi $、$ ATM $</li>
 </ul>
 <h3 id="5-2-多路访问链路和协议"><a href="#5-2-多路访问链路和协议" class="headerlink" title="5.2 多路访问链路和协议"></a>5.2 多路访问链路和协议</h3><h4 id="5-2-1-链路概述"><a href="#5-2-1-链路概述" class="headerlink" title="5.2.1 链路概述"></a>5.2.1 链路概述</h4><ul>
 <li><p>链路类型</p>
 <ul>
-<li>点到点链路：$ PPP $/以太网交换机和主机之间的点到点链路</li>
-<li>广播链路(共享线路或介质)：传统以太网/$ 802.11 $无线$ LAN $</li>
+<li>点到点链路：$ PPP $&#x2F;以太网交换机和主机之间的点到点链路</li>
+<li>广播链路(共享线路或介质)：传统以太网&#x2F;$ 802.11 $无线$ LAN $</li>
 </ul>
 </li>
 <li><p>链路特点</p>
@@ -319,14 +320,15 @@ if (true) {
 </li>
 <li><p>轮询协议</p>
 </li>
-<li>令牌传递协议</li>
+<li><p>令牌传递协议</p>
+</li>
 </ul>
 <h3 id="5-3-交换局域网"><a href="#5-3-交换局域网" class="headerlink" title="5.3 交换局域网"></a>5.3 交换局域网</h3><h4 id="5-3-1-地址"><a href="#5-3-1-地址" class="headerlink" title="5.3.1 地址"></a>5.3.1 $ MAC $地址</h4><ul>
 <li>又称为$ LAN $地址、物理地址</li>
 <li>$ 48 $比特，前$ 24 $比特由$ IEEE $分配管理——$ OUI $号，后$ 24 $比特由厂商自行分配</li>
 <li>通常采用<strong>十六进制</strong>表示法，如$ 5C-66-AB-90-75-B1 $</li>
 <li>在数据链路层标识<strong>每块网络适配器</strong>，使得能够在广播信道上寻址目标节点</li>
-<li>$ MAC $地址烧入网络适配器的$ ROM $中，<strong>不可更改</strong></li>
+<li>$ MAC $地址烧入网络适配器的$ ROM $中，**不可更改**</li>
 <li>$ MAC $地址类似于身份证号，不会随着网络迁移而改变；$ IP $类似于邮件通信地址，需要根据网络配置策略更改</li>
 <li>和网络层地址类似，主机和路由器上的每个接口（适配器）也都有链路层地址，但是链路层交换机的接口没有链路层地址</li>
 <li>链路层交换机的作用是在主机和路由器之间承载数据报，并<strong>透明</strong>地执行该任务</li>
@@ -348,6 +350,7 @@ if (true) {
 </li>
 <li><p>建立$ ARP $应答包</p>
 <img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://picbed.cloudchewie.com/blog/post/Computer-Network-and-Communication-5/Chp5-%E5%B1%80%E5%9F%9F%E7%BD%91%E5%86%85ARP%E5%BA%94%E7%AD%94%E5%8C%85.png!blogimg" class="" width="400" title="局域网内ARP应答包">
+
 <ul>
 <li><p>局域网内的所有适配器都把帧中的$ ARP $分组向上传递给$ ARP $模块</p>
 </li>
@@ -365,6 +368,7 @@ if (true) {
 </li>
 <li><p>局域网间工作流程</p>
 <img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://picbed.cloudchewie.com/blog/post/Computer-Network-and-Communication-5/Chp5-%E5%B1%80%E5%9F%9F%E7%BD%91%E9%97%B4ARP.png!blogimg" class="" width="400" title="局域网间ARP">
+
 <ul>
 <li>发送方主机首先获取两个局域网间路由器的端口的$ MAC $地址（ARP）</li>
 <li>发送方向路由器发送帧</li>
@@ -375,6 +379,7 @@ if (true) {
 </li>
 </ul>
 <h3 id="5-4-以太网"><a href="#5-4-以太网" class="headerlink" title="5.4 以太网"></a>5.4 以太网</h3><h4 id="5-4-1-以太网帧结构"><a href="#5-4-1-以太网帧结构" class="headerlink" title="5.4.1 以太网帧结构"></a>5.4.1 以太网帧结构</h4><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://picbed.cloudchewie.com/blog/post/Computer-Network-and-Communication-5/Chp5-%E4%BB%A5%E5%A4%AA%E7%BD%91%E5%B8%A7%E7%BB%93%E6%9E%84.png!blogimg" class="" width="400" title="以太网帧结构">
+
 <ul>
 <li><p>数据最长$ 1500 $个字节</p>
 </li>
@@ -390,7 +395,7 @@ if (true) {
 </li>
 <li><p>类型：上层协议类型（大多为$ IP $协议，也支持其它协议，如$ AppleTalk $）</p>
 </li>
-<li><p>$ CRC $：由接收方检查,若检测到错误，就将该帧丢弃</p>
+<li>$ CRC $：由接收方检查,若检测到错误，就将该帧丢弃
 </li>
 <li><p>以太网提供的服务</p>
 <ul>
@@ -459,17 +464,18 @@ if (true) {
 </ul>
 </li>
 <li>传统以太网（$ 10Mbps $）规定争用期为$ 51.2μs $，最短有效帧长为$ 64 $字节</li>
-<li>最短有效帧长=$ 2τ* $链路传输速率</li>
+<li>最短有效帧长&#x3D;$ 2τ* $链路传输速率</li>
 <li>当传送前$ 64 $个字节内没有发生碰撞时，就一直占用信道直到传输完毕所有字节（此时有其他数据来到时必须等待）</li>
 <li>如果发生碰撞，则一定是在发送的前$ 64 $字节之内</li>
 <li>任何小于$ 64 $字节的帧都是由于冲突而异常中止的无效帧</li>
 </ul>
 <h4 id="5-4-4-以太网交换机"><a href="#5-4-4-以太网交换机" class="headerlink" title="5.4.4 以太网交换机"></a>5.4.4 以太网交换机</h4><ul>
-<li>链路层设备，负责存储转发以太网帧</li>
-<li>主机不知道交换机的存在</li>
-<li>检查帧头部，根据目的$ MAC $地址转发</li>
-</ul>
-<ul>
+<li><p>链路层设备，负责存储转发以太网帧</p>
+</li>
+<li><p>主机不知道交换机的存在</p>
+</li>
+<li><p>检查帧头部，根据目的$ MAC $地址转发</p>
+</li>
 <li><p>交换机的工作原理</p>
 <ul>
 <li>交换机不转发同一网段内通信的帧</li>
@@ -491,46 +497,43 @@ if (true) {
 <li>根据表项存储时间和老化期清除表项</li>
 </ul>
 </li>
-<li>与路由器对比</li>
+<li><p>与路由器对比</p>
+</li>
 </ul>
-<div class="table-container">
 <table>
 <thead>
 <tr>
-<th style="text-align:center"></th>
-<th style="text-align:center">路由器</th>
-<th style="text-align:center">以太网交换机</th>
-<th style="text-align:center">集线器</th>
+<th align="center"></th>
+<th align="center">路由器</th>
+<th align="center">以太网交换机</th>
+<th align="center">集线器</th>
 </tr>
 </thead>
-<tbody>
-<tr>
-<td style="text-align:center">类型</td>
-<td style="text-align:center">网络层设备</td>
-<td style="text-align:center">链路层设备</td>
-<td style="text-align:center">链路层设备</td>
+<tbody><tr>
+<td align="center">类型</td>
+<td align="center">网络层设备</td>
+<td align="center">链路层设备</td>
+<td align="center">链路层设备</td>
 </tr>
 <tr>
-<td style="text-align:center">维护</td>
-<td style="text-align:center">维护路由表</td>
-<td style="text-align:center">维护交换表</td>
-<td style="text-align:center"></td>
+<td align="center">维护</td>
+<td align="center">维护路由表</td>
+<td align="center">维护交换表</td>
+<td align="center"></td>
 </tr>
 <tr>
-<td style="text-align:center">算法</td>
-<td style="text-align:center">路由算法</td>
-<td style="text-align:center">MAC地址过滤、学习算法</td>
-<td style="text-align:center"></td>
+<td align="center">算法</td>
+<td align="center">路由算法</td>
+<td align="center">MAC地址过滤、学习算法</td>
+<td align="center"></td>
 </tr>
 <tr>
-<td style="text-align:center">是否需配置</td>
-<td style="text-align:center">需要配置</td>
-<td style="text-align:center">即插即用</td>
-<td style="text-align:center">即插即用</td>
+<td align="center">是否需配置</td>
+<td align="center">需要配置</td>
+<td align="center">即插即用</td>
+<td align="center">即插即用</td>
 </tr>
-</tbody>
-</table>
-</div>
+</tbody></table>
 <h2 id="六、无线网络"><a href="#六、无线网络" class="headerlink" title="六、无线网络"></a>六、无线网络</h2><h3 id="6-1-概述"><a href="#6-1-概述" class="headerlink" title="6.1 概述"></a>6.1 概述</h3><ul>
 <li>特性<ul>
 <li>无线特性：基于无线链路</li>
@@ -558,7 +561,8 @@ if (true) {
 <li>基础设施——预先建立的固定基站</li>
 </ul>
 </li>
-<li>$ Ad\enspace hoc $网络<ul>
+<li>$ Ad\enspace hoc $网络
+<ul>
 <li>不包含固定基础设施的自组网络——无基站</li>
 <li>每个移动主机兼具主机和基站的作用</li>
 <li>节点(移动主机)仅仅能够在其覆盖范围内向其他节点传送数据</li>
@@ -575,8 +579,8 @@ if (true) {
 <h3 id="6-2-概述"><a href="#6-2-概述" class="headerlink" title="6.2 概述"></a>6.2 $ WiFi $概述</h3><ul>
 <li>执行$ 802.11 $协议的无线$ LAN $</li>
 <li>$ 802.11 $协议是一个协议簇，使用$ CSMA/CA $协议进行多路访问
-- $ 802.11a $的频率范围为$ 5.1\sim5.8GHz $
 <ul>
+<li>$ 802.11a $的频率范围为$ 5.1\sim5.8GHz $</li>
 <li>$ 802.11ac $的频率范围为$ 5.1\sim5.8GHz $，支持单流和多流通信</li>
 <li>$ 802.11b $的频率范围为$ 2.4\sim2.485GHz $，不需要许可证</li>
 <li>$ 802.11g $的频率范围为$ 2.4\sim2.485GHz $</li>
@@ -584,8 +588,8 @@ if (true) {
 </ul>
 </li>
 <li>$ 802.11b $的信道划分
-- 将$ 85MHz $划分为$ 11 $个部分重叠的信道，仅当两个信道间隔$ 4 $个及以上的信道时没有重叠，可以同时工作，如$ 1、6、11 $
 <ul>
+<li>将$ 85MHz $划分为$ 11 $个部分重叠的信道，仅当两个信道间隔$ 4 $个及以上的信道时没有重叠，可以同时工作，如$ 1、6、11 $</li>
 <li>每个无线访问接入点$ AP $周期性发送信标帧，包含自己的$ SSID $和$ MAC $</li>
 <li>主机扫描$ 11 $个信道获取所有可用的$ AP $的信标帧</li>
 <li>主机连接到某个$ AP $，加入其子网，并通过$ dhcp $获取$ IP $地址（需要身份鉴别）</li>

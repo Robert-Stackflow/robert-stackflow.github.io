@@ -206,6 +206,7 @@ if (true) {
         <i class="cloudchewiefont cloudchewie-icon-angle-right"></i>
     </div>
     </a></div>
+
 <h2 id="四、关系数据理论"><a href="#四、关系数据理论" class="headerlink" title="四、关系数据理论"></a>四、关系数据理论</h2><h3 id="4-1-规范化理论"><a href="#4-1-规范化理论" class="headerlink" title="4.1 规范化理论"></a>4.1 规范化理论</h3><ul>
 <li>关系的规范化：按照一定的规范设计的关系模式，将结构复杂的关系分解成结构简单的关系，从而把不好的关系数据库模式转变成为好的关系数据库模式</li>
 <li>简化的关系模式：$ R(U,F) $，其中$ U $为组成该关系的属性名集合，$ F $为属性间数据的依赖关系集合</li>
@@ -274,19 +275,21 @@ if (true) {
 </li>
 </ul>
 <h3 id="4-4-函数依赖的公理系统"><a href="#4-4-函数依赖的公理系统" class="headerlink" title="4.4 函数依赖的公理系统"></a>4.4 函数依赖的公理系统</h3><ul>
-<li>逻辑蕴涵：已知关系模式$ R $，$ U $是属性集全体，$ F $是其函数依赖，$ X $，$ Y $是其属性子集，对于任何一个关系$ r $，若函数依赖$ X\rightarrow Y $都成立，则称$ F $逻辑蕴涵$ X\rightarrow Y $</li>
-<li>依赖闭包：在关系模式$ R $中，为$ F $所逻辑蕴涵的函数依赖的全体叫做$ F $的闭包，记作$ F^{+} $</li>
+<li><p>逻辑蕴涵：已知关系模式$ R $，$ U $是属性集全体，$ F $是其函数依赖，$ X $，$ Y $是其属性子集，对于任何一个关系$ r $，若函数依赖$ X\rightarrow Y $都成立，则称$ F $逻辑蕴涵$ X\rightarrow Y $</p>
+</li>
+<li><p>依赖闭包：在关系模式$ R $中，为$ F $所逻辑蕴涵的函数依赖的全体叫做$ F $的闭包，记作$ F^{+} $</p>
+</li>
 <li>$ X $关于$ F $的闭包$ X_{F^+} $
 <ul>
 <li>$ X_{F^+}=\{A\vert X\rightarrow A\} $可由$ F $根据$ Armstrong $公理系统导出</li>
 </ul>
 </li>
 <li>$ Armstrong $公理系统
-- 自反律：若$ Y\subseteq X\subseteq U $，则$ X\rightarrow Y $为$ F $所蕴含
-- 增广律：若$ X\rightarrow Y $为$ F $所蕴含，且$ Z\subseteq U $，则$ XZ\rightarrow YZ $为$ F $所蕴含
-- 传递律：若$ X\rightarrow Y $和$ Y\rightarrow Z $为$ F $所蕴含，则$ X\rightarrow Z $为$ F $所蕴含
-- **合并规则**：由$ X\rightarrow Y $，$ X\rightarrow Z $，则$ X\rightarrow YZ $
 <ul>
+<li>自反律：若$ Y\subseteq X\subseteq U $，则$ X\rightarrow Y $为$ F $所蕴含</li>
+<li>增广律：若$ X\rightarrow Y $为$ F $所蕴含，且$ Z\subseteq U $，则$ XZ\rightarrow YZ $为$ F $所蕴含</li>
+<li>传递律：若$ X\rightarrow Y $和$ Y\rightarrow Z $为$ F $所蕴含，则$ X\rightarrow Z $为$ F $所蕴含</li>
+<li><strong>合并规则</strong>：由$ X\rightarrow Y $，$ X\rightarrow Z $，则$ X\rightarrow YZ $</li>
 <li><strong>伪传递规则</strong>：由$ X\rightarrow Y $，$ WY\rightarrow Z $，则$ XW\rightarrow Z $</li>
 <li><strong>分解规则</strong>：由$ X\rightarrow Y $，$ Z\subseteq Y $，则$ X\rightarrow Z $</li>
 <li>$ X\rightarrow A_1A_2\cdots A_k $成立的充要条件是$ X\rightarrow A_i $成立</li>
@@ -298,12 +301,14 @@ if (true) {
 <li>如果$ X_{F^+}=U $，则$ X $是$ R $的候选码</li>
 </ul>
 </li>
-<li><strong>$ X_{F^+} $的计算</strong><ul>
+<li><p><strong>$ X_{F^+} $的计算</strong></p>
+<ul>
 <li>寻找$ F $中决定因素为$ X $或$ X $子集的函数依赖，得到这些函数依赖的右部，与$ X $合并得到新的$ X $</li>
 <li>继续以上步骤，直至合并前后的属性集相同或合并后的属性集为$ U $</li>
 </ul>
 </li>
-<li><strong>候选码的计算</strong><ul>
+<li><p><strong>候选码的计算</strong></p>
+<ul>
 <li>基本定义<ul>
 <li>左部属性：只出现在$ F $左边的属性</li>
 <li>右部属性：只出现在$ F $右边的属性</li>
@@ -312,9 +317,9 @@ if (true) {
 </ul>
 </li>
 <li>基本规则<ul>
-<li>左部属性一定出现在任何候选码中/一定是主属性</li>
-<li>右部属性一定不出现在任何候选码中/一定是非主属性</li>
-<li>外部属性一定出现在任何候选码中/一定是主属性</li>
+<li>左部属性一定出现在任何候选码中&#x2F;一定是主属性</li>
+<li>右部属性一定不出现在任何候选码中&#x2F;一定是非主属性</li>
+<li>外部属性一定出现在任何候选码中&#x2F;一定是主属性</li>
 </ul>
 </li>
 <li>求解过程<ul>
@@ -326,14 +331,17 @@ if (true) {
 </li>
 </ul>
 </li>
-<li>函数依赖的等价/覆盖：如果$ G^+=F^+ $，则$ F $覆盖$ G $</li>
-<li>最小覆盖/极小函数依赖集：满足如下条件的函数依赖集<ul>
+<li><p>函数依赖的等价&#x2F;覆盖：如果$ G^+=F^+ $，则$ F $覆盖$ G $</p>
+</li>
+<li><p>最小覆盖&#x2F;极小函数依赖集：满足如下条件的函数依赖集</p>
+<ul>
 <li>$ F $中任一函数依赖的右部仅含有一个属性</li>
 <li>$ F $中不存在这样的函数依赖$ X\rightarrow A $，使得$ F $与$ F-\{X\rightarrow A\} $等价，即$ F $中的函数依赖不能被其他函数依赖导出</li>
 <li>$ F $中不存在这样的函数依赖$ X\rightarrow A $，$ X $有真子集$ Z $使得$ F $与$ F-\{X\rightarrow A\}\cup\{Z\rightarrow A\} $等价，即$ F $中各函数依赖左部均为最小属性集，均不存在冗余属性</li>
 </ul>
 </li>
-<li><strong>最小覆盖的计算</strong><ul>
+<li><p><strong>最小覆盖的计算</strong></p>
+<ul>
 <li>将$ F $中所有函数依赖的右边化为单一属性<ul>
 <li>使用合并规则</li>
 <li>逐一检查$ F $中各函数依赖$ F_i:X\rightarrow Y $</li>
@@ -359,14 +367,15 @@ if (true) {
 <h3 id="4-5-模式分解"><a href="#4-5-模式分解" class="headerlink" title="4.5 模式分解"></a>4.5 模式分解</h3><ul>
 <li>模式分解：将关系模式$R\langle U,V\rangle$分解为$\rho=\{R_1\langle U_1,F_1\rangle,\cdots,R_n\langle U_n,F_n\rangle\}$，且$ U=U_1\cup\cdots\cup U_n $，没有$ U_i\subseteq U_j,1\leq i,j\leq n $，$ F_i $是$ F $在$ U_i $上的投影</li>
 <li>正确的模式分解<ul>
-<li>具有无损连接性：设$ \rho={R_1\langle U_1,F_1\rangle ,\cdots,R_n\langle U_n,F_n\rangle } $是$ R\langle U,V\rangle  $的一个分解，若对$ R $上的任何一个关系$ r $均有$ r=r $在$ \rho $中个关系模式上投影的自然连接，则称$ \rho $具有无损连接性，简称$ \rho $为无损分解</li>
-<li>具有保持函数依赖性：设$ \rho={R_1\langle U_1,F_1\rangle ,\cdots,R_n\langle U_n,F_n\rangle } $是$ R\langle U,V\rangle  $的一个分解，若$ F $所逻辑蕴涵的函数依赖一定为分解后所有的关系模式中的函数依赖$ F_i $所逻辑蕴涵，即$ F^+=(F_1\cup F_2\cup\cdots\cup F_n)^+ $，则称$ \rho $具有保持函数依赖性</li>
+<li>具有无损连接性：设$ \rho&#x3D;{R_1\langle U_1,F_1\rangle ,\cdots,R_n\langle U_n,F_n\rangle } $是$ R\langle U,V\rangle  $的一个分解，若对$ R $上的任何一个关系$ r $均有$ r&#x3D;r $在$ \rho $中个关系模式上投影的自然连接，则称$ \rho $具有无损连接性，简称$ \rho $为无损分解</li>
+<li>具有保持函数依赖性：设$ \rho&#x3D;{R_1\langle U_1,F_1\rangle ,\cdots,R_n\langle U_n,F_n\rangle } $是$ R\langle U,V\rangle  $的一个分解，若$ F $所逻辑蕴涵的函数依赖一定为分解后所有的关系模式中的函数依赖$ F_i $所逻辑蕴涵，即$ F^+&#x3D;(F_1\cup F_2\cup\cdots\cup F_n)^+ $，则称$ \rho $具有保持函数依赖性</li>
 <li>如果一个分解具有无损连接性，则它能够保证不丢失信息</li>
 <li>如果一个分解保持了函数依赖，则它可以减轻或解决各种异常情况</li>
 </ul>
 </li>
 </ul>
 <h2 id="五、查询优化"><a href="#五、查询优化" class="headerlink" title="五、查询优化"></a>五、查询优化</h2><h3 id="6-1-查询处理"><a href="#6-1-查询处理" class="headerlink" title="6.1 查询处理"></a>6.1 查询处理</h3><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://picbed.cloudchewie.com/blog/post/Introduction-to-Database-System-3/Chp1-%E6%9F%A5%E8%AF%A2%E8%AE%A1%E5%88%92%E4%B8%BE%E4%BE%8B.png!blogimg" class="" width="400" title="查询计划举例">
+
 <ul>
 <li><p>查询处理流程</p>
 <ul>
@@ -377,18 +386,21 @@ if (true) {
 </li>
 <li><p>迭代模型</p>
 <img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://picbed.cloudchewie.com/blog/post/Introduction-to-Database-System-3/Chp1-%E8%BF%AD%E4%BB%A3%E6%A8%A1%E5%9E%8B.png!blogimg" class="" width="400" title="迭代模型">
+
 <ul>
 <li>每个算子执行$ Next $函数，调用得到一个下层提交的元组或一个空值标记NULL Maker</li>
 </ul>
 </li>
 <li><p>物化模型</p>
 <img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://picbed.cloudchewie.com/blog/post/Introduction-to-Database-System-3/Chp1-%E7%89%A9%E5%8C%96%E6%A8%A1%E5%9E%8B.png!blogimg" class="" width="400" title="物化模型">
+
 <ul>
 <li>每个算子一次性获取所有输出，传递元组列表给父节点</li>
 </ul>
 </li>
 <li><p>向量模型</p>
 <img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://picbed.cloudchewie.com/blog/post/Introduction-to-Database-System-3/Chp1-%E5%90%91%E9%87%8F%E6%A8%A1%E5%9E%8B.png!blogimg" class="" width="400" title="向量模型">
+
 <ul>
 <li>基本框架同迭代模型，但是每次提交一批元组（Batch）</li>
 </ul>
