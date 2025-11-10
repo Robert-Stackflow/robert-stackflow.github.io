@@ -1,0 +1,2217 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>机器学习笔记 | Cloudchewie</title><meta name="keywords" content="机器学习,Transformer,CNN,RNN,神经网络"><meta name="author" content="Robert-Stackflow"><meta name="copyright" content="Robert-Stackflow"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="ffffff"><meta name="description" content="机器学习学习笔记，包括概率分布、朴素贝叶斯、信息熵、隐马尔可夫模型、FNN、BP算法、RNN、CNN、Transformer">
+<meta property="og:type" content="article">
+<meta property="og:title" content="机器学习笔记">
+<meta property="og:url" content="https://blog.cloudchewie.com/posts/2025/01/04/notes/Machine-Learning/">
+<meta property="og:site_name" content="Cloudchewie">
+<meta property="og:description" content="机器学习学习笔记，包括概率分布、朴素贝叶斯、信息熵、隐马尔可夫模型、FNN、BP算法、RNN、CNN、Transformer">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://picbed.cloudchewie.com/blog/cover/Machine-Learning.png!cover">
+<meta property="article:published_time" content="2025-01-04T17:47:08.000Z">
+<meta property="article:modified_time" content="2025-11-10T07:39:33.650Z">
+<meta property="article:author" content="Robert-Stackflow">
+<meta property="article:tag" content="笔记">
+<meta property="article:tag" content="机器学习">
+<meta property="article:tag" content="神经网络">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://picbed.cloudchewie.com/blog/cover/Machine-Learning.png!cover"><link rel="shortcut icon" href="https://picbed.cloudchewie.com/icon/blog-transparent.png!mini"><link rel="canonical" href="https://blog.cloudchewie.com/posts/2025/01/04/notes/Machine-Learning/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//pv.cloudchewie.com"/><meta name="baidu-site-verification" content="codeva-NPu2Lb2oyZ"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.cbd.int/@fortawesome/fontawesome-free@6.1.2/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.cbd.int/node-snackbar@0.1.16/dist/snackbar.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.cbd.int/@fancyapps/ui@5.0.20/dist/fancybox/fancybox.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: {"hits":{"per_page":6},"languages":{"input_placeholder":"搜索文章","hits_empty":"找不到您查询的内容：${query}","hits_stats":"找到 ${hits} 条结果，用时 ${time} 毫秒"}},
+  navMusic: true,
+  localSearch: undefined,
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"简","rightMenuMsgToTraditionalChinese":"转为繁体","rightMenuMsgToSimplifiedChinese":"转为简体"},
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":200},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: {"copy_success":"复制成功","chs_to_cht":"你已切换为繁体中文","cht_to_chs":"你已切换为简体中文","day_to_night":"你已切换为深色模式","night_to_day":"你已切换为浅色模式","comment_barrage_open":"打开评论弹幕","comment_barrage_close":"关闭评论弹幕","browser_version_low":"浏览器版本过低，网站样式可能错乱","welcome":"欢迎访问Cloudchewie","cookie_notice":"本站使用Cookie和本地/会话存储保证浏览体验和网站统计","bgLight":"#1F883D","bgDark":"#1f1f1f","position":"top-right"},
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.cbd.int/flickr-justified-gallery@2.1.2/dist/fjGallery.min.js',
+      css: 'https://cdn.cbd.int/flickr-justified-gallery@2.1.2/dist/fjGallery.css'
+    }
+  },
+  isPhotoFigcaption: true,
+  islazyload: true,
+  shortcut: {"enable":true,"delay":100,"shiftDelay":500},
+  isAnchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '机器学习笔记',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2025-11-10 15:39:33'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          data: value,
+          time: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.time) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.data
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+    win.getCSS = (url,id = false) => new Promise((resolve, reject) => {
+      const link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.href = url
+      if (id) link.id = id
+      link.onerror = reject
+      link.onload = link.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        link.onload = link.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(link)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', 'ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+          const isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+          const isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+          const hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+
+          if (t === undefined) {
+            if (isLightMode) activateLightMode()
+            else if (isDarkMode) activateDarkMode()
+            else if (isNotSpecified || hasNoSupport) {
+              const now = new Date()
+              const hour = now.getHours()
+              const isNight = hour <= 6 || hour >= 18
+              isNight ? activateDarkMode() : activateLightMode()
+            }
+            window.matchMedia('(prefers-color-scheme: dark)').addListener(function (e) {
+              if (saveToLocal.get('theme') === undefined) {
+                e.matches ? activateDarkMode() : activateLightMode()
+              }
+            })
+          } else if (t === 'light') activateLightMode()
+          else activateDarkMode()
+        
+      const asideStatus = saveToLocal.get('enableAside')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><canvas id="universe"></canvas><style id="noiseStyle"></style><style id="settingStyle"></style><style id="barragesColor"></style><style id="themeColor"></style><meta name="baidu-site-verification" content="codeva-KoHQLKwmYl" /><script>let cloudGPT_postSelector = '\#post \#article-container';let enableGPT=true;let enableAside=true;</script><meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="Cloudchewie" type="application/atom+xml">
+</head><body data-type="cloudchewie"><div id="loading-box" onclick="document.getElementById(&quot;loading-box&quot;).classList.add(&quot;loaded&quot;)"><div class="loading-bg"><div class="loading-img"></div></div></div><script>const preloader = {
+  endLoading: () => {
+    document.body.style.overflow = 'auto';
+    document.getElementById('loading-box').classList.add("loaded")
+  },
+  initLoading: () => {
+    document.body.style.overflow = '';
+    document.getElementById('loading-box').classList.remove("loaded")
+  }
+}
+window.addEventListener('load',()=> { preloader.endLoading() })
+
+if (true) {
+  document.addEventListener('pjax:send', () => { preloader.initLoading() })
+  document.addEventListener('pjax:complete', () => { preloader.endLoading() })
+}</script><div class="needEndHide" id="fps"></div><div id="web_bg"></div><div id="cloud_music_bg"></div><div id="web_box"><div id="web_container"><div id="menu-mask"></div><div class="post" id="body-wrap"><header class="post-bg  nav-top" id="page-header" style="background-image: url('https://picbed.cloudchewie.com/blog/cover/Machine-Learning.png!cover')"><nav id="nav"><div id="nav-group"><span id="blog_name"><div class="back-home-button"><i class="cloudchewiefont cloudchewie-icon-grip-vertical"></i><div class="back-menu-list-groups"><div class="back-menu-list-group"><div class="back-menu-list-title"><span>站点</span><div class="back-menu-list"><a class="back-menu-item" href="https://www.cloudchewie.com" rel="external nofollow noreferrer" title="主页" target="_blank"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://picbed.cloudchewie.com/blog/index/favicon.png!mini" alt="主页"/><span class="back-menu-item-text">主页</span></a><a class="back-menu-item" href="https://moment.cloudchewie.com" rel="external nofollow noreferrer" title="时光" target="_blank"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://picbed.cloudchewie.com/icon/moment-transparent.png!mini" alt="时光"/><span class="back-menu-item-text">时光</span></a><a class="back-menu-item" href="https://memos.cloudchewie.com" rel="external nofollow noreferrer" title="Memos" target="_blank"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://picbed.cloudchewie.com/icon/memos.webp!mini" alt="Memos"/><span class="back-menu-item-text">Memos</span></a><a class="back-menu-item" href="https://status.cloudchewie.com" rel="external nofollow noreferrer" title="站点监测" target="_blank"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://picbed.cloudchewie.com/icon/uptime.png!mini" alt="站点监测"/><span class="back-menu-item-text">站点监测</span></a></div></div></div><div class="back-menu-list-group"><div class="back-menu-list-title"><span>应用</span><div class="back-menu-list"><a class="back-menu-item" href="https://purrli.cloudchewie.com" rel="external nofollow noreferrer" title="Purrli" target="_blank"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://picbed.cloudchewie.com/blog/cat/apple-touch-icon.png!mini" alt="Purrli"/><span class="back-menu-item-text">Purrli</span></a><a class="back-menu-item" href="https://pan.cloudchewie.com" rel="external nofollow noreferrer" title="Cloud云盘" target="_blank"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://picbed.cloudchewie.com/icon/cloud-transparent.png!mini" alt="Cloud云盘"/><span class="back-menu-item-text">Cloud云盘</span></a><a class="back-menu-item" href="https://lsky.cloudchewie.com" rel="external nofollow noreferrer" title="Cloud图床" target="_blank"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://picbed.cloudchewie.com/icon/lsky.ico" alt="Cloud图床"/><span class="back-menu-item-text">Cloud图床</span></a><a class="back-menu-item" href="/responsive" title="网站截图" target="_blank"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://picbed.cloudchewie.com/blog/index/favicon.png!mini" alt="网站截图"/><span class="back-menu-item-text">网站截图</span></a><a class="back-menu-item" href="https://apps.cloudchewie.com" rel="external nofollow noreferrer" title="App Center" target="_blank"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://picbed.cloudchewie.com/blog/index/favicon.png!mini" alt="App Center"/><span class="back-menu-item-text">App Center</span></a></div></div></div><div class="back-menu-list-group"><div class="back-menu-list-title"><span>线路</span><div class="back-menu-list"><a class="back-menu-item" href="https://blog.cloudchewie.com" title="腾讯云" target="_blank"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://picbed.cloudchewie.com/icon/cos.svg" alt="腾讯云"/><span class="back-menu-item-text">腾讯云</span></a><a class="back-menu-item" href="https://vercel.blog.cloudchewie.com" rel="external nofollow noreferrer" title="Vercel" target="_blank"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://picbed.cloudchewie.com/icon/vercel.png!mini" alt="Vercel"/><span class="back-menu-item-text">Vercel</span></a><a class="back-menu-item" href="https://gh.blog.cloudchewie.com" rel="external nofollow noreferrer" title="GitHub" target="_blank"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://picbed.cloudchewie.com/icon/github.svg" alt="GitHub"/><span class="back-menu-item-text">GitHub</span></a></div></div></div><div class="back-menu-list-group"><div class="back-menu-list-title"><span>友链</span><div class="back-menu-list"><a class="back-menu-item" href="https://bf.zzxworld.com/s/1152" rel="external nofollow noreferrer" title="Blog Finder" target="_blank"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://picbed.cloudchewie.com/icon/blogfinder.png!mini" alt="Blog Finder"/><span class="back-menu-item-text">Blog Finder</span></a><a class="back-menu-item" href="https://www.travellings.cn/go.html" rel="external nofollow noreferrer" title="开往" target="_blank"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://picbed.cloudchewie.com/icon/travellings.png!mini" alt="开往"/><span class="back-menu-item-text">开往</span></a></div></div></div></div></div><a id="site-name" href="/" accesskey="h">Cloudchewie</a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page group" href="javascript:void(0);" rel="external nofollow noreferrer"><span> 文章</span></a><ul class="menus_item_child"><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 专栏</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);" rel="external nofollow noreferrer"><span> 空间</span></a><ul class="menus_item_child"><li><a class="site-page child" href="/memos/"><i class="fa-fw fas fa-rocket"></i><span> 即刻</span></a></li><li><a class="site-page child" href="/gallery/"><i class="fa-fw fas fa-image"></i><span> 画廊</span></a></li><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 天籁</span></a></li><li><a class="site-page child" href="/air/"><i class="fa-fw fas fa-wind"></i><span> 小空调</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);" rel="external nofollow noreferrer"><span> 分享</span></a><ul class="menus_item_child"><li><a class="site-page child" href="/bangumi/"><i class="fa-fw fab fa-bilibili"></i><span> 追番</span></a></li><li><a class="site-page child" href="/video/"><i class="fa-fw fas fa-video"></i><span> 影视</span></a></li><li><a class="site-page child" href="/game/"><i class="fa-fw fas fa-gamepad"></i><span> 游戏</span></a></li><li><a class="site-page child" href="/equipment/"><i class="fa-fw fas fa-laptop-code"></i><span> 装备</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);" rel="external nofollow noreferrer"><span> 站点</span></a><ul class="menus_item_child"><li><a class="site-page child" href="/atom.xml"><i class="fa-fw fas fa-rss"></i><span> RSS</span></a></li><li><a class="site-page child" href="/log/"><i class="fa-fw fa-fw fas fa-wrench"></i><span> 日志</span></a></li><li><a class="site-page child" href="/term/"><i class="fa-fw fa-fw fas fa-balance-scale"></i><span> 协议</span></a></li><li><a class="site-page child" href="/help/"><i class="fa-fw fa-fw fas fa-circle-question"></i><span> 指南</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);" rel="external nofollow noreferrer"><span> 关于</span></a><ul class="menus_item_child"><li><a class="site-page child" href="/about/"><i class="fa-fw fas fa-circle-info"></i><span> 关于我</span></a></li><li><a class="site-page child" href="/guestbook/"><i class="fa-fw fas fa-address-book"></i><span> 留言板</span></a></li></ul></div></div></div><center id="name-container"><a id="page-name" href="javascript:cloudchewieFn.scrollToTop()" rel="external nofollow noreferrer"></a></center><div id="nav-right"><div id="search-button" title="搜索站内文章"><a class="site-page social-icon search" accesskey="s"><i class="fas fa-search fa-fw"></i></a></div><theme-toggle><div id="darkmode-button" title="深色/浅色模式"> <a class="site-page social-icon"><i class="fas fa-adjust"></i></a></div></theme-toggle><div id="trailing-button" title="随机开往一个项目网站"><a class="site-page social-icon trailing"><i class="fas fa-subway fa-fw"></i></a></div><div id="wander-button" title="随机前往一篇文章"> <a class="site-page social-icon wander" accesskey="r"><i class="fas fa-dice fa-fw"></i></a></div><div id="console-button" title="打开控制台"> <a class="site-page social-icon console" accesskey="c"><i class="fas fa-cog fa-fw"></i></a></div><div class="js-pjax" id="console"><div class="console-card-group"><div class="console-card-group-left"><div class="console-card" id="theme-settings"><span class="console-card-title">通用设置</span><div class="console-card-content"><div class="checkboxes"><div class="content" style="display:flex"><input id="con-toggleFixedNav" type="checkbox" onclick="consoleFn.toggleFixedNav()"/><div class="content-text">固定导航栏</div></div><div class="content" style="display:flex"><input id="con-toggleRightSide" type="checkbox" onclick="consoleFn.toggleRightSide()"/><div class="content-text">显示侧边按钮</div></div><div class="content" style="display:flex"><input id="con-toggleAsidePosition" type="checkbox" onclick="consoleFn.toggleAsidePosition()"/><div class="content-text">侧栏居右（关闭则居左）</div></div><div class="content" style="display:flex"><input id="con-toggleAutoTheme" type="checkbox" onclick="consoleFn.toggleAutoTheme()"/><div class="content-text">深色模式跟随系统设置</div></div><div class="content" style="display:flex"><input id="con-toggleStarBackground" type="checkbox" onclick="consoleFn.toggleStarBackground()"/><div class="content-text">繁星效果(深色模式下)</div></div><div class="content" style="display:flex"><input id="con-toggleNoise" type="checkbox" onclick="consoleFn.toggleNoise()"/><div class="content-text">噪点效果</div></div><div class="content" style="display:flex"><input id="con-toggleAutoColor" type="checkbox" onclick="consoleFn.toggleAutoColor()"/><div class="content-text">文章页自动主题色</div></div><div class="content" style="display:flex"><input id="con-toggleFPS" type="checkbox" onclick="consoleFn.toggleFPS()"/><div class="content-text">显示帧率</div></div></div></div></div><div class="console-card" id="aplayer-settings" style="flex:1;"><span class="console-card-title">歌单设置</span><div class="console-card-content"><div class="playlist-container"><div class="playlist-item" style="background-image:url(https://picbed.cloudchewie.com/blog/other/index.png!mini)" onclick="consoleFn.changeAPlayerList(9516481572,&quot;netease&quot;,true)"><span>默认歌单</span></div><div class="playlist-item" style="background-image:url(https://picbed.cloudchewie.com/blog/other/xusong.jpg!mini)" onclick="consoleFn.changeAPlayerList(7081513713,&quot;netease&quot;,true)"><span>许嵩专辑</span></div><div class="playlist-item" style="background-image:url(https://picbed.cloudchewie.com/blog/gallery/kaedehara-kazuha/wanye1.jpeg!mini)" onclick="consoleFn.changeAPlayerList(7366289244,&quot;netease&quot;,true)"><span>噬云兽特辑</span></div></div><input id="url-input" oninput="$(&quot;#url-btn&quot;).html(&quot;解析&quot;);$(&quot;#url-btn&quot;).removeClass(&quot;success&quot;);$(&quot;#url-btn&quot;).removeClass(&quot;fail&quot;);" placeholder="输入自定义歌单链接"/><a id="url-btn" onclick="consoleFn.resolveUrl()">解析</a></div></div></div><div class="console-card-group-right"><div class="console-card" id="background-settings"><span class="console-card-title">背景设置</span><div class="console-card-content"><h2 class="console-card-subtitle">默认背景</h2><div class="bgbox default-bg"><div class="boxt"><a class="boxl" href="javascript:;" rel="external nofollow noreferrer" style="background: #f7f9fe" onclick="consoleFn.setDefaultBackground()"></a><a class="boxr" href="javascript:;" rel="external nofollow noreferrer" style="background: #040404" onclick="consoleFn.setDefaultBackground()"></a></div></div><span class="console-card-subtitle pc-background">图片（PC端）</span><div class="bgbox pc-background"><a class="imgbox" href="javascript:;" rel="external nofollow noreferrer" style="background-image:url(https://picbed.cloudchewie.com/blog/gallery/shoto/shoto8.jpg!mini)" onclick="consoleFn.changeBackground('url(https://picbed.cloudchewie.com/blog/gallery/shoto/shoto8.jpg)')"></a><a class="imgbox" href="javascript:;" rel="external nofollow noreferrer" style="background-image:url(https://picbed.cloudchewie.com/blog/gallery/cute/cute14.png!mini)" onclick="consoleFn.changeBackground('url(https://picbed.cloudchewie.com/blog/gallery/cute/cute14.png)')"></a><a class="imgbox" href="javascript:;" rel="external nofollow noreferrer" style="background-image:url(https://picbed.cloudchewie.com/blog/gallery/danheng/danheng7.jpg!mini)" onclick="consoleFn.changeBackground('url(https://picbed.cloudchewie.com/blog/gallery/danheng/danheng7.jpg)')"></a><a class="imgbox" href="javascript:;" rel="external nofollow noreferrer" style="background-image:url(https://picbed.cloudchewie.com/blog/gallery/kaedehara-kazuha/wanye1.jpeg!mini)" onclick="consoleFn.changeBackground('url(https://picbed.cloudchewie.com/blog/gallery/kaedehara-kazuha/wanye1.jpeg)')"></a><a class="imgbox" href="javascript:;" rel="external nofollow noreferrer" style="background-image:url(https://picbed.cloudchewie.com/blog/gallery/kaedehara-kazuha/wanye2.jpg!mini)" onclick="consoleFn.changeBackground('url(https://picbed.cloudchewie.com/blog/gallery/kaedehara-kazuha/wanye2.jpg)')"></a><a class="imgbox" href="javascript:;" rel="external nofollow noreferrer" style="background-image:url(https://picbed.cloudchewie.com/blog/gallery/kaedehara-kazuha/wanye3.jpg!mini)" onclick="consoleFn.changeBackground('url(https://picbed.cloudchewie.com/blog/gallery/kaedehara-kazuha/wanye3.jpg)')"></a><a class="imgbox" href="javascript:;" rel="external nofollow noreferrer" style="background-image:url(https://picbed.cloudchewie.com/blog/gallery/xiao/xiao1.jpeg!mini)" onclick="consoleFn.changeBackground('url(https://picbed.cloudchewie.com/blog/gallery/xiao/xiao1.jpeg)')"></a><a class="imgbox" href="javascript:;" rel="external nofollow noreferrer" style="background-image:url(https://picbed.cloudchewie.com/blog/gallery/umibe-no-etranger/yibang1.jpg!mini)" onclick="consoleFn.changeBackground('url(https://picbed.cloudchewie.com/blog/gallery/umibe-no-etranger/yibang1.jpg)')"></a><a class="imgbox" href="javascript:;" rel="external nofollow noreferrer" style="background-image:url(https://picbed.cloudchewie.com/blog/gallery/umibe-no-etranger/yibang2.png!mini)" onclick="consoleFn.changeBackground('url(https://picbed.cloudchewie.com/blog/gallery/umibe-no-etranger/yibang2.png)')"></a></div><span class="console-card-subtitle mobile-background">图片（移动端）</span><div class="bgbox mobile-background"><a class="pimgbox" href="javascript:;" rel="external nofollow noreferrer" style="background-image:url(https://picbed.cloudchewie.com/blog/gallery/kaedehara-kazuha/wanye8.jpg!mini)" onclick="consoleFn.changeBackground('url(https://picbed.cloudchewie.com/blog/gallery/kaedehara-kazuha/wanye8.jpg)')"></a><a class="pimgbox" href="javascript:;" rel="external nofollow noreferrer" style="background-image:url(https://picbed.cloudchewie.com/blog/gallery/xiao/xiao5.jpeg!mini)" onclick="consoleFn.changeBackground('url(https://picbed.cloudchewie.com/blog/gallery/xiao/xiao5.jpeg)')"></a><a class="pimgbox" href="javascript:;" rel="external nofollow noreferrer" style="background-image:url(https://picbed.cloudchewie.com/blog/gallery/xiao/xiao10.jpg!mini)" onclick="consoleFn.changeBackground('url(https://picbed.cloudchewie.com/blog/gallery/xiao/xiao10.jpg)')"></a></div><span class="console-card-subtitle">渐变色</span><div class="bgbox"><a class="box" href="javascript:;" rel="external nofollow noreferrer" style="background: linear-gradient(to right, #eecda3, #ef629f)" onclick="consoleFn.changeBackground('linear-gradient(to right, #eecda3, #ef629f)')"></a><a class="box" href="javascript:;" rel="external nofollow noreferrer" style="background: linear-gradient(to right, #B7D31E, #42CE1E)" onclick="consoleFn.changeBackground('linear-gradient(to right, #B7D31E, #42CE1E)')"></a><a class="box" href="javascript:;" rel="external nofollow noreferrer" style="background: linear-gradient(to right, #06DE86, #06A5DE)" onclick="consoleFn.changeBackground('linear-gradient(to right, #06DE86, #06A5DE)')"></a><a class="box" href="javascript:;" rel="external nofollow noreferrer" style="background: linear-gradient(to right, #189BC4, #183DC4)" onclick="consoleFn.changeBackground('linear-gradient(to right, #189BC4, #183DC4)')"></a><a class="box" href="javascript:;" rel="external nofollow noreferrer" style="background: linear-gradient(to right, #C018C4, #C41818)" onclick="consoleFn.changeBackground('linear-gradient(to right, #C018C4, #C41818)')"></a><a class="box" href="javascript:;" rel="external nofollow noreferrer" style="background: linear-gradient(to right, #8B00BB, #030094)" onclick="consoleFn.changeBackground('linear-gradient(to right, #8B00BB, #030094)')"></a><a class="box" href="javascript:;" rel="external nofollow noreferrer" style="background: linear-gradient(90deg, #ffd7e4 0%, #c8f1ff 100%)" onclick="consoleFn.changeBackground('linear-gradient(90deg, #ffd7e4 0%, #c8f1ff 100%)')"></a><a class="box" href="javascript:;" rel="external nofollow noreferrer" style="background: linear-gradient(45deg, #e5737b, #c6999e, #96b9c2, #00d6e8)" onclick="consoleFn.changeBackground('linear-gradient(45deg, #e5737b, #c6999e, #96b9c2, #00d6e8)')"></a></div><span class="console-card-subtitle">纯色</span><div class="bgbox"><a class="box" href="javascript:;" rel="external nofollow noreferrer" style="background: #f7f9fe" onclick="consoleFn.changeBackground('#f7f9fe')"></a><a class="box" href="javascript:;" rel="external nofollow noreferrer" style="background: #18171d" onclick="consoleFn.changeBackground('#18171d')"></a><a class="box" href="javascript:;" rel="external nofollow noreferrer" style="background: #7D9D9C" onclick="consoleFn.changeBackground('#7D9D9C')"></a><a class="box" href="javascript:;" rel="external nofollow noreferrer" style="background: #49A6E9" onclick="consoleFn.changeBackground('#49A6E9')"></a><a class="box" href="javascript:;" rel="external nofollow noreferrer" style="background: #F7CEFF" onclick="consoleFn.changeBackground('#F7CEFF')"></a><a class="box" href="javascript:;" rel="external nofollow noreferrer" style="background: #FFFFCE" onclick="consoleFn.changeBackground('#FFFFCE')"></a><a class="box" href="javascript:;" rel="external nofollow noreferrer" style="background: #CFFFCE" onclick="consoleFn.changeBackground('#CFFFCE')"></a><a class="box" href="javascript:;" rel="external nofollow noreferrer" style="background: #17EFE9" onclick="consoleFn.changeBackground('#17EFE9')"></a><a class="box" href="javascript:;" rel="external nofollow noreferrer" style="background: #9F17EF" onclick="consoleFn.changeBackground('#9F17EF')"></a></div></div></div></div></div><div class="button-group" id="consoleShortcuts"><button class="reSettings consoleShortcut" title="恢复默认设置" id="con-reset" onclick="consoleFn.resetSettings();"><i class="fa fa-repeat"></i></button><button class="consoleShortcut" title="简体/繁体" id="con-translate" onclick="cloudchewieFn.translate();"><i class="cloudchewiefont cloudchewie-icon-font"></i></button><theme-toggle><button class="consoleShortcut" title="浅色/深色模式" id="con-mode"><i class="fa fa-adjust"></i></button></theme-toggle><button class="consoleShortcut" title="播放/暂停音乐" id="con-music" onclick="cloudchewieFn.toggleMusic();"><i class="fas fa-play"></i></button><button class="consoleShortcut" title="全屏" id="con-fullscreen" onclick="consoleFn.toggleFullScreen();"><i class="fas fa-expand"></i></button><button class="consoleShortcut" title="自定义右键菜单" id="con-rightmouse" onclick="consoleFn.toggleContextMenu();"><i class="fas fa-computer-mouse"></i></button><button class="consoleShortcut" title="键盘快捷键" id="con-shortcut" onclick="consoleFn.toggleShortcut();"><i class="fas fa-keyboard"></i></button></div><div class="console-mask" id="console-mask"></div></div><div id="love-button" title="噬云兽的主页"> <a class="site-page social-icon love" href="/love" accesskey="l"><i class="fas fa-heart fa-fw"></i></a></div><div class="nav-button" id="nav-totop"><a class="totopbtn" href="javascript:void(0);" rel="external nofollow noreferrer"><i class="fas fa-arrow-up"></i><span id="percent" onclick="cloudchewieFn.scrollToDest(0,500)">0</span></a></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></div></nav><div id="post-info"><div id="post-firstinfo"><div class="meta-firstline"><a class="post-meta-original">原创</a><span class="post-meta-categories"><span class="post-meta-separator"></span><i class="cloudchewiefont cloudchewie-icon-inbox post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E8%AF%BE%E7%A8%8B%E7%AC%94%E8%AE%B0/" itemprop="url">课程笔记</a></span><span class="article-meta tags"><a class="article-meta__tags" href="/tags/%E7%AC%94%E8%AE%B0/" tabindex="-1" itemprop="url"> <span> <i class="cloudchewiefont cloudchewie-icon-hashtag"></i>笔记</span></a><a class="article-meta__tags" href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" tabindex="-1" itemprop="url"> <span> <i class="cloudchewiefont cloudchewie-icon-hashtag"></i>机器学习</span></a><a class="article-meta__tags" href="/tags/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/" tabindex="-1" itemprop="url"> <span> <i class="cloudchewiefont cloudchewie-icon-hashtag"></i>神经网络</span></a></span></div></div><h1 class="post-title" itemprop="name headline">机器学习笔记</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="cloudchewiefont cloudchewie-icon-calendar-days post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" itemprop="dateCreated datePublished" datetime="2025-01-04T17:47:08.000Z" title="发表于 2025-01-05 01:47:08">2025-01-05</time><span class="post-meta-separator"></span><i class="cloudchewiefont cloudchewie-icon-history post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" itemprop="dateCreated datePublished" datetime="2025-11-10T07:39:33.650Z" title="更新于 2025-11-10 15:39:33">2025-11-10</time></span></div><div class="meta-secondline"><span class="post-meta-separator"></span><span class="post-meta-wordcount"><i class="cloudchewiefont cloudchewie-icon-file-word post-meta-icon" title="文章字数"></i><span class="post-meta-label" title="文章字数">字数总计:</span><span class="word-count" title="文章字数">13.5k</span><span class="post-meta-separator"></span><i class="cloudchewiefont cloudchewie-icon-clock post-meta-icon" title="阅读时长"></i><span class="post-meta-label" title="阅读时长">阅读时长:</span><span>51分钟</span></span><span class="post-meta-separator"></span><span class="post-meta-pv-cv" id="" data-flag-title="机器学习笔记"><i class="cloudchewiefont cloudchewie-icon-fw-eye post-meta-icon"></i><span class="post-meta-label" title="阅读量">阅读量:</span><span id="busuanzi_page_pv"><i class="cloudchewiefont cloudchewie-icon-spinner cloudchewie-spin"></i></span></span><span class="post-meta-separator"></span><span class="post-meta-commentcount"><i class="cloudchewiefont cloudchewie-icon-comments post-meta-icon"></i><span class="post-meta-label">评论数:</span><a href="/posts/2025/01/04/notes/Machine-Learning/#post-comment" tabindex="-1"><span id="twikoo-count"><i class="cloudchewiefont cloudchewie-icon-spinner cloudchewie-spin"></i></span></a></span></div></div></div><section class="main-hero-waves-area waves-area"><svg class="waves-svg" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto"><defs><path id="gentle-wave" d="M -160 44 c 30 0 58 -18 88 -18 s 58 18 88 18 s 58 -18 88 -18 s 58 18 88 18 v 44 h -352 Z"></path></defs><g class="parallax"><use href="#gentle-wave" x="48" y="0"></use><use href="#gentle-wave" x="48" y="3"></use><use href="#gentle-wave" x="48" y="5"></use><use href="#gentle-wave" x="48" y="7"></use></g></svg></section></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h3 id="一、概率分布"><a href="#一、概率分布" class="headerlink" title="一、概率分布"></a>一、概率分布</h3><ul>
+<li><p>联合概率分布</p>
+<ul>
+<li><p>简单定义：两个事件共同发生的概率，即$ P(AB) $或$ P(A,B) $或$ P(A\cap B) $</p>
+</li>
+<li><p>严格定义：对于多维随机变量$ X_1,\cdots,X_n $，可以用联合概率分布$ P(X_1,\cdots,X_n) $描述其各个状态的概率，即联合概率分布，是一个定义在所有变量状态空间的笛卡尔乘积上的函数：</p>
+<p>$$<br>P(X_1,\cdots,X_n):\oplus_{i&#x3D;1}^n\Omega_{x_i}\rightarrow[0,1]<br>$$</p>
+<ul>
+<li>且所有函数值之和为 1，即$ \displaystyle\sum_{X_1,\cdots,X_n}P(X_1,\cdots,X_n)=1 $</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>边缘概率分布</p>
+<ul>
+<li>仅与单个随机变量有关的概率称为边缘概率</li>
+<li>边缘化（Marginalization）：在联合概率中，在最终结果中将不需要的事件合并成该事件的全概率</li>
+<li>$ P(X=a)=\displaystyle\sum_bP(X=a,Y=b) $</li>
+</ul>
+</li>
+<li><p>条件概率分布</p>
+<ul>
+<li>在条件$ Y=b $成立的情况下，$ X=a $发生的概率，记作$ P(X=a\mid Y=b) $或$ P(a\mid b) $</li>
+<li>$ \displaystyle\sum_aP(X=a\mid Y=b)=1 $</li>
+<li>$ P(X=a\mid Y=b)=\frac{P(X=a,Y=b)}{P(Y=b)} $</li>
+</ul>
+</li>
+<li>$ Pr(X=x)=\displaystyle\sum_yPr(X=x,Y=y)=\displaystyle\sum_yPr(X=x\mid Y=y)Pr(Y=y) $
+
+<ul>
+<li>统计独立性：当且仅当$ P(A\cap B)=P(A)P(B) $时，$ P(A\mid B)=P(A) $且$ P(B\mid A)=P(B) $</li>
+<li>条件独立性：若$ P(A\mid B\cap C)=P(A\mid C) $或者$ P(B\cap C)=0 $？？？</li>
+</ul>
+</li>
+<li><p>贝叶斯公式</p>
+<ul>
+<li>$ P(A\mid B)=\frac{P(A,B)}{P(B)}=\frac{P(B\mid A)P(A)}{P(B)} $
+<ul>
+<li>$ P(Y) $称为先验概率，$ P(Y\mid X) $称为后验（条件）概率，$ P(X,Y) $称为联合概率</li>
+</ul>
+</li>
+<li>$ P(A_i\mid B)=\frac{P(B\mid A_i)P(A_i)}{\displaystyle\sum_jP(B\mid A_j)P(A_j)} $，其中$ A_1,\cdots,A_n $为$ A $的完备事件组</li>
+<li>$ P(A\mid B,C)=\frac{P(A)P(B\mid A)P(C\mid A,B)}{P(B)P(C\mid B)} $</li>
+</ul>
+</li>
+<li><p>极大后验假设</p>
+<ul>
+<li>$ h_{MAP}=\arg\displaystyle\max_{h\in H}P(h\mid D)=\arg\displaystyle\max_{h\in H}\frac{P(D\mid h)P(h)}{P(D)}=\arg\displaystyle\max_{h\in H}P(D\mid h)P(h) $
+<ul>
+<li>在候选假设集合$ H $中，找到给定数据$ D $时可能性最大的假设$ h $，$ h $即称为极大后验假设（MAP）</li>
+<li>$ P(D) $是不依赖于$ h $的常量</li>
+</ul>
+</li>
+<li>假设$ H $中每个假设有相同的先验概率，则简化为只考虑$ P(D\mid h) $，称为给定$ h $时数据$ D $的似然度，而称$ h_{ML}=\arg\displaystyle\max_{h\in H}P(D\mid h) $为极大似然假设</li>
+</ul>
+</li>
+</ul>
+<h3 id="二、朴素贝叶斯理论"><a href="#二、朴素贝叶斯理论" class="headerlink" title="二、朴素贝叶斯理论"></a>二、朴素贝叶斯理论</h3><ul>
+<li><p>以文本分类任务为例</p>
+<ul>
+<li><p>形式化定义：给定文档空间$ X $，类别集合$ C=\{c_1,\cdots,c_j\} $，则训练集$ D&#x3D;{&lt;d,c&gt;\in X\times C} $</p>
+</li>
+<li><p>需要学习一个算法，得到分类器$\gamma:X\rightarrow C$，确定文档$d$最可能属于的类别</p>
+</li>
+<li><p>文本的表示</p>
+<ul>
+<li>One-Hot 表示<ul>
+<li>相互独立地表示语料中的每个词，将每个词表示为一个稀疏向量，其维度是词典大小</li>
+<li>不考虑单词之间的关联，不能表示词语的重要性，语义信息被全部丢失</li>
+</ul>
+</li>
+<li>TF-IDF（Term Frequency-Inverse Document Frequency，词频-逆文档频率）<ul>
+<li>衡量一个词语在文档中的重要性，来评估该词对于整个文档集合的区分能力</li>
+<li>词频（TF，Term Frequency）<ul>
+<li>一个词语在文档中出现的频率，即$ TF(t,d)=\frac{f_t}{N} $</li>
+<li>表示词语在单个文档中的相对重要性，未考虑在整个文档集合中的普遍性</li>
+</ul>
+</li>
+<li>逆文档频率（IDF，Inverse Document Frequency）<ul>
+<li>一个词语在整个文档集合中的重要性，即$ IDF(t,D)=\log\frac{\mid D\mid }{1+\mid d\in D:t\in d\mid } $，其中$ \mid d\in D:t\in d\mid  $表示包含词语$ t $的文档数</li>
+<li>若一个词在多个文档中都频繁出现，其区分能力较低，其 IDF 值也较低</li>
+</ul>
+</li>
+<li>$ TF-IDF(t,d,D)=TF(t,d)\cdot IDF(t,D) $</li>
+<li>忽略了词语的语义信息，不能捕捉上下文关系</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>朴素贝叶斯分类器</p>
+<ul>
+<li><p>文档$ d $的类别是$ c $的概率公式是一个多项式模型</p>
+<p>$$<br>P(c\mid d)&#x3D;P(d\mid c)P(c)&#x2F;P(d)\propto P(d\mid c)P(c)&#x3D;P(c)\prod_{1\leq k\leq n_{d}}P(t_{k}\mid c)<br>$$</p>
+</li>
+<li><p>查询似然模型（Query Likelihood Model，QLM）</p>
+<ul>
+<li>$ RSV(Q,D)=P(Q\mid D)=P(Q\mid M_D)=P(q_1q_2\cdots q_m\mid M_D)=P(q_1\mid M_D)\cdots P(q_m\mid M_D)=\displaystyle\Pi_{w\in Q}P(w\mid M_D)^{c(w,Q)} $</li>
+<li>即需要估计文档$ D $的一元模型$ M_D $，即求$ P(w\mid M_D) $</li>
+<li>平滑技术<ul>
+<li>Jelinek-Mercer 平滑：$ p(w\mid D)=\lambda P_{ML}(w\mid D)+(1-\lambda)P(w\mid C) $</li>
+<li>$ p(w\mid D)=\frac{c(w,D)+\mu P(w\mid C)}{\mid D\mid +\mu} $</li>
+<li>$ p(w\mid D)=\frac{max(c(w,D)-\delta,0)}{\mid D\mid }+\frac{\delta\mid D\mid _{\mu}}{\mid D\mid }p(w\mid C) $​</li>
+</ul>
+</li>
+<li>无法解决词语失配问题，如查询中用词和文档中用词不一致</li>
+</ul>
+</li>
+<li><p>基于翻译的语言模型</p>
+<ul>
+<li>$ P(Q\mid D)=\displaystyle\Pi_i P(q_i\mid D)=\displaystyle\Pi_i\displaystyle\sum_jP(q_i\mid w_j)P(w_j\mid M_D) $</li>
+<li>其中，$ P(q_i\mid w_j) $为翻译概率，可以通过同近义词构造</li>
+</ul>
+</li>
+<li><p>基于 KL 距离（相对熵）模型</p>
+<ul>
+<li>$ D_{KL}(P\mid  Q)=\displaystyle\sum_{x\in\mathcal{X}}P(x)\log\frac{P(x)}{Q(x)} $</li>
+<li>$ Score(Q,D)=\log\frac{P(Q\mid M_D)}{P(Q\mid M_C)} $，其中$ P(Q\mid M_D) $表示文档$ D $的查询似然模型</li>
+<li>$ Score(Q,D)=\displaystyle\sum_{q_i\in Q}tf(q_i,Q)*\frac{P(q_i\mid M_D)}{P(q_i\mid M_C)}\propto\displaystyle\sum_{q_i\in Q}P(q_i\mid M_Q)*\frac{P(q_i\mid M_D)}{P(q_i\mid M_C)}=\displaystyle\sum_{q_i\in Q}P(q_i\mid M_Q)*\frac{P(q_i\mid M_D)}{P(q_i\mid M_Q)}-\displaystyle\sum_{q_i\in Q}P(q_i\mid M_Q)*\frac{P(q_i\mid M_C)}{P(q_i\mid M_Q)}=-KL(M_Q,M_D)+KL(M_Q,M_C) $</li>
+<li>$ -KL(M_Q,M_D)=\displaystyle\sum_{q_i\in Q}P(q_i\mid M_Q)*\log P(q_i\mid M_D)-\displaystyle\sum_{q_i\in Q}P(q_i\mid M_Q)*\log P(q_i\mid M_Q) $</li>
+<li>$ Score(Q,D)\propto\displaystyle\sum_{q_i\in Q}P(q_i\mid M_Q)*\log P(q_i\mid M_D) $</li>
+</ul>
+</li>
+<li><p>朴素贝叶斯分类的目标：找到具有最大后验概率的类别$ c_{\mathrm{map}}=\underset{c\in\mathbb{C}}{\operatorname*{\operatorname*{\operatorname*{\arg\max}}}}\hat{P}(c\mid d)=\underset{c\in\mathbb{C}}{\operatorname*{\operatorname*{\arg\max}}}\hat{P}(c)\prod_{1\leq k\leq n_d}\hat{P}(t_k\mid c) $​</p>
+<ul>
+<li>利用对数将小概率乘积转变为求和计算：$ c_\mathrm{map}=\arg\displaystyle\max_{c\in\mathbb{C}}\left[\log\hat{P}(c)+\displaystyle\sum_{1\leq k\leq n_d}\log\hat{P}(t_k\mid c)\right] $</li>
+</ul>
+</li>
+<li><p>利用极大似然估计法从训练数据中估计$ \hat{P}(c) $和$ \hat{P}(t_k\mid c) $</p>
+<ul>
+<li>先验概率：$ \hat{P}(c)=\frac{N_c}{N} $</li>
+<li>条件概率$ \hat{P}(t_k\mid c)=\frac{T_{ct}}{\displaystyle\sum_{t^{\prime}\in V}T_{ct^{\prime}}} $<ul>
+<li>其中$ T_{ct} $是训练集中类别$ c $中的词条$ t $​ 的个数，计入重数</li>
+<li>给定位置独立性假设$ \hat{P}(t_{k_1}\mid c)=\hat{P}(t_{k_2}\mid c) $</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>零概率问题</p>
+<ul>
+<li>如果词$ t $没有出现在类别$ c $时，即$ \hat{P}(t\mid c)=0 $</li>
+<li>平滑后：$ \hat{P}(t_k\mid c)=\frac{T_{ct}+1}{\displaystyle\sum_{t^{\prime}\in V}(T_{ct^{\prime}}+1)} $，其中$ B $是不同的词语个数，即词汇表大小$ \mid V\mid =B $</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="三、信息熵"><a href="#三、信息熵" class="headerlink" title="三、信息熵"></a>三、信息熵</h3><ul>
+<li><p>信息量</p>
+<ul>
+<li>信息多少的度量</li>
+<li>信息量的大小和事件发生的概率成反比（概率越小，不确定性越大，信息量越大）</li>
+<li>$ I(x)=-\log p(x) $</li>
+</ul>
+</li>
+<li><p>信息熵</p>
+<ul>
+<li>对平均不确定性的度量</li>
+<li>对于离散型随机变量$ X $的熵，即为信息量的数学期望，$ H(X)=E_{x\sim X}[I(x)]=E_{x\sim X}[-\log x]=-\displaystyle\sum_{x\in X}[p(x)\log p(x)] $</li>
+<li>单调性：发生概率越高的事件，信息熵越低</li>
+<li>非负性：信息熵不能为负</li>
+<li>累加性</li>
+</ul>
+</li>
+<li><p>联合熵：$ H(X,Y)=-1*\displaystyle\sum_{x\in \mathcal{X}}\displaystyle\sum_{y\in \mathcal{Y}}p(x,y)log(p(x,y)) $</p>
+</li>
+<li><p>条件熵：</p>
+
+  $$
+      \begin{aligned}
+      H(Y\mid X)&=\mathbb{E}_{X}[H(Y\mid X=x)]\\
+      &=\displaystyle\sum_{x \in \mathcal{X}} p(x) H(Y\mid X=x)\\
+      &=\displaystyle\sum_{x \in \mathcal{X}} p(x) \left( -\displaystyle\sum_{y \in \mathcal{Y}} p(y\mid x) \log p(y\mid x) \right)\\
+      &=-\displaystyle\sum_{x \in \mathcal{X}} \displaystyle\sum_{y \in \mathcal{Y}} p(y,x) \log p(y\mid x).
+      \end{aligned}
+  $$
+  </li>
+<li><p>联合熵与条件熵的关系</p>
+
+  $$
+      \begin{aligned}
+      H(X, Y) &= -\displaystyle\sum_{x \in \mathcal{X}} \displaystyle\sum_{y \in \mathcal{Y}} p(x, y) \text{log} [p(x) p(y\mid x)] \\
+      &= -\displaystyle\sum_{x \in \mathcal{X}} \displaystyle\sum_{y \in \mathcal{Y}} p(x, y) [\log p(x) + \log p(y\mid x)] \\
+      &= -\displaystyle\sum_{x \in \mathcal{X}} \displaystyle\sum_{y \in \mathcal{Y}} p(x, y) \log p(x) - \displaystyle\sum_{x \in \mathcal{X}} \displaystyle\sum_{y \in \mathcal{Y}} p(x, y) \log p(y\mid x) \\
+      &= -\displaystyle\sum_{x \in \mathcal{X}} p(x) \log p(x) - \displaystyle\sum_{x \in \mathcal{X}} \displaystyle\sum_{y \in \mathcal{Y}} p(x, y) \log p(y\mid x) \\
+      &= H(X) + H(Y\mid X).
+      \end{aligned}
+  $$
+  </li>
+<li><p>交叉熵</p>
+<ul>
+<li><p>度量两个概率分布之间的差异性信息，在分类任务中常用作目标函数</p>
+</li>
+<li><p>其中，$ p $为真实标签，$ q $为预测标签</p>
+
+    $$
+        \begin{aligned}
+        H(p,q)&=\displaystyle\sum_{i=1}^np(x_i)*log(\frac{1}{q(x_i)}) \\
+        &=-1*\displaystyle\sum_{i=1}^np(x_i)*log(q(x_i))
+        \end{aligned}
+    $$
+    </li>
+</ul>
+</li>
+<li><p>KL 散度（相对熵）</p>
+<ul>
+<li>对同一个随机变量有两个概率分布$ P(X) $和$ Q(X) $​，衡量两个分布的不相似程度</li>
+<li>相对熵具有不对称性</li>
+<li>$ D_{KL}(p\mid \mid q)=\displaystyle\sum_{i=1}^np(x_i)*log(\frac{p(x_i)}{q(x_i)}) $​</li>
+</ul>
+</li>
+<li><p>交叉熵与相对熵的关系</p>
+<ul>
+<li>KL 散度&#x3D;随机变量$  X $的信息熵-交叉熵</li>
+<li>由于$ H(X) $为常量，因此两者均可用来评估分类任务中真实标签和预测标签的差别
+    $$
+    \begin{aligned}
+    D_{KL}(p\mid \mid q)&=\displaystyle\sum_{i=1}^np(x_i)*log(\frac{p(x_i)}{q(x_i)})\\
+    &=\displaystyle\sum_{i=1}^np(x_i)*log(p(x_i))-1*\displaystyle\sum_{i=1}^np(x_i)*log(q(x_i))\\
+    &=H(X)-H(p,q)
+    \end{aligned}
+    $$
+    </li>
+</ul>
+</li>
+<li><p>互信息</p>
+<ul>
+<li><p>联合分布$ p(x,y) $和$ p(x)p(y) $​ 之间的相对熵</p>
+</li>
+<li>$ I(X;Y)=\displaystyle\sum_{y\in Y}\displaystyle\sum_{x\in X}p(x,y)\log\frac{p(x,y)}{p(x)p(y)} $​
+</li>
+<li><p>信息熵与条件熵之差——知道其中一个，另一个不确定性减少的程度</p>
+
+    $$
+    \begin{aligned}
+    I(x;y)&=H(Y)-H(Y\mid X)=H(X)-H(X\mid Y) \\
+    & =-\displaystyle\sum_{x\in X}p(x)\log p(x)-\displaystyle\sum_{y\in Y}p(y)H(X\mid Y=y) \\
+    & =-\displaystyle\sum_{x\in X}\left(\displaystyle\sum_{y\in Y}p(x,y)\right)\log p(x)+\displaystyle\sum_{y\in Y}p(y)\displaystyle\sum_{x\in X}p(x\mid y)\log p(x\mid y) \\
+    & =-\displaystyle\sum_{x\in X}\displaystyle\sum_{y\in Y}p(x,y)\log p(x)+\displaystyle\sum_{y\in Y}\displaystyle\sum_{x\in X}p(x,y)\log p(x\mid y) \\
+    & =\displaystyle\sum_{y\in Y}\displaystyle\sum_{x\in X}p(x,y)\log\frac{p(x\mid y)}{p(x)} \\
+    & =\displaystyle\sum_{y\in Y}\displaystyle\sum_{x\in X}p(x,y)\log\frac{p(x,y)}{p(x)p(y)}
+    \end{aligned}
+    $$
+    </li>
+</ul>
+</li>
+</ul>
+<h3 id="四、隐马尔可夫模型"><a href="#四、隐马尔可夫模型" class="headerlink" title="四、隐马尔可夫模型"></a>四、隐马尔可夫模型</h3><ul>
+<li><p>隐马尔可夫模型（Hidden Markov Model, HMM）</p>
+<ul>
+<li>一个五元组$ \lambda=(Y,X,\Pi,A,B) $，其中$ Y $是隐状态（输出变量）的集合，$ X $是观察值（输入）的集合，$ \Pi $是初始状态的概率，$ A $是状态转移概率矩阵，$ B $是输出观察值概率矩阵</li>
+<li>$ p(\vec{y},\vec{x})=\prod_{i=1}^np(y_i\mid y_{i-1})p(x_i\mid y_i) $</li>
+<li>三个假设<ul>
+<li>马尔可夫性假设（状态构成一阶马尔可夫链）</li>
+<li>不动性假设（状态与时间无关）</li>
+<li>输出独立性假设（输出仅与当前状态有关）</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>以词性标注（Part-Of-Speech Tagging, POS Tagging）为例理解隐马尔可夫模型</p>
+<ul>
+<li><p>假设句子“Time flies quickly”，目标即为找出最可能的词性序列$ S = \text{(N, V, ADV)} $</p>
+</li>
+<li><p>已知概率分布</p>
+<ul>
+<li>初始状态分布 ($ \Pi $)：句子开头每个词性的概率<br>$$<br>P(S_1 &#x3D; N) &#x3D; 0.6, \quad P(S_1 &#x3D; V) &#x3D; 0.3, \quad P(S_1 &#x3D; ADV) &#x3D; 0.1<br>$$</li>
+</ul>
+<ol start="2">
+<li>状态转移概率 ($ A $)：词性之间的转移概率<br>$$<br>P(S_t &#x3D; N \mid  S_{t-1} &#x3D; N) &#x3D; 0.3, \quad P(S_t &#x3D; V \mid  S_{t-1} &#x3D; N) &#x3D; 0.5, \quad \dots<br>$$</li>
+<li>观测概率 ($ B $)：隐藏状态生成观测单词的概率<br>$$<br>P(O_t &#x3D; \text{“Time”} \mid  S_t &#x3D; N) &#x3D; 0.8, \quad P(O_t &#x3D; \text{“flies”} \mid  S_t &#x3D; V) &#x3D; 0.7, \dots<br>$$</li>
+</ol>
+</li>
+<li><p>计算最优序列：采用维特比算法（Viterbi Algorithm）求解</p>
+<ul>
+<li><p>构建动态规划表</p>
+<ul>
+<li>行表示隐藏状态 $ S $，列表示单词 $ O $</li>
+<li>每个单元格存储到当前单词位置的最优路径概率以及最佳前驱状态</li>
+</ul>
+</li>
+<li><p>过程</p>
+<ul>
+<li><p>初始化：</p>
+<p>$$<br>V_1(N) &#x3D; \pi(N) \cdot B(N, \text{“Time”}) &#x3D; 0.6 \cdot 0.8 &#x3D; 0.48<br>$$</p>
+<ul>
+<li>类似计算 $ V_1(V) $ 和 $ V_1(ADV) $</li>
+</ul>
+</li>
+<li><p>递推：</p>
+</li>
+</ul>
+<p>$$<br>V_2(V) &#x3D; \displaystyle\max_{S_1} [V_1(S_1) \cdot A(S_1 \to V)] \cdot B(V, \text{“flies”})<br>$$</p>
+<ul>
+<li><p>回溯：根据存储的最佳前驱状态，回溯出隐藏状态序列</p>
+</li>
+<li><p>输出结果：通过维特比算法，找到最优词性序列$ S = \text{(N, V, ADV)} $​</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>三个基本问题</p>
+<ul>
+<li>评估问题<ul>
+<li>对于给定模型，求解某个观察值序列的概率$ P(Q\mid \lambda) $</li>
+<li>如语音识别：给定一个观测序列（如一段音频的特征向量序列）和一个特定的 HMM（如表示单词 “hello” 的模型），评估这段音频是否属于该单词</li>
+<li>前向算法</li>
+<li>后向算法</li>
+</ul>
+</li>
+<li>解码问题<ul>
+<li>对于给定模型和观察值序列，求可能性最大的状态序列$ \displaystyle\max_{Q}\{P(Q\mid O,\lambda)\} $</li>
+<li>如词性标注任务：给定一个句子的单词序列（如 “Time flies quickly”），找到对应的最可能的词性序列（如 “Noun, Verb, Adverb”）。</li>
+<li>Viterbi 算法</li>
+</ul>
+</li>
+<li>学习问题<ul>
+<li>对于给定观察值序列$ O $，调整参数$ \lambda $，使得观察值出现的概率$ P(O\mid \lambda) $​ 最大</li>
+<li>如 DNA 序列分析：给定一组 DNA 序列（观测序列），学习模型参数以区分不同的区域类型（隐藏状态，例如基因编码区和非编码区）。</li>
+<li>Baum-Welch 算法</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="五、Word2Vec"><a href="#五、Word2Vec" class="headerlink" title="五、Word2Vec"></a>五、Word2Vec</h3><ul>
+<li><p>词向量：对词典$ D $中的任意词$ w $，指定一个固定长度的实数值向量$  v(w)\propto R^m $ ，则$ v(w) $就称为$ w $​ 的词向量</p>
+</li>
+<li><p>Word Embedding：将不可计算、非结构化的词转化为可计算、结构化的向量，将现实问题转化为数学问题</p>
+</li>
+<li><p>N-gram 模型</p>
+<ul>
+<li>N-gram 是长度为 $ n $ 的词序列或字符序列。</li>
+</ul>
+<ol start="2">
+<li><p>使用前 $ n-1 $ 个单词预测第 $ n $ 个单词：</p>
+<p>$$<br>P(w_1, w_2, \dots, w_m) &#x3D; \prod_{i&#x3D;1}^m P(w_i \mid  w_{i-n+1}, \dots, w_{i-1})<br>$$</p>
+</li>
+<li><p>马尔科夫假设：假设一个单词的概率仅取决于其前 $ n-1 $ 个单词，而非完整句子<br>$$<br>P(w_i \mid  w_1, \dots, w_{i-1}) \approx P(w_i \mid  w_{i-n+1}, \dots, w_{i-1})<br>$$</p>
+</li>
+</ol>
+<ul>
+<li><p>Unigram (1-gram)：假设每个单词的概率与上下文无关，即$ P(w_1, w_2, \dots, w_m) = \prod_{i=1}^m P(w_i) $</p>
+</li>
+<li><p>Bigram (2-gram)：假设每个单词的概率仅取决于前一个单词，即$ P(w_i \mid  w_{i-1}) $</p>
+</li>
+<li><p>Trigram (3-gram)：假设每个单词的概率取决于前两个单词，即$ P(w_i \mid  w_{i-2}, w_{i-1}) $​</p>
+</li>
+</ul>
+</li>
+<li><p>Word2Vec</p>
+<ul>
+<li>通过计算向量之间的距离，来体现词与词之间的相似性， 解决 One-Hot 向量存在的词汇鸿沟问题</li>
+<li>基于如下假设： 衡量两个词在语义上的相似性，决定于其邻居词的分布是否相似</li>
+<li>问题描述：$ p(w\mid\mathrm{Context}(w))=F(w,\mathrm{Context}(w),\theta) $，优化$ \theta^* $，确定$ F $函数</li>
+<li>两种形式<ul>
+<li>CBOW<ul>
+<li>通过上下文来预测当前值。相当于一句话中 mask 一个词，预测该词是什么</li>
+<li>优化函数：对数似然函数，$ \mathcal{L}=\displaystyle\sum_{w\in\mathcal{C}}\log p(w\mid\mathsf{Context}(w))=- \sum \log P(w_t \mid  w_{t-n}, \dots, w_{t+n}) $</li>
+</ul>
+</li>
+<li>Skip-gram<ul>
+<li>用当前词来预测上下文。相当于给定一个词，预测前后词是什么</li>
+<li>优化函数：对数似然函数，$ \mathcal{L}=\displaystyle\sum_{w\in\mathcal{C}}\log p(\mathsf{Context}(w)\mid w)=- \sum \log P(w_{t+i} \mid  w_t), \quad i \in \{-n, \dots, -1, 1, \dots, n\} $</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>目标：优化模型参数使得$ P(w_o \mid  w_c) = \frac{\exp(v_o \cdot v_c)}{\displaystyle\sum_{w} \exp(v_w \cdot v_c)} $，其中$ v_o $是输出词向量，$ v_c $​ 是中心词向量</li>
+</ul>
+</li>
+</ul>
+<h3 id="六、机器学习概述"><a href="#六、机器学习概述" class="headerlink" title="六、机器学习概述"></a>六、机器学习概述</h3><ul>
+<li><p>机器学习</p>
+<ul>
+<li>本质：构建一个映射函数</li>
+<li>$ x\rightarrow f(x,\theta^*)\rightarrow y/p(y\mid x) $</li>
+</ul>
+</li>
+<li><p>机器学习三要素</p>
+<ul>
+<li>模型<ul>
+<li>线性：$ f(x,\theta)=w^Tx+b $</li>
+<li>广义线性：$ f(x,\theta)=w^T\Phi(x)+b $，当$ \Phi(x) $为可学习的非线性基函数，则$ f(x,\theta) $即为神经网络</li>
+</ul>
+</li>
+<li>学习准则<ul>
+<li>期望风险：$ \mathcal{R}(f)=\mathbb{E}_{(\mathbf{x},y)\sim p(\mathbf{x},y)}[\mathcal{L}(f(\mathbf{x}),y)] $​</li>
+<li>经验风险：$ R(\theta)=\frac{1}{\mathrm{N}}\displaystyle\sum_{i=1}^{\mathrm{N}}L(y^{(i)},f(\mathrm{x}^{(i)})) $</li>
+<li>结构风险：$ R(\theta)+\lambda\mid  \theta\mid  ^2 $</li>
+</ul>
+</li>
+<li>优化：梯度下降</li>
+</ul>
+</li>
+<li><p>机器学习的类型</p>
+<table>
+<thead>
+<tr>
+<th>类别</th>
+<th>监督学习</th>
+<th>无监督学习</th>
+<th>强化学习</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>训练样本</td>
+<td>训练集 $ \{(x^{(n)}, y^{(n)})\}_{n=1}^N $</td>
+<td>训练集 $ \{x^{(n)}\}_{n=1}^N $</td>
+<td>智能体和环境交互的轨迹 $ \tau $ 和累计奖励 $ G_T $</td>
+</tr>
+<tr>
+<td>优化目标</td>
+<td>$ y = f(x) $ 或 $ p(y\mid  x) $</td>
+<td>$ p(x) $ 或带隐变量 $ z $ 的 $ p(x\mid  z) $</td>
+<td>期望总回报 $ \mathbb{E}[G_T] $</td>
+</tr>
+<tr>
+<td>学习准则</td>
+<td>期望风险最小化、最大似然估计</td>
+<td>最大似然估计、最小重构误差</td>
+<td>策略评估、策略改进</td>
+</tr>
+</tbody></table>
+</li>
+<li><p>参数学习</p>
+<ul>
+<li><p>由于期望风险未知，利用经验风险近似</p>
+</li>
+<li><p>在选择合适的风险函数后，寻找参数$ \theta^* $，使得经验风险函数最小化</p>
+<p>$$<br>\theta^*&#x3D;\underset{\theta}{\operatorname*{\arg\min}}\mathcal{R}_{\mathcal{D}}^{emp}(\theta)<br>$$</p>
+</li>
+<li><p>机器学习问题转化为最优化问题</p>
+</li>
+</ul>
+</li>
+<li><p>优化：梯度下降法</p>
+<ul>
+<li>批量梯度下降法</li>
+<li>随机梯度下降法</li>
+<li>小批量梯度下降法</li>
+</ul>
+</li>
+<li><p>如何减少泛化错误</p>
+<ul>
+<li>优化：经验风险最小</li>
+<li>正则化（regularization）：降低模型复杂度</li>
+<li>所有损害优化的方法都是正则化<ul>
+<li>增加优化约束（L1&#x2F;L2 约束，数据增强）</li>
+<li>干扰优化过程（权重衰减、随机梯度下降、早停）</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>模型的选择</p>
+<ul>
+<li><p>拟合能力强的模型一般复杂度会比较高，容易过拟合</p>
+</li>
+<li><p>如果限制模型复杂度，降低拟合能力，可能会欠拟合</p>
+</li>
+<li><p>期望错误的分解（偏差与方差分解）</p>
+<p>$$<br>\mathcal{R}(f) &#x3D; (\text{bias})^2 + \text{variance} + \epsilon<br>$$</p>
+<ol>
+<li><p>偏差（Bias）：</p>
+<p>$$<br>\mathbb{E}_x \left[ \left( \mathbb{E}_D[f_D(x)] - f^*(x) \right)^2 \right]<br>$$</p>
+</li>
+<li><p>方差（Variance）：</p>
+<p>$$<br>\mathbb{E}_x \left[ \mathbb{E}_D \left[ \left( f_D(x) - \mathbb{E}_D[f_D(x)] \right)^2 \right] \right]<br>$$</p>
+</li>
+<li><p>噪声项（Irreducible Error）：</p>
+</li>
+</ol>
+<p>$$<br>\mathbb{E}_{(x,y) \sim p_r(x,y)} \left[ \left( y - f^*(x) \right)^2 \right]<br>$$</p>
+</li>
+<li><p>低方差、低偏差时模型最优</p>
+</li>
+<li><p>有效降低方差：集成模型</p>
+<ul>
+<li>通过多个高方差模型的平均来降低方差</li>
+<li>集成模型的期望错误大于等于所有模型的平均期望错误的$ \frac{1}{M} $​，小于等于所有模型的平均期望错误</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>线性模型</p>
+<table>
+<thead>
+<tr>
+<th>模型</th>
+<th>函数&#x2F;激活函数</th>
+<th>损失函数</th>
+<th>输出形式</th>
+<th>优化方法</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>线性模型</td>
+<td>$ f(x)=w^Tx+b $</td>
+<td>$ (y-w^Tx)^2 $</td>
+<td>实数或类别</td>
+<td>最小二乘、梯度下降</td>
+</tr>
+<tr>
+<td>Logistic 回归</td>
+<td>logistic 函数</td>
+<td>交叉熵损失：$ y\log\sigma(w^Tx) $</td>
+<td>类别的概率值</td>
+<td>梯度下降</td>
+</tr>
+<tr>
+<td>Softmax 回归</td>
+<td>softmax 函数</td>
+<td>交叉熵损失：$ y\log\text{softmax}(w^Tx) $</td>
+<td>各类别的概率分布</td>
+<td>梯度下降</td>
+</tr>
+<tr>
+<td>感知机</td>
+<td>阶跃函数</td>
+<td>$ \max(0,-yw^Tx) $</td>
+<td>$ +1/-1 $</td>
+<td>随机梯度下降</td>
+</tr>
+<tr>
+<td>SVM</td>
+<td>阶跃函数</td>
+<td>$ \max(0,1-yw^Tx) $</td>
+<td>$ +1/-1 $</td>
+<td>二次规划、SMO 等</td>
+</tr>
+</tbody></table>
+</li>
+<li><p>线性模型备注</p>
+<ul>
+<li><p>Logistic 回归</p>
+<ul>
+<li><p>在线性模型基础上加入 Sigmoid 函数，使输出值限定在$ (0,1) $之间，即$ P(y=1\mid x)=\sigma(w^Tx+b)=\frac{1}{1+e^{-(w^Tx+b)}} $</p>
+</li>
+<li><p>用于二分类任务，输出类别的概率值</p>
+</li>
+</ul>
+</li>
+<li><p>Softmax 回归</p>
+<ul>
+<li>对 Logistic 回归的扩展，适用于多分类任务</li>
+<li>对于$ K $分类任务，$ P(y=k\mid x)=\frac{e^{w_k^Tx}}{\displaystyle\sum_{j=1}^{K}e^{w_j^Tx}} $​</li>
+<li>分类规则：选择概率最大的类别$ \arg\displaystyle\max_kP(y=k\mid x) $</li>
+</ul>
+</li>
+<li><p>感知机</p>
+<ul>
+<li>$ f(x)=\text{sign}(w^Tx+b) $
+</li>
+<li><p>学习规则：通过误分类点的更新规则调整权重</p>
+
+      $$
+      \begin{aligned}
+      w &\gets w + \eta y_i x_i \\
+      b &\gets b + \eta y_i
+      \end{aligned}
+      $$
+      </li>
+<li><p>用于线性可分的二分类任务</p>
+</li>
+</ul>
+</li>
+<li><p>支持向量机</p>
+<ul>
+<li><p>寻找最优决策边界（最大化分类间隔）的分类模型，适用于二分类问题</p>
+</li>
+<li><p>找到一个超平面，使两类之间的间隔（Margin）最大化：$ \max \frac{2}{\mid  w\mid  } $，同时满足：$ y_i (w^T x_i + b) \geq 1, \quad \forall i $​</p>
+</li>
+<li><p>损失函数——引入松弛变量（对于线性不可分问题）后，优化目标为：<br>$$<br>\min \frac{1}{2} \mid  w\mid  ^2 + C \displaystyle\sum_{i&#x3D;1}^N \xi_i<br>$$<br>其中 $ C $ 控制间隔和误分类的权衡，$ \xi_i $ 是松弛变量。</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>深度学习</p>
+<ul>
+<li>传统机器学习的步骤<ul>
+<li>原始数据$ \Rightarrow $数据预处理$ \Rightarrow $特征提取$ \Rightarrow $特征转换$ \Rightarrow $预测识别$ \Rightarrow $结果</li>
+<li>第 2-4 步为特征处理，第 5 步为浅层学习</li>
+</ul>
+</li>
+<li>深度学习&#x3D;表示学习+浅层学习<ul>
+<li>原始数据$ \Rightarrow $底层特征$ \Rightarrow $中层特征$ \Rightarrow $高层特征$ \Rightarrow $预测识别$ \Rightarrow $​​ 结果</li>
+</ul>
+</li>
+<li>深度学习的核心思想：通过层次化的表征学习，从数据中自动提取特征</li>
+<li>尽管深度学习通常使用多层神经网络，但深度学习的范围实际上更广</li>
+<li>深度学习天然不是神经网络，但神经网络天然是深度学习</li>
+</ul>
+</li>
+<li><p>正则化方法</p>
+<ul>
+<li>L1 正则化</li>
+<li>L2 正则化</li>
+</ul>
+</li>
+<li><p>优化器（Optimizer）</p>
+<ul>
+<li><p>核心功能：计算梯度，并基于梯度信息调整模型参数</p>
+</li>
+<li><p>通常，优化器通过梯度下降法来更新参数，即沿着损失函数的梯度方向，调整模型参数，以减少损失值</p>
+</li>
+<li><p>基本步骤</p>
+<ul>
+<li><strong>计算梯度：</strong> 计算损失函数相对于模型参数的梯度</li>
+<li><strong>更新参数：</strong> 根据梯度的方向和大小，调整模型参数，使损失函数逐步减小</li>
+</ul>
+</li>
+<li><p>常见优化器类型</p>
+<ul>
+<li><p>梯度下降法（GD, Gradient Descent）</p>
+<ul>
+<li>批量梯度下降（Batch GD）：每次使用所有训练数据来计算梯度并更新参数，计算量大，适用于小型数据集</li>
+<li>随机梯度下降（SGD, Stochastic GD）：每次使用一个样本来计算梯度并更新参数，计算效率高，但容易受噪声影响</li>
+<li>小批量梯度下降（Mini-batch GD）：每次使用一小部分样本来计算梯度并更新参数，是大多数实际应用中最常用的方法，平衡了计算效率和稳定性</li>
+</ul>
+</li>
+<li><p>动量法（Momentum）：在每次更新时加入之前梯度的加权平均，能加速收敛并减少震荡，特别在处理有很多局部最小值的问题时表现较好</p>
+</li>
+<li><p>AdaGrad：自适应地调整每个参数的学习率，适用于稀疏数据（例如文本数据或推荐系统中的数据）</p>
+</li>
+<li><p>RMSprop：结合了动量法和 AdaGrad，适用于非平稳目标函数，通常用于训练深度神经网络</p>
+</li>
+<li><p>Adam（Adaptive Moment Estimation）：结合了动量法和 RMSprop 的优点，计算每个参数的自适应学习率，且在训练过程中能够自动调整。Adam 广泛用于深度学习训练中，通常能提供较好的效果</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="七、前馈神经网络"><a href="#七、前馈神经网络" class="headerlink" title="七、前馈神经网络"></a>七、前馈神经网络</h3><ul>
+<li><p>神经网络</p>
+<ul>
+<li>激活规则：神经元输入到输出之间的映射关系，一般为非线性函数</li>
+<li>网络结构：不同神经元之间的连接关系</li>
+<li>学习算法：通过训练数据来学习神经网络的参数</li>
+</ul>
+</li>
+<li><p>M-P 神经元模型</p>
+<ul>
+<li>神经元接受来自$ 𝑛 $个其他神经元传递过来的输入信号，这些输入信号通过带权重的连接进行传递，将神经元接收到的总输入值与神经元的阈值进行比较，然后通过“激活函数”（activation function）处理产生神经元输出</li>
+<li>$ a=f(n)=f(\displaystyle\sum_{i=1}^n x_iw_i+b)=f(WX+b) $</li>
+</ul>
+</li>
+<li><p>学习与优化</p>
+<ul>
+<li><p>将样本数据实际输出与神经元输出进行比较，计算模型偏差&#x2F;损失，以自适应线性单元（无激活函数的线性层）为例，假设有$ n $​ 个样本</p>
+</li>
+<li><p>梯度下降</p>
+<ul>
+<li>$ E=\frac{1}{2}\displaystyle\sum_{i=1}^n(W^Tx^{(i)}-\tilde{y}^{(i)}) $
+</li>
+<li><p>沿着损失函数的曲线下降，直到达到局部或全局的最小值点</p>
+
+      $$
+      \begin{aligned}
+       & w:=w+\Delta w \\
+       & \Delta w=-\eta\nabla E(w) \\
+       & \frac{\partial E}{\partial w_j}=-\displaystyle\sum_i(y^{(i)}-\hat{y}^{(i)})x_j^{(i)} \\
+       & \Delta w_j=-\eta\frac{\partial E}{\partial w_j}
+      \end{aligned}
+      $$
+      </li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>前馈神经网络（Forward Nerual Network）</p>
+<ul>
+<li>各神经元分别属于不同的层</li>
+<li>整个网络中无反馈，信号从输入层向输出层单向传播，可用一个有向无环图表示</li>
+<li>同一层神经元之间没有连接；前后两层所有神经元相连（即 full connected），前层神经元输出就是后层神经元输入；每一个连接都有一个权重</li>
+</ul>
+</li>
+<li><p>通用近似原理：对于具有线性输出层和至少一个使用“挤压”性质的激活函数的隐藏层组成的前馈神经网络，只要其隐藏层神经元的数量足够，它可以以任意精度来近似任何从一个定义在实数空间中的有界闭集函数</p>
+</li>
+</ul>
+<h3 id="八、反向传播"><a href="#八、反向传播" class="headerlink" title="八、反向传播"></a>八、反向传播</h3><ul>
+<li><p>BP（Back Propagation）神经网络是前馈神经网络，但权重学习过程是 BP 过程</p>
+<ul>
+<li>第$ k $层共有$ p_k $个神经元</li>
+<li>第$ k $层第$ i $个神经元的输入线性加权和为$ u_i^k=\displaystyle\sum_{j=1}^{p_{k-1}}w_{ij}^ky_j^{k-1}-\theta_i=\displaystyle\sum_{j=0}^{p_{k-1}}w_{ij}^ky_j^{k-1} $，其中$ y_o^{k-1}=\theta_i,w_{i0}^k=-1 $</li>
+<li>第$ k $层第$ i $个神经元的输出为$ y_i^k=f(u_i^k)=\frac{1}{1+e^{-s_i^k}} $</li>
+<li>一个三层的 BP 神经网络可以任意精度逼近任意连续函数$ Y = f(X) $​（通过学习不断调整边权重）</li>
+<li>给定$ N $组输入样本$ \{X_{si},Y_{si}\} $，如何调整 BP 神经网络的权重，使得输入为$ X_{si} $时，输出为$ Y_{si} $​</li>
+</ul>
+</li>
+<li><p>BP 学习算法的基本思想</p>
+<ul>
+<li>基本思想：目标函数为神经网络输出层每个神经元实际输出值$ y_j^m $与期望输出值$ d_j $之差的平方和，其中$ d_j $是向量$ Y_{si} $的第$ j $维分量</li>
+<li>如何不断调整权重：利用“最快下降法”使得权值沿着目标函数的负梯度方向改变（这样可以使得目标函数值迅速下降，接近 0）</li>
+<li>目标函数：$ J=\frac{1}{2}\displaystyle\sum_{j=1}^{p_m}(y_j^m-d_j)^2 $</li>
+<li>约束条件：$ u_i^k=\displaystyle\sum_{j}w_{ij}^ky_j^{k-1} $，$ y_i^k=f_k(u_i^k) $</li>
+<li>连接权重的修正量：$ \Delta w_{ij}^k=-\epsilon\frac{\partial J}{\partial w_{ij}^k} $​</li>
+<li>梯度：在单变量的函数中，梯度即为导数，也就是曲线上某点的斜率。但是在多维变量的函数中，梯度就是函数对每一维度变量求偏导得出的向量</li>
+</ul>
+</li>
+<li><p>BP 学习算法的步骤</p>
+<ul>
+<li>正向传播输入信息，产生输出</li>
+<li>反向传播误差，反向逐层计算偏导，调整网络权值（最快下降法，调整权值使得误差迅速减小）<ul>
+<li>例如：$ \frac{\partial E_{total}}{\partial w_5}=\frac{\partial E_{total}}{\partial y_{o_1}}\times\frac{\partial y_{o_1}}{\partial u_{o_1}}\times\frac{\partial u_{o_1}}{\partial w_5} $​</li>
+<li>同样把其余所有的权值都进行更新迭代，然后再进行正向传播计算， 并且每次重新计算误差，根据误差再反向传播更新权重。</li>
+</ul>
+</li>
+<li>直至达到损失函数的最小值，最后得到的就是具有正确权值的最佳模型</li>
+</ul>
+</li>
+<li><p>优化问题</p>
+<ul>
+<li>在每一层都要乘以该层的激活函数的导数</li>
+<li>梯度消失问题<ul>
+<li>激活函数求导过小（求导小于 1）前面的层比后面的层梯度变化更小，故变化更慢，从而引起了梯度消失问题</li>
+<li>在反向传播中，梯度通过链式法则传递，多个小于 1 的数相乘会使梯度指数级衰减</li>
+</ul>
+</li>
+<li>梯度爆炸问题<ul>
+<li>激活函数求导过大（求导大于 1），前面层比后面层梯度变化更快，会引起梯度爆炸问题</li>
+<li>在反向传播中，梯度通过链式法则传递，多个大于 1 的数相乘会使梯度指数级增大</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>常见激活函数</p>
+<table>
+<thead>
+<tr>
+<th>激活函数</th>
+<th>数学表达式</th>
+<th>导数表达式</th>
+<th>特点</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Sigmoid</td>
+<td>$ f(x) = \frac{1}{1 + e^{-x}} $</td>
+<td>$ f^{\prime}(x) = f(x)(1 - f(x)) $</td>
+<td>输出范围为 (0, 1)，常用于概率预测。容易导致梯度消失问题，特别是在深层网络中。</td>
+</tr>
+<tr>
+<td>Tanh</td>
+<td>$ f(x) = \tanh(x) = \frac{e^x - e^{-x}}{e^x + e^{-x}} $</td>
+<td>$ f^{\prime}(x) = 1 - f(x)^2 $</td>
+<td>输出范围为 (-1, 1)，比 Sigmoid 更常用。仍有梯度消失风险。</td>
+</tr>
+<tr>
+<td>ReLU</td>
+<td>$ f(x) = \max(0, x) $</td>
+<td>$ f^{\prime}(x) = \begin{cases} 1 & x > 0 \\ 0 & x \leq 0 \end{cases} $</td>
+<td>简单高效，避免梯度消失&#x2F;爆炸问题。导数在 $ x \leq 0 $ 时为 0，可能导致“死亡神经元”。</td>
+</tr>
+<tr>
+<td>Leaky ReLU</td>
+<td>$ f(x) = \begin{cases} x & x > 0 \\ \alpha x & x \leq 0 \end{cases} $</td>
+<td>$ f^{\prime}(x) = \begin{cases} 1 & x > 0 \\ \alpha & x \leq 0 \end{cases} $</td>
+<td>解决 ReLU 的“死亡神经元”问题，$ \alpha $ 是一个小的正常数（如 0.01）。</td>
+</tr>
+<tr>
+<td>ELU</td>
+<td>$ f(x) = \begin{cases} x & x > 0 \\ \alpha (e^x - 1) & x \leq 0 \end{cases} $</td>
+<td>$ f^{\prime}(x) = \begin{cases} 1 & x > 0 \\ f(x) + \alpha & x \leq 0 \end{cases} $</td>
+<td>更平滑，输出范围更接近 0，增强训练稳定性。</td>
+</tr>
+<tr>
+<td>Softmax</td>
+<td>$ f_i(x) = \frac{e^{x_i}}{\displaystyle\sum_{j} e^{x_j}} $</td>
+<td>$ f^{\prime}_i(x) = f_i(x)(1 - f_i(x)) $（单一元素导数） $ f^{\prime}_{ij}(x) = -f_i(x)f_j(x) $（交叉元素导数）</td>
+<td>用于多分类问题，输出为概率分布。</td>
+</tr>
+<tr>
+<td>Swish</td>
+<td>$ f(x) = x \cdot \sigma(x) = x \cdot \frac{1}{1 + e^{-x}} $</td>
+<td>$ f^{\prime}(x) = f(x) + \sigma(x) \cdot (1 - f(x)) $</td>
+<td>平滑非线性，比 ReLU 表现更好，尤其在深层网络中。</td>
+</tr>
+<tr>
+<td>GELU</td>
+<td>$ f(x) = x \cdot \Phi(x) $, 其中 $ \Phi(x) $ 是标准正态分布的 CDF</td>
+<td>无明确的闭式解，可近似为 $ f^{\prime}(x) \approx \sigma(x) \cdot (1 + x \cdot (1 - \sigma(x))) $</td>
+<td>平滑近似，性能优于 ReLU 和 Swish，常用于 Transformer。</td>
+</tr>
+<tr>
+<td>Linear</td>
+<td>$ f(x) = x $</td>
+<td>$ f^{\prime}(x) = 1 $</td>
+<td>输出未受限，通常用于回归问题或最后一层。</td>
+</tr>
+</tbody></table>
+</li>
+<li><p>常见激活函数的曲线图</p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://picbed.cloudchewie.com/blog/post/Machine-Learning/%E6%BF%80%E6%B4%BB%E5%87%BD%E6%95%B0%E6%9B%B2%E7%BA%BF.png!blogimg" class="" width="400" title="激活函数曲线"></li>
+</ul>
+<h3 id="九、卷积神经网络"><a href="#九、卷积神经网络" class="headerlink" title="九、卷积神经网络"></a>九、卷积神经网络</h3><ul>
+<li><p>传统神经网络的缺点</p>
+<ul>
+<li>不同层神经元连接方式为“全连接”，对于大维度输入数据，权重和偏置参数量大，导致训练收敛缓慢</li>
+<li>特别是图像数据（数以百万像素），以单张黑白 28 × 28 的手写数字图片为例，输入层神经元就有 784 个</li>
+</ul>
+</li>
+<li><p>卷积神经网络（Convolutional Neural Network, CNN）</p>
+<ul>
+<li>利用生物学上感受野的概念</li>
+<li>局部连接：卷积层的神经元只与前一层的部分神经元节点相连，即神经元之间的连接是<strong>非全连接</strong>的</li>
+<li>权重共享：同一层中某些神经元之间的连接的权重$ 𝑤 $和偏置$ 𝑏 $​​ 是相同的，大大减少了训练参数量</li>
+<li>降采样（池化）：更进一步信息抽象和特征提取，减少数据处理量</li>
+</ul>
+</li>
+<li><p>卷积层</p>
+<ul>
+<li>卷积是一种线性的、平移不变的运算，其由在输入信号上执行局部加权的组合构成</li>
+<li>根据所选择的权重集合不同，揭示输入信号的不同性值</li>
+<li>卷积核（滤波器）：在 CNN 中，与权重集合相关的是卷积核（kernel）；选择合适的核，能从输入信号中提取最显著和最重要的特征</li>
+<li>$ c_i=f(\sum\omega\cdot x+b) $，其中$ \omega $​ 即为卷积核</li>
+<li>在全连接神经网络中，隐藏层中的神经元的感受野足够大乃至可以看到上一层的所有特征</li>
+<li>而在卷积神经网络中，隐藏层中的神经元的感受野比较小，只能看到上一层的部分特征，其所能看到的大小即为卷积核大小</li>
+<li>通过一个带有卷积核的感受视野扫描生成的下一层神经元矩阵被称为一个 Feature Map（特征图）</li>
+<li>卷积核中的每一项即为其权重值</li>
+</ul>
+</li>
+<li><p>特征图大小的计算</p>
+<ul>
+<li><p>输入图像大小为 $ H_{\text{in}} \times W_{\text{in}} $（高度 × 宽度）</p>
+</li>
+<li><p>卷积核大小为 $ K_h \times K_w $（高度 × 宽度）</p>
+</li>
+<li><p>步幅（stride）为 $ S_h $ 和 $ S_w $（纵向步幅 × 横向步幅）</p>
+</li>
+<li><p>填充（padding）为 $ P_h $ 和 $ P_w $（高度方向填充 × 宽度方向填充）</p>
+</li>
+<li><p>则输出图像大小 $ H_{\text{out}} \times W_{\text{out}} $ 可以计算为：</p>
+</li>
+</ul>
+<p>$$<br>H_{\text{out}} &#x3D; \left\lfloor \frac{H_{\text{in}} + 2P_h - K_h}{S_h} \right\rfloor + 1 \<br>W_{\text{out}} &#x3D; \left\lfloor \frac{W_{\text{in}} + 2P_w - K_w}{S_w} \right\rfloor + 1<br>$$</p>
+<ul>
+<li>很多深度学习框架会采取向下取整的方式，放弃输入特征图的一部分边界数据</li>
+<li>Caffe 和 PyTorch 会放弃输入特征图的左侧和上侧的一部分数据， 使得卷积核滑动窗恰好能到达最右下角的点</li>
+</ul>
+</li>
+<li><p>如何增加输出单元的感受野</p>
+<ul>
+<li>增加卷积核大小</li>
+<li>增加卷积层数</li>
+<li>在卷积前进行汇聚操作</li>
+</ul>
+</li>
+<li><p>卷积的变种</p>
+<ul>
+<li>分组卷积</li>
+<li>转置卷积</li>
+<li>空洞卷积：通过给卷积核插入“空洞”来变相地增加感受野的大小</li>
+<li>可变形卷积</li>
+</ul>
+</li>
+<li><p>卷积核的深度</p>
+<ul>
+<li><p>卷积核（Kernel）的形状可以表示为 $ K_h \times K_w \times C_{\text{in}} $:</p>
+<ul>
+<li>$ K_h $：卷积核的高度</li>
+<li>$ K_w $​：卷积核的宽度</li>
+<li>$ C_{\text{in}} $：输入特征图的通道数（深度）</li>
+</ul>
+</li>
+<li><p>特点</p>
+<ul>
+<li>卷积核的深度 $ C_{\text{in}} $ 必须与输入特征图的通道数相等，因为每个卷积核需要对输入的每一通道进行逐元素卷积</li>
+<li>如果输入特征图是 RGB 图像（3 个通道），卷积核的深度 $ C_{\text{in}} $​ 就为 3</li>
+</ul>
+</li>
+<li><p>卷积过程</p>
+<ul>
+<li>输入特征图的形状：$ H_{\text{in}} \times W_{\text{in}} \times C_{\text{in}} $（高度 × 宽度 × 通道数）</li>
+</ul>
+<ol start="2">
+<li>卷积核的形状：$ K_h \times K_w \times C_{\text{in}} $</li>
+<li>每个卷积核的作用：<ul>
+<li>对输入特征图的每一通道进行单独卷积</li>
+<li>将所有通道的卷积结果按元素相加（求和），生成一个二维特征图</li>
+</ul>
+</li>
+</ol>
+<ul>
+<li>输出特征图：如果有 $ C_{\text{out}} $ 个卷积核，则输出特征图的形状为 $ H_{\text{out}} \times W_{\text{out}} \times C_{\text{out}} $​</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>池化（Pooling）</p>
+<ul>
+<li>对图像进行“有损压缩”</li>
+<li>最大值池化、最小值池化、平均池化、全局平均池化（Global Average Pooling）</li>
+<li>作用<ul>
+<li>不变性，更关注是否存在某些关键特征而不是特征具体的位置；</li>
+<li>减少计算量和参数量；</li>
+<li>获得定长输出，例如：文本分类的时候输入是不定长的，可以通过池化获得定长输出；</li>
+<li>防止过拟合，但也有可能会带来欠拟合</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>局部响应归一化（Local Response Normalization, LRN）</p>
+<ul>
+<li><p>局部响应归一化是一种归一化技术，主要用于提高模型的泛化能力</p>
+</li>
+<li><p>它最早出现在 AlexNet 中，用于对中间特征图进行归一化，灵感来自生物神经网络的“侧抑制”机制</p>
+</li>
+<li><p>核心思想是对特定像素位置的值，使用其相邻通道的响应来进行归一化：</p>
+<ul>
+<li>计算当前像素位置在 <strong>通道维度</strong> 上的局部响应平方和</li>
+<li>根据平方和对当前通道的值进行归一化，抑制大的激活值，提升其他通道的响应</li>
+</ul>
+</li>
+<li><p>对于给定的输入特征图，假设输入在某一位置的特征值为 $ a_{i,x,y} $，表示第 $ i $ 个通道在位置 $ (x, y) $ 的值。LRN 的归一化计算如下：</p>
+<p>$$<br>b_{i,x,y} &#x3D; \frac{a_{i,x,y}}{\left( k + \alpha \displaystyle\sum_{j&#x3D;\max(0, i-n&#x2F;2)}^{\min(N-1, i+n&#x2F;2)} (a_{j,x,y})^2 \right)^\beta}<br>$$</p>
+<ul>
+<li>$ b_{i,x,y} $：归一化后的值</li>
+<li>$ a_{i,x,y} $：原始输入值</li>
+<li>$ k $：一个常数，避免归一化分母为零（通常 $ k = 2 $）</li>
+<li>$ \alpha $：缩放因子，控制归一化的强度（常见值为 $ 10^{-4} $）</li>
+<li>$ \beta $：指数项，控制归一化的抑制程度（通常取 $ 0.75 $）</li>
+<li>$ N $：输入特征图的通道数</li>
+<li>$ n $​：归一化时考虑的通道范围（常见值为 5）</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>批归一化（Batch Normalization，BN，BatchNorm）</p>
+<ul>
+<li><p>对于一个神经网络层的输入 $ x $，BN 的核心步骤如下：</p>
+<ul>
+<li><p>计算均值和方差：</p>
+<p>$$<br>\mu_B &#x3D; \frac{1}{m} \displaystyle\sum_{i&#x3D;1}^{m} x_i, \quad \sigma_B^2 &#x3D; \frac{1}{m} \displaystyle\sum_{i&#x3D;1}^{m} (x_i - \mu_B)^2<br>$$</p>
+</li>
+<li><p>标准化：</p>
+<p>$$<br>\hat{x}_i &#x3D; \frac{x_i - \mu_B}{\sqrt{\sigma_B^2 + \epsilon}}<br>$$</p>
+</li>
+<li><p>缩放和平移：</p>
+<p>$$<br>y_i &#x3D; \gamma \hat{x}_i + \beta<br>$$</p>
+<ul>
+<li>$ m $：当前批次的样本数</li>
+<li>$ \epsilon $：一个小常数，防止分母为零</li>
+<li>$ \gamma $ 和 $ \beta $​：可学习的参数，用于调整标准化后的分布</li>
+</ul>
+</li>
+<li>$ y_i = \gamma \cdot \frac{x_i - \mu_B}{\sqrt{\sigma_B^2 + \epsilon}} + \beta $​</li>
+</ul>
+</li>
+<li><p>通常用于非线性激活函数之前或之后，最常见的是放在激活函数之前：<br>$$<br>\text{Input} \to \text{Linear&#x2F;Conv} \to \text{BatchNorm} \to \text{Activation (e.g., ReLU)}<br>$$</p>
+</li>
+</ul>
+</li>
+<li><p>瓶颈结构</p>
+</li>
+<li><p>沙漏结构</p>
+</li>
+<li><p>正则化方法（Dropout）</p>
+<ul>
+<li>Dropout 是一种常用的正则化方法，可以缓解网络的过拟合问题</li>
+<li>Dropout 操作是指在网络的训练阶段，每次迭代时会从基础网络中随机丢弃一定比例的神经元，然后在修改后的网络上进行前向传播和反向传播</li>
+<li>注意：模型在测试阶段会恢复全部的神经元</li>
+</ul>
+</li>
+<li><p>残差网络（Residual Neural Network，ResNet）</p>
+<ul>
+<li><p>网络的退化（degeneration）：在 CNN 中，随着网络层数的加深，网络的训练误差和测试误差都会上升</p>
+</li>
+<li><p>残差连接</p>
+<ul>
+<li><p>ResNet 引入残差块（Residual Block），通过引入跳跃连接（Skip Connection），避免直接学习输入到输出的复杂映射，而是让网络学习残差映射：</p>
+<p>$$<br>F(x) &#x3D; H(x) - x\<br>H(x) &#x3D; F(x) + x<br>$$</p>
+</li>
+<li><p>其中，$ H(x) $ 是目标映射；$ F(x) $ 是残差映射，由一系列卷积层学习；$ x $ 是输入，通过跳跃连接直接加到输出</p>
+</li>
+</ul>
+</li>
+<li><p>残差块（Residual Block）</p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://picbed.cloudchewie.com/blog/post/Machine-Learning/%E6%AD%A3%E5%B8%B8%E5%9D%97%E4%B8%8E%E6%AE%8B%E5%B7%AE%E5%9D%97.png!blogimg" class="" width="400" title="正常块与残差块">
+
+<ul>
+<li><p>基本结构包括：</p>
+<ul>
+<li>两层卷积层（每层包含卷积+批归一化+ReLU 激活）</li>
+<li>跳跃连接：输入直接加到第二层卷积的输出</li>
+</ul>
+</li>
+<li><p>具体流程：</p>
+<ul>
+<li><p>输入 $ x $ 经过两层卷积，生成 $ F(x) $。</p>
+</li>
+<li><p>跳跃连接将 $ x $ 加到 $ F(x) $，输出 $ H(x) = F(x) + x $。</p>
+</li>
+</ul>
+</li>
+<li><p>表达式</p>
+<p>$$<br>  y &#x3D; \text{ReLU}(F(x, {W_i}) + x)<br>$$</p>
+</li>
+<li><p>如果输入和输出维度不同（如通道数不一致），跳跃连接可以通过线性投影（$ W_s $）调整：<br>$$<br>  y &#x3D; \text{ReLU}(F(x, {W_i}) + W_s \cdot x)<br>$$</p>
+</li>
+</ul>
+</li>
+</ul>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://picbed.cloudchewie.com/blog/post/Machine-Learning/%E5%8C%85%E5%90%AB%E4%BB%A5%E5%8F%8A%E4%B8%8D%E5%8C%85%E5%90%AB1x1%E5%8D%B7%E7%A7%AF%E5%B1%82%E7%9A%84%E6%AE%8B%E5%B7%AE%E5%9D%97.png!blogimg" class="" width="400" title="包含以及不包含1x1卷积层的残差块">
+
+<ul>
+<li><p>网络结构</p>
+<ol>
+<li>浅层卷积层：一个大核卷积（如 $ 7 \times 7 $）和池化层</li>
+<li>残差块堆叠：由多个残差块组成，每个阶段的通道数可能不同</li>
+<li>全局平均池化：将最后的特征图通过全局平均池化降维，变为固定大小的特征向量</li>
+<li>全连接层：用于分类或其他任务</li>
+</ol>
+</li>
+</ul>
+</li>
+<li><p>TextCNN</p>
+<ul>
+<li><p>将卷积神经网络 CNN 应用到文本分类任务，利用多个不同 size 的卷积核（kernel）提取句子中关键信息（类似多窗口大小的 n-gram），从而能够更好地捕捉局部相关性</p>
+</li>
+<li><p>输入层</p>
+<ul>
+<li>给定长度为 $ l $ 的句子 $ S = [w_1, w_2, \dots, w_l] $，每个单词 $ w_i $ 使用词嵌入（如 Word2Vec 或 GloVe）转换为固定长度的向量</li>
+<li>输入矩阵 $ X \in \mathbb{R}^{l \times d} $：$ X = [v(w_1), v(w_2), \dots, v(w_l)]^T $，其中$ l $表示句子长度，$ d $表示词向量的维度</li>
+</ul>
+</li>
+<li><p>卷积层</p>
+<ul>
+<li><p>卷积核：</p>
+<ul>
+<li>使用多个不同大小的卷积核（如 $ h = 2, 3, 4 $​）来捕捉不同长度的 n-gram 特征</li>
+<li>卷积核的大小为 $ h \times d $，跨越词嵌入的整个维度</li>
+</ul>
+</li>
+<li><p>卷积操作：对输入矩阵 $ X $ 应用卷积，生成特征映射 $ c $：$ c_i = f(w \cdot X[i:i+h-1] + b) $</p>
+</li>
+</ul>
+</li>
+<li><p>池化层：使用 1-max pooling</p>
+<ul>
+<li>从每个特征映射中选择最大的值，表示该卷积核在整个输入中最显著的特征</li>
+<li>池化后的结果是一个固定长度的向量，每个值对应一个卷积核的输出</li>
+<li>特征的位置信息在池化层完全丢失</li>
+<li>最大池化会丢失同一特征的强度信息：强特征会出现多次，出现次数越多说明这个特征越强，但 Max Pooling 只保留一个最大值</li>
+<li>采用 Average Pooling、K-Max Pooling、Chunk-Max Pooling</li>
+</ul>
+</li>
+<li><p>全连接层</p>
+<ul>
+<li>将池化层的输出拼接后传入全连接层</li>
+<li>最后通过 softmax（或 sigmoid）激活函数完成分类</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="十、循环神经网络"><a href="#十、循环神经网络" class="headerlink" title="十、循环神经网络"></a>十、循环神经网络</h3><ul>
+<li><p>FNN、CNN 处理序列数据的局限性</p>
+<ul>
+<li>只适合：图片分类、识别等任务</li>
+<li>不适合：连续数据处理，与时间有关数据（序列依赖关系）<ul>
+<li>比如语音、文本、视频、金融数据（股票波动）</li>
+<li>整个数据由若干同类型单元组成，称为“帧”，如音素、字词、每帧图像</li>
+<li>帧与帧之间存在相互依赖关系，不再满足独立性假设， 需要考虑数据前后位置关系</li>
+</ul>
+</li>
+<li>无法处理变长度数据<ul>
+<li>全部或者部分丧失数据之间前后依赖性</li>
+<li>单次处理数据长度不能过长，容易引起参数爆炸</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>循环神经网络（Recurrent Neural Network, RNN）</p>
+<ul>
+<li><p>给定输入序列 $ X = [x_1, x_2, \dots, x_T] $，RNN 的计算过程为：</p>
+<ul>
+<li><p>输入层：序列中的每个时间步 $ t $，输入 $ x_t $</p>
+</li>
+<li><p>隐藏层：每个时间步的隐藏状态 $ h_t $ 根据当前输入 $ x_t $ 和前一时间步的隐藏状态 $ h_{t-1} $ 计算：<br>$$<br>h_t &#x3D; f(W_{hx} \cdot x_t + W_{hh} \cdot h_{t-1} + b_h)<br>$$</p>
+<ul>
+<li>$ W_{hx} $：输入到隐藏层的权重矩阵</li>
+<li>$ W_{hh} $：隐藏层到隐藏层的权重矩阵（时间共享）</li>
+<li>$ b_h $：隐藏层的偏置。</li>
+<li>$ f $：激活函数（如 tanh 或 ReLU）</li>
+</ul>
+</li>
+<li><p>输出层：计算每个时间步的输出 $ y_t $：<br>$$<br>y_t &#x3D; g(W_{hy} \cdot h_t + b_y)<br>$$</p>
+<ul>
+<li>$ W_{hy} $：隐藏层到输出层的权重矩阵</li>
+<li>$ g $​：输出激活函数（如 softmax 或 sigmoid）</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>双向循环神经网络</p>
+<ul>
+<li><p>基本思想</p>
+<ul>
+<li>普通 RNN 只能利用序列的过去信息（即从 $ t=1 $ 到 $ t=T $ 的顺序）</li>
+<li>BiRNN 在同一时间步 $ t $ 同时考虑：<ul>
+<li>前向 RNN：从 $ t=1 $ 到 $ t=T $ 的正向传播</li>
+<li>后向 RNN：从 $ t=T $ 到 $ t=1 $​ 的反向传播</li>
+</ul>
+</li>
+<li>最终输出结合两种方向的信息</li>
+</ul>
+</li>
+<li><p>每个时间步 $ t $ 的隐藏状态为：$ h_t = [h_t^f; h_t^b] $</p>
+<ul>
+<li>$ h_t^f $：前向隐藏状态</li>
+<li>$ h_t^b $：后向隐藏状态</li>
+<li>输出 $ y_t $ 结合了前向和后向隐藏状态的信息</li>
+</ul>
+</li>
+<li><p>给定输入序列 $ X = [x_1, x_2, \dots, x_T] $</p>
+<ul>
+<li><p>前向 RNN：$ h_t^f = f(W_{hx}^f \cdot x_t + W_{hh}^f \cdot h_{t-1}^f + b_h^f) $</p>
+</li>
+<li><p>后向 RNN：$ h_t^b = f(W_{hx}^b \cdot x_t + W_{hh}^b \cdot h_{t+1}^b + b_h^b) $</p>
+</li>
+<li><p>输出层：每个时间步的输出 $ y_t = g(W_{hy} \cdot [h_t^f; h_t^b] + b_y) $​</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>基本循环神经网络和双向神经网络：只有单个隐藏层，不能很好学习数据内部关系</p>
+</li>
+<li><p>Deep（Bidirectional）RNN：叠加多个隐藏层，即在每个时刻会有多个隐藏层，有更强学习能力，但需要更多训练数据</p>
+</li>
+<li><p>循环神经网络训练算法——基于时间的反向传播 BPTT（Back-Propagation Through Time）</p>
+</li>
+<li><p>优化问题</p>
+<ul>
+<li>RNN 循环神经网络在时间维度上非常深，导致在训练中很容易发生梯度爆炸和梯度消失问题</li>
+<li>训练时梯度不能在较长序列中一直传递下去，从而使 RNN 无法捕捉到长距离的影响</li>
+</ul>
+</li>
+<li><p>正则化方法（Dropout）</p>
+</li>
+<li><p>RNN 的架构类型</p>
+<table>
+<thead>
+<tr>
+<th>架构类型</th>
+<th>输入形态</th>
+<th>输出形态</th>
+<th>应用场景</th>
+<th>特点</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>一对一</td>
+<td>单一输入$ x $</td>
+<td>单一输出 $ y $</td>
+<td>图像分类</td>
+<td>无时间维度，类似传统神经网络</td>
+</tr>
+<tr>
+<td>一对多</td>
+<td>单一输入$ x $</td>
+<td>序列输出 $ [y_1, \dots, y_T] $</td>
+<td>图像描述生成</td>
+<td>单一输入扩展为序列输出，常结合解码器使用</td>
+</tr>
+<tr>
+<td>多对一</td>
+<td>序列输入$ [x_1, \dots, x_T] $</td>
+<td>单一输出</td>
+<td>情感分析、分类</td>
+<td>将输入序列压缩为单一结果，依赖隐藏状态捕捉序列信息</td>
+</tr>
+<tr>
+<td>多对多(定长)</td>
+<td>序列输入</td>
+<td>序列输出</td>
+<td>视频帧分类、同步时间序列处理</td>
+<td>输入和输出长度相同，适合逐时间步预测</td>
+</tr>
+<tr>
+<td>多对多(变长)</td>
+<td>序列输入</td>
+<td>序列输出</td>
+<td>机器翻译、对话生成</td>
+<td>Encoder-Decoder&#x2F;Seq2Seq；编码器提取上下文向量，解码器生成序列输出</td>
+</tr>
+<tr>
+<td>长短期记忆网络 (LSTM)</td>
+<td>序列输入</td>
+<td>灵活</td>
+<td>长期时间序列预测</td>
+<td>通过记忆单元和门机制缓解梯度消失问题</td>
+</tr>
+<tr>
+<td>门控循环单元 (GRU)</td>
+<td>序列输入</td>
+<td>灵活</td>
+<td>长距离依赖建模</td>
+<td>结构更简洁，效率更高，但效果与 LSTM 相近</td>
+</tr>
+</tbody></table>
+</li>
+<li><p>LSTM</p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://picbed.cloudchewie.com/blog/post/Machine-Learning/LSTM.png!blogimg" class="" width="400" title="LSTM">
+
+<ul>
+<li><p>公式：假设当前输入为 $ x_t $，前一时刻的隐藏状态和记忆单元状态分别为 $ h_{t-1} $ 和 $ c_{t-1} $</p>
+<ol>
+<li><p>遗忘门（Forget Gate）：决定当前时刻哪些信息需要从记忆单元中删除</p>
+<p>$$<br>f_t &#x3D; \sigma(W_f \cdot [h_{t-1}, x_t] + b_f)<br>$$</p>
+<ul>
+<li>$ f_t \in [0, 1] $：表示是否保留记忆单元中信息的比例</li>
+</ul>
+</li>
+<li><p>输入门（Input Gate）：决定当前输入信息的重要性，并选择性地将其添加到记忆单元</p>
+<p>$$<br>i_t &#x3D; \sigma(W_i \cdot [h_{t-1}, x_t] + b_i)<br>$$</p>
+<ul>
+<li>$ i_t \in [0, 1] $：表示当前输入的重要程度</li>
+</ul>
+</li>
+<li><p>候选记忆单元状态：</p>
+<p>$$<br>\tilde{c}<em>t &#x3D; \tanh(W_c \cdot [h</em>{t-1}, x_t] + b_c)<br>$$</p>
+<ul>
+<li>$ \tilde{c}_t $：表示当前输入的候选记忆信息</li>
+</ul>
+</li>
+<li><p>更新记忆单元状态（Cell State）：用来存储长期的上下文信息</p>
+<p>$$<br>c_t &#x3D; f_t \odot c_{t-1} + i_t \odot \tilde{c}_t<br>$$</p>
+<ul>
+<li>$ c_t $：结合过去的记忆和当前的输入，更新记忆单元状态</li>
+</ul>
+</li>
+<li><p>输出门（Output Gate）：决定从记忆单元中读取哪些信息作为当前的隐藏状态输出</p>
+<p>$$<br>o_t &#x3D; \sigma(W_o \cdot [h_{t-1}, x_t] + b_o)<br>$$</p>
+<ul>
+<li>$ o_t \in [0, 1] $：表示当前记忆单元中哪些信息用于生成隐藏状态</li>
+</ul>
+</li>
+<li><p>隐藏状态：<br>$$<br>h_t &#x3D; o_t \odot \tanh(c_t)<br>$$</p>
+<ul>
+<li>$ h_t $​：作为当前时刻的输出信息</li>
+</ul>
+</li>
+</ol>
+</li>
+<li><p>综上所述，LSTM 公式可描述如下</p>
+
+    $$
+    \begin{aligned}
+    \begin{bmatrix}
+    \tilde{c}_t \\
+      o_t \\
+      i_t \\
+      f_t
+    \end{bmatrix}
+    &= \text{Activation}\left( \mathbf{W} \begin{bmatrix} \mathbf{x}_t \\ \mathbf{h}_{t-1} \end{bmatrix} + \mathbf{b} \right), \\
+    c_t &= f_t \odot c_{t-1} + i_t \odot \tilde{c}_t, \\
+    h_t &= o_t \odot \tanh(c_t),
+    \end{aligned}
+    $$
+    </li>
+</ul>
+</li>
+<li><p>GRU</p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://picbed.cloudchewie.com/blog/post/Machine-Learning/GRU.png!blogimg" class="" width="400" title="GRU">
+
+<ul>
+<li><p>GRU 比 LSTM 网络更简单的循环神经网络</p>
+<ul>
+<li>LSTM 中引入三个门函数控制输入值、记忆值和输出值，参数较多，训练起来比较困难</li>
+<li>遗忘门和输入门合并成更新门，另外多一个重置门</li>
+<li>不需要计算额外的内部状态$ c $，在当前状态$ h_t $和历史状态$ h_{t-1} $​ 之间引入线性依赖关系</li>
+</ul>
+</li>
+<li><p>公式：假设当前时刻的输入为 $ x_t $，上一时刻的隐藏状态为 $ h_{t-1} $</p>
+<ol>
+<li><p>更新门：控制当前时刻的隐藏状态中有多少信息需要从上一时刻传递，以及有多少新信息需要添加</p>
+
+
+       $$
+       z_t = \sigma(W_z \cdot [h_{t-1}, x_t] + b_z)
+       $$
+
+       
+
+<ul>
+<li>$ z_t \in [0, 1] $：更新门的输出，表示上一时刻的隐藏状态与当前时刻的输入的权重</li>
+</ul>
+</li>
+<li><p>重置门：决定丢弃多少过去的记忆，从而有选择性地“重置”上一时刻的隐藏状态</p>
+
+
+       $$
+       r_t = \sigma(W_r \cdot [h_{t-1}, x_t] + b_r)
+       $$
+
+       
+
+<ul>
+<li>$ r_t \in [0, 1] $：重置门的输出，控制当前时刻如何利用上一时刻的隐藏状态</li>
+</ul>
+</li>
+<li><p>候选隐藏状态：将记忆直接集成到隐藏状态 $ h_t $ 中，结构更为简单</p>
+
+
+       $$
+       \tilde{h}_t = \tanh(W_h \cdot [r_t \odot h_{t-1}, x_t] + b_h)
+       $$
+
+       
+
+<ul>
+<li>$ \tilde{h}_t $：基于当前输入和重置后的隐藏状态计算得到的候选隐藏状态</li>
+</ul>
+</li>
+<li><p>隐藏状态更新：</p>
+
+       $$
+       \begin{aligned}
+       h_t &= z_t \odot h_{t-1} + (1 - z_t) \odot \tilde{h}_t \\
+       &= z_t\odot h_{t-1}+(1-z_t)\odot\tanh(W_hx_t+U_h(r_t\circ h_{t-1})+b_h)
+       \end{aligned}
+       $$
+       
+<ul>
+<li>$ h_t $：结合上一时刻的隐藏状态（通过更新门的权重）和候选隐藏状态，更新当前隐藏状态</li>
+</ul>
+</li>
+</ol>
+</li>
+<li><p>当$ z_t=0 $且$ r_t=1 $时，隐状态$ h_t $退化为简单循环神经网络，即$ h_t=\tanh(W_hx_t+U_hh_{t-1}+b_h) $</p>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="十一、Transformer-模型"><a href="#十一、Transformer-模型" class="headerlink" title="十一、Transformer 模型"></a>十一、Transformer 模型</h3><ul>
+<li><p>序列到序列（Sequence to Sequence，Seq2Seq）架构</p>
+</li>
+<li><p>注意力机制</p>
+<ul>
+<li>深度学习中的注意力机制本质上和人类的选择性视觉注意力机制类似</li>
+<li>核心目标 r 也是从众多信息中选择出对当前任务目标更关键的信息，可以广义地解释为重要性权重的向量</li>
+<li>RNN 是健忘的，前面的信息在经过多个时间步骤传播后会被逐渐消弱乃至消失；</li>
+<li>RNN 的解码期间没有对齐操作，因此在解码每个元素的过程中，焦点分散在整个序列中；</li>
+</ul>
+</li>
+<li><p>注意力机制的核心步骤</p>
+<ul>
+<li><p>第一步：根据 Query 和 Key 计算权重系数</p>
+<ul>
+<li><p>根据 Query 和 Key 计算两者的相似性或者相关性</p>
+</li>
+<li><p>对第一阶段的原始分值进行归一化处理</p>
+</li>
+</ul>
+</li>
+<li><p>第二步：根据权重系数对 Value 进行加权求和</p>
+</li>
+<li><p>假设输入序列为 $ X = [x_1, x_2, \dots, x_T] $，输出序列为 $ Y = [y_1, y_2, \dots, y_{T^{\prime}}] $</p>
+</li>
+<li><p>计算注意力分数：对于每个时间步 $ t $ 的输出 $ y_t $，计算输入序列中每个元素 $ x_i $ 的相关性（称为注意力分数）</p>
+<p>$$<br>e_{t,i} &#x3D; f(h_t^{\text{dec}}, h_i^{\text{enc}})<br>$$</p>
+<ul>
+<li>$ h_t^{\text{dec}} $：解码器当前时间步的隐藏状态</li>
+<li>$ h_i^{\text{enc}} $：编码器中第 $ i $ 个时间步的隐藏状态</li>
+<li>$ f(\cdot) $：相关性函数，常用的形式包括：
+<ul>
+<li>点积：$ e_{t,i} = h_t^{\text{dec}} \cdot h_i^{\text{enc}} $</li>
+<li>加法：$ e_{t,i} = W[h_t^{\text{dec}}, h_i^{\text{enc}}] + b $</li>
+<li>缩放点积（用于 Transformer）</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>归一化注意力权重：使用 softmax 函数将注意力分数归一化为概率分布，$ \alpha_{t,i} $表示输入 $ x_i $ 对生成 $ y_t $ 的贡献权重</p>
+<p>$$<br>\alpha_{t,i} &#x3D; \frac{\exp(e_{t,i})}{\displaystyle\sum_{j&#x3D;1}^T \exp(e_{t,j})}<br>$$</p>
+</li>
+<li><p>加权求和生成上下文向量：用注意力权重对输入序列的隐藏状态进行加权求和，生成上下文向量 $ c_t $</p>
+<p>$$<br>c_t &#x3D; \displaystyle\sum_{i&#x3D;1}^T \alpha_{t,i} h_i^{\text{enc}}<br>$$</p>
+</li>
+<li><p>生成输出：上下文向量 $ c_t $ 和当前隐藏状态 $ h_t^{\text{dec}} $ 结合，生成最终输出<br>$$<br>y_t &#x3D; g(c_t, h_t^{\text{dec}})<br>$$</p>
+</li>
+</ul>
+</li>
+<li><p>自注意力（Self-Attention）</p>
+<ul>
+<li><p>缩放点积注意力（Scaled Dot-Product Attention）</p>
+</li>
+<li><p>自注意力是 Transformer 的核心机制，用于输入序列中每个元素与其他所有元素的交互</p>
+</li>
+<li><p>减少了对外部信息的依赖，更擅长捕捉数据或特征的内部相关性</p>
+</li>
+<li><p>将输入单词转化成嵌入向量，根据嵌入向量得到$ Q,K,V $三个向量且$ Q=K=V $</p>
+</li>
+<li><p>自注意力的权重矩阵计算：<br>$$<br>\text{Attention}(Q, K, V) &#x3D; \text{softmax}\left(\frac{QK^\top}{\sqrt{d_k}}\right)V<br>$$</p>
+<ul>
+<li>$ Q $：查询矩阵</li>
+<li>$ K $：键矩阵</li>
+<li>$ V $：值矩阵</li>
+<li>$ d_k $：键向量的维度，用于缩放点积</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>多头注意力（Multi-Head Attention）</p>
+<ul>
+<li>将输入分为多个头（子空间），并行计算注意力，每个头独立学习不同的特征表示</li>
+<li>这些“头”的输出随后被合并（通常是拼接后再通过一个线性层），以产生最终的输出表示</li>
+<li>公式：<br>$$<br>\text{MultiHead}(Q, K, V) &#x3D; \text{Concat}(\text{head}_1, \text{head}_2, \dots, \text{head}_h)W^O<br>$$<ul>
+<li>$ \text{head}_i = \text{Attention}(QW_i^Q, KW_i^K, VW_i^V) $​</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>Transformer 结构</p>
+<ul>
+<li><p>编码器结构：每个编码器由 N 层叠加的模块组成，每层包括</p>
+<ul>
+<li><p>多头自注意力机制：输入序列之间计算相关性，生成权重分布；</p>
+</li>
+<li><p>前馈神经网络：每个时间步上的特征通过一个两层的全连接网络进行处理；</p>
+</li>
+<li><p>残差连接与层归一化（Residual Connection &amp; Layer Normalization）：保留梯度流，提高模型训练的稳定性</p>
+
+      $$
+      \begin{aligned}
+      Z^{\prime} &= Z + \text{SubLayer}(Z)\\
+      \text{LayerNorm}(Z^{\prime}) &= \gamma \cdot \frac{Z^{\prime} - \mu}{\sigma} + \beta
+      \end{aligned}
+      $$
+      </li>
+</ul>
+</li>
+<li><p>解码器结构：解码器与编码器类似，但增加了以下模块</p>
+<ul>
+<li><p>掩码自注意力（Masked Multi-Head Self-Attention）：遮蔽未来的时间步，确保仅依赖已生成的部分；</p>
+
+
+      $$
+      \text{MaskedAttention}(Q, K, V) = \text{softmax}\left(\frac{QK^\top}{\sqrt{d_k}} + M\right)V
+      $$
+
+      
+</li>
+<li><p>交叉注意力（Encoder-Decoder Attention）：将自己的隐藏状态作为查询 $ Q $，编码器的输出作为键 $ K $ 和值 $ V $</p>
+</li>
+</ul>
+</li>
+<li><p>模型输入和位置编码</p>
+<ul>
+<li><p>输入嵌入：输入序列的每个词首先被嵌入到高维向量空间</p>
+</li>
+<li><p>位置编码（Positional Encoding）：</p>
+<ul>
+<li>Transformer 不使用循环结构，因此需要位置编码提供序列位置信息</li>
+<li>位置编码公式（正弦和余弦）：
+        $$
+        \begin{aligned}
+        PE(pos, 2i) &= \sin\left(\frac{pos}{10000^{2i/d_{\text{model}}}}\right)\\
+        PE(pos, 2i+1) &= \cos\left(\frac{pos}{10000^{2i/d_{\text{model}}}}\right)
+        \end{aligned}
+        $$
+        </li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>GPT（Generative Pre-trained Transformer）</p>
+<ul>
+<li>单向 Transformer 编码器：<ul>
+<li>输入序列仅能关注之前的上下文（从左到右），无法利用后续信息。</li>
+</ul>
+</li>
+</ul>
+<ol start="2">
+<li>预训练-微调范式：<ul>
+<li>预训练阶段：在大规模无标签文本上进行自回归任务（如下一个词预测）</li>
+<li>微调阶段：在特定任务（如分类、生成）上微调模型</li>
+</ul>
+</li>
+</ol>
+</li>
+<li><p>BERT（Bidirectional Encoder Representations from Transformers）</p>
+<ul>
+<li><p>双向 Transformer 编码器：</p>
+<ul>
+<li>每个词同时关注其左侧和右侧的上下文</li>
+</ul>
+</li>
+<li><p>预训练目标：</p>
+<ul>
+<li>掩码语言模型（Masked Language Model，MLM）：随机遮蔽部分词汇，通过上下文预测它们</li>
+<li>下一句预测（Next Sentence Prediction，NSP）：判断两句子是否为连续句子</li>
+</ul>
+</li>
+<li><p>Emebedding</p>
+<ul>
+<li>Token Emebedding</li>
+<li>Segment Embedding 用于区分输入的句子对，间接在语言模型中建模出前后句子所属的不同类型；</li>
+<li>Position Embedding 则不同于 Transformer 中的三角函数，BERT 中直接设定处理序列的最大长度为 512，并对每个位置的 Embedding 进行学习</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>T5（Text-to-Text Transfer Transformer）</p>
+<ul>
+<li>编码器-解码器结构：编码器处理输入，解码器生成输出文本</li>
+</ul>
+<ol start="2">
+<li>任务统一化：<ul>
+<li>例如，将分类任务表示为 “输入：文本，输出：标签”</li>
+</ul>
+</li>
+<li>预训练目标：<ul>
+<li>使用填空（Span Corruption）任务：随机遮蔽文本片段，模型学习恢复这些片段</li>
+</ul>
+</li>
+</ol>
+</li>
+<li><p>RoBERTa（A Robustly Optimized BERT Pretraining Approach）</p>
+<ul>
+<li>改进点：<ul>
+<li>移除了下一句预测（NSP）任务，专注于 MLM</li>
+<li>使用更大的数据集和更长的训练时间</li>
+<li>动态生成掩码：每次训练时重新生成遮蔽词</li>
+<li>增加批量大小和序列长度</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</article><script>enableGPT=true;</script><script>enableAside=true;</script><div class="post-copyright"><div class="post-copyright__author_box"><a class="post-copyright__author_img" href="/" title="头像"><img class="post-copyright__author_img_back" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://picbed.cloudchewie.com/blog/index/avatar.png!mini" title="头像" alt="头像"><img class="post-copyright__author_img_front" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://picbed.cloudchewie.com/blog/index/avatar.png!mini" title="头像" alt="头像"></a><div class="post-copyright__author_name">Robert-Stackflow</div><div class="post-copyright__author_desc">我之心扉，早已蒙尘；幸有良人，辟尘生辉</div></div><div class="post-copyright__post__info"><a class="post-copyright__original" title="该文章为原创文章，注意版权协议" href="https://blog.cloudchewie.com/posts/2025/01/04/notes/Machine-Learning/">原创</a><a class="post-copyright-title"><span onclick="rm.copyPageUrl('https://blog.cloudchewie.com/posts/2025/01/04/notes/Machine-Learning/')">机器学习笔记</span></a></div><div class="post-tools" id="post-tools"><div class="post-tools-left"><div class="shareRight"><div class="share-link mobile"><div class="share-qrcode"><div class="share-button" title="使用手机访问这篇文章"><i class="fas fa-qrcode"></i></div><div class="share-main"><div class="share-main-all"><div id="qrcode" title="https://blog.cloudchewie.com/posts/2025/01/04/notes/Machine-Learning/"></div><div class="reward-dec">使用手机访问这篇文章</div></div></div></div></div><div class="share-link weibo"><a class="share-button" target="_blank" href="https://service.weibo.com/share/share.php?title=机器学习笔记&amp;url=https://blog.cloudchewie.com/posts/2025/01/04/notes/Machine-Learning/&amp;pic=https://picbed.cloudchewie.com/blog/cover/Machine-Learning.png!cover" rel="external nofollow noreferrer noopener"><i class="fa-brands fa-weibo"></i></a></div><div class="share-link copyurl"><div class="share-button" id="post-share-url" title="复制链接" onclick="cloudchewieFn.copyArticleLink()"><i class="fas fa-link"></i></div></div></div></div><div class="post-tools-right"><div class="post_share"></div></div></div><div class="post-copyright__notice"><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="external nofollow noreferrer" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://blog.cloudchewie.com" target="_blank">Cloudchewie</a>！</span></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/posts/2025/01/05/llm/Distributed-Training/"><img class="prev-cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://picbed.cloudchewie.com/blog/cover/Distributed-Training.png!cover" onerror="onerror=null;src='https://picbed.cloudchewie.com/blog/index/404.png!cover'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">分布式训练</div></div></a></div><div class="next-post pull-right"><a href="/posts/2024/11/22/documention/LLaMA-Factory-Parameters/"><img class="next-cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://picbed.cloudchewie.com/blog/cover/llama-factory.png!cover" onerror="onerror=null;src='https://picbed.cloudchewie.com/blog/index/404.png!cover'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">LLaMA-Factory参数说明</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><span>阅读建议</span></div><div class="relatedPosts-list"><div class="relatedPosts-list-item"><a href="/posts/2025/01/16/notes/Reinforcement-Learning-1/" title="强化学习笔记（一）"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://picbed.cloudchewie.com/blog/cover/Reinforcement-Learning.jpg!cover" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2025-01-16</div><div class="title">强化学习笔记（一）</div></div></a></div><div class="relatedPosts-list-item"><a href="/posts/2025/01/16/notes/Reinforcement-Learning-2/" title="强化学习笔记（二）"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://picbed.cloudchewie.com/blog/cover/Reinforcement-Learning.jpg!cover" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2025-01-16</div><div class="title">强化学习笔记（二）</div></div></a></div><div class="relatedPosts-list-item"><a href="/posts/2025/01/16/notes/Reinforcement-Learning-3/" title="强化学习笔记（三）"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://picbed.cloudchewie.com/blog/cover/Reinforcement-Learning.jpg!cover" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2025-01-16</div><div class="title">强化学习笔记（三）</div></div></a></div></div></div><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><span> 评论</span></div><div class="comment-randomInfo"><a onclick="cloudchewieFn.addRandomCommentInfo()" href="javascript:void(0)" rel="external nofollow noreferrer">匿名评论</a></div><div class="comment-commentTerm"><a href="javascript:pjax.loadUrl(&quot;/term&quot;);" rel="external nofollow noreferrer">评论条例</a></div></div><div class="comment-wrap"><div><div id="twikoo-wrap"></div></div></div></div><div class="comment-barrage"></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://picbed.cloudchewie.com/blog/index/avatar.png!mini" onerror="this.onerror=null;this.src='https://picbed.cloudchewie.com/blog/index/404.png!cover'" alt="avatar"/></div><div class="author-info__name">Robert-Stackflow</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">归档</div><div class="length-num">37</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">31</div></a><a href="/categories/"><div class="headline">专栏</div><div class="length-num">7</div></a></div><a id="card-info-btn" target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/Robert-stackflow"><i class="fab fa-github"></i><span>GitHub</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="tencent://Message/?Uin=2014027378&amp;amp;websiteName=local.edu.com:8888=&amp;amp;Menu=yes" rel="external nofollow noreferrer" target="_blank" title="QQ"><i class="fab fa-qq"></i></a><a class="social-icon" href="https://space.bilibili.com/651449217" rel="external nofollow noreferrer" target="_blank" title="Bilibili"><i class="fab fa-bilibili"></i></a><a class="social-icon" href="https://twitter.com/RobertStackflow" rel="external nofollow noreferrer" target="_blank" title="X"><i class="fab fa-twitter"></i></a><a class="social-icon" href="mailto:2014027378@qq.com" rel="external nofollow noreferrer" target="_blank" title="Email"><i class="fas fa-envelope"></i></a><a class="social-icon" href="/atom.xml" target="_blank" title="RSS"><i class="fas fa-square-rss"></i></a></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E6%A6%82%E7%8E%87%E5%88%86%E5%B8%83"><span class="toc-text">一、概率分布</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E6%9C%B4%E7%B4%A0%E8%B4%9D%E5%8F%B6%E6%96%AF%E7%90%86%E8%AE%BA"><span class="toc-text">二、朴素贝叶斯理论</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%89%E3%80%81%E4%BF%A1%E6%81%AF%E7%86%B5"><span class="toc-text">三、信息熵</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9B%9B%E3%80%81%E9%9A%90%E9%A9%AC%E5%B0%94%E5%8F%AF%E5%A4%AB%E6%A8%A1%E5%9E%8B"><span class="toc-text">四、隐马尔可夫模型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%94%E3%80%81Word2Vec"><span class="toc-text">五、Word2Vec</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%AD%E3%80%81%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E6%A6%82%E8%BF%B0"><span class="toc-text">六、机器学习概述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%83%E3%80%81%E5%89%8D%E9%A6%88%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C"><span class="toc-text">七、前馈神经网络</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%AB%E3%80%81%E5%8F%8D%E5%90%91%E4%BC%A0%E6%92%AD"><span class="toc-text">八、反向传播</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B9%9D%E3%80%81%E5%8D%B7%E7%A7%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C"><span class="toc-text">九、卷积神经网络</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8D%81%E3%80%81%E5%BE%AA%E7%8E%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C"><span class="toc-text">十、循环神经网络</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8D%81%E4%B8%80%E3%80%81Transformer-%E6%A8%A1%E5%9E%8B"><span class="toc-text">十一、Transformer 模型</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/posts/2025/01/16/notes/Reinforcement-Learning-4/" title="强化学习笔记（四）"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://picbed.cloudchewie.com/blog/cover/Reinforcement-Learning.jpg!cover" onerror="this.onerror=null;this.src='https://picbed.cloudchewie.com/blog/index/404.png!cover'" alt="强化学习笔记（四）"/></a><div class="content"><a class="title" href="/posts/2025/01/16/notes/Reinforcement-Learning-4/" title="强化学习笔记（四）">强化学习笔记（四）</a><time datetime="2025-01-16T01:13:56.000Z" title="发表于 2025-01-16 09:13:56">2025-01-16</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/2025/01/16/notes/Reinforcement-Learning-3/" title="强化学习笔记（三）"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://picbed.cloudchewie.com/blog/cover/Reinforcement-Learning.jpg!cover" onerror="this.onerror=null;this.src='https://picbed.cloudchewie.com/blog/index/404.png!cover'" alt="强化学习笔记（三）"/></a><div class="content"><a class="title" href="/posts/2025/01/16/notes/Reinforcement-Learning-3/" title="强化学习笔记（三）">强化学习笔记（三）</a><time datetime="2025-01-16T01:10:08.000Z" title="发表于 2025-01-16 09:10:08">2025-01-16</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/2025/01/16/notes/Reinforcement-Learning-2/" title="强化学习笔记（二）"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://picbed.cloudchewie.com/blog/cover/Reinforcement-Learning.jpg!cover" onerror="this.onerror=null;this.src='https://picbed.cloudchewie.com/blog/index/404.png!cover'" alt="强化学习笔记（二）"/></a><div class="content"><a class="title" href="/posts/2025/01/16/notes/Reinforcement-Learning-2/" title="强化学习笔记（二）">强化学习笔记（二）</a><time datetime="2025-01-16T01:08:28.000Z" title="发表于 2025-01-16 09:08:28">2025-01-16</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/2025/01/16/notes/Reinforcement-Learning-1/" title="强化学习笔记（一）"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://picbed.cloudchewie.com/blog/cover/Reinforcement-Learning.jpg!cover" onerror="this.onerror=null;this.src='https://picbed.cloudchewie.com/blog/index/404.png!cover'" alt="强化学习笔记（一）"/></a><div class="content"><a class="title" href="/posts/2025/01/16/notes/Reinforcement-Learning-1/" title="强化学习笔记（一）">强化学习笔记（一）</a><time datetime="2025-01-16T01:07:08.000Z" title="发表于 2025-01-16 09:07:08">2025-01-16</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/2025/01/05/llm/Distributed-Training/" title="分布式训练"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://picbed.cloudchewie.com/blog/cover/Distributed-Training.png!cover" onerror="this.onerror=null;this.src='https://picbed.cloudchewie.com/blog/index/404.png!cover'" alt="分布式训练"/></a><div class="content"><a class="title" href="/posts/2025/01/05/llm/Distributed-Training/" title="分布式训练">分布式训练</a><time datetime="2025-01-05T15:53:24.000Z" title="发表于 2025-01-05 23:53:24">2025-01-05</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div id="footer_deal"><a class="deal_link" href="tencent://Message/?Uin=2014027378&amp;amp;websiteName=local.edu.com:8888=&amp;amp;Menu=yes" rel="external nofollow noreferrer" title="QQ"><i class="cloudchewiefont cloudchewie-icon-qq"></i></a><a class="deal_link" href="mailto:2014027378@qq.com" rel="external nofollow noreferrer" title="email"><i class="cloudchewiefont cloudchewie-icon-envelope"></i></a><a class="deal_link" target="_blank" rel="noopener external nofollow noreferrer" href="https://memos.cloudchewie.com" title="Memos"><i class="cloudchewiefont cloudchewie-icon-plant-fill"></i></a><a class="deal_link" href="/atom.xml" title="RSS"><i class="cloudchewiefont cloudchewie-icon-rss"></i></a><img class="footer_mini_logo" title="返回顶部" alt="返回顶部" onclick="cloudchewieFn.scrollToDest(0, 500)" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://picbed.cloudchewie.com/blog/index/avatar.png!mini" size="50px"/><a class="deal_link" target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/Robert-Stackflow" title="Github"><i class="cloudchewiefont cloudchewie-icon-github"></i></a><a class="deal_link" target="_blank" rel="noopener external nofollow noreferrer" href="https://space.bilibili.com/651449217" title="Bilibili"><i class="cloudchewiefont cloudchewie-icon-bilibili"></i></a><a class="deal_link" target="_blank" rel="noopener external nofollow noreferrer" href="https://twitter.com/RobertStackflow" title="Twitter"><i class="fab fa-twitter"></i></a><a class="deal_link" target="_blank" rel="noopener external nofollow noreferrer" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="Copyright"><i class="cloudchewiefont cloudchewie-icon-copyright-line"></i></a></div></div><div id="footer-bar"><div class="footer-bar-links"><div class="footer-bar-left"><div id="footer-bar-tips"><div class="copyright">&copy;2022 - 2025 By <a class="footer-bar-link" href="https://cloudchewie.com" rel="external nofollow noreferrer" title="Robert-Stackflow" target="_blank">Robert-Stackflow</a></div></div><div id="footer-type-tips"></div><div class="js-pjax"><script>function subtitleType () {
+  if (false) { 
+    window.typed = new Typed("#footer-type-tips", {
+      strings: ["昼夜交替的低语，暗藏着谁人的心迹"],
+      startDelay: 300,
+      typeSpeed: 150,
+      loop: true,
+      backSpeed: 50
+    })
+  } else {
+    document.getElementById("footer-type-tips").innerHTML = '昼夜交替的低语，暗藏着谁人的心迹'
+  }
+}
+
+if (false) {
+  if (typeof Typed === 'function') {
+    subtitleType()
+  } else {
+    getScript('https://cdn.cbd.int/typed.js@2.0.12/lib/typed.min.js').then(subtitleType)
+  }
+} else {
+  subtitleType()
+}</script></div></div><div class="footer-bar-right"><a class="footer-bar-link" target="_blank" rel="noopener external nofollow noreferrer" href="https://hexo.io/" title="框架">框架</a><a class="footer-bar-link" target="_blank" rel="noopener external nofollow noreferrer" href="https://butterfly.js.org/" title="主题">主题</a><a class="footer-bar-link" target="_blank" rel="noopener external nofollow noreferrer" href="http://beian.miit.gov.cn/" title="鄂ICP备2023005999号">鄂ICP备2023005999号</a><a class="footer-bar-link cc" href="/term" title="cc协议"><i class="cloudchewiefont cloudchewie-icon-copyright-line"></i><i class="cloudchewiefont cloudchewie-icon-creative-commons-by-line"></i><i class="cloudchewiefont cloudchewie-icon-creative-commons-nc-line"></i><i class="cloudchewiefont cloudchewie-icon-creative-commons-nd-line"></i></a></div></div></div></footer></div></div></div><div id="sidebar"><div id="sidebar-menus"><div class="avatar-img is-center"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://picbed.cloudchewie.com/blog/index/avatar.png!mini" onerror="onerror=null;src='https://picbed.cloudchewie.com/blog/index/404.png!cover'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"></div><div class="back-menu-list-groups"><div class="back-menu-list-group"><div class="back-menu-list-title">站点</div><div class="back-menu-list"><a class="back-menu-item" target="_blank" rel="noopener external nofollow noreferrer" href="https://www.cloudchewie.com" title="主页"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://picbed.cloudchewie.com/blog/index/favicon.png!mini" alt="主页"/><span class="back-menu-item-text">主页</span></a><a class="back-menu-item" target="_blank" rel="noopener external nofollow noreferrer" href="https://moment.cloudchewie.com" title="时光"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://picbed.cloudchewie.com/icon/moment-transparent.png!mini" alt="时光"/><span class="back-menu-item-text">时光</span></a><a class="back-menu-item" target="_blank" rel="noopener external nofollow noreferrer" href="https://memos.cloudchewie.com" title="Memos"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://picbed.cloudchewie.com/icon/memos.webp!mini" alt="Memos"/><span class="back-menu-item-text">Memos</span></a><a class="back-menu-item" target="_blank" rel="noopener external nofollow noreferrer" href="https://status.cloudchewie.com" title="站点监测"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://picbed.cloudchewie.com/icon/uptime.png!mini" alt="站点监测"/><span class="back-menu-item-text">站点监测</span></a></div></div><div class="back-menu-list-group"><div class="back-menu-list-title">应用</div><div class="back-menu-list"><a class="back-menu-item" target="_blank" rel="noopener external nofollow noreferrer" href="https://purrli.cloudchewie.com" title="Purrli"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://picbed.cloudchewie.com/blog/cat/apple-touch-icon.png!mini" alt="Purrli"/><span class="back-menu-item-text">Purrli</span></a><a class="back-menu-item" target="_blank" rel="noopener external nofollow noreferrer" href="https://pan.cloudchewie.com" title="Cloud云盘"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://picbed.cloudchewie.com/icon/cloud-transparent.png!mini" alt="Cloud云盘"/><span class="back-menu-item-text">Cloud云盘</span></a><a class="back-menu-item" target="_blank" rel="noopener external nofollow noreferrer" href="https://lsky.cloudchewie.com" title="Cloud图床"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://picbed.cloudchewie.com/icon/lsky.ico" alt="Cloud图床"/><span class="back-menu-item-text">Cloud图床</span></a><a class="back-menu-item" href="/responsive" title="网站截图"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://picbed.cloudchewie.com/blog/index/favicon.png!mini" alt="网站截图"/><span class="back-menu-item-text">网站截图</span></a><a class="back-menu-item" target="_blank" rel="noopener external nofollow noreferrer" href="https://apps.cloudchewie.com" title="App Center"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://picbed.cloudchewie.com/blog/index/favicon.png!mini" alt="App Center"/><span class="back-menu-item-text">App Center</span></a></div></div><div class="back-menu-list-group"><div class="back-menu-list-title">线路</div><div class="back-menu-list"><a class="back-menu-item" href="https://blog.cloudchewie.com" title="腾讯云"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://picbed.cloudchewie.com/icon/cos.svg" alt="腾讯云"/><span class="back-menu-item-text">腾讯云</span></a><a class="back-menu-item" target="_blank" rel="noopener external nofollow noreferrer" href="https://vercel.blog.cloudchewie.com" title="Vercel"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://picbed.cloudchewie.com/icon/vercel.png!mini" alt="Vercel"/><span class="back-menu-item-text">Vercel</span></a><a class="back-menu-item" target="_blank" rel="noopener external nofollow noreferrer" href="https://gh.blog.cloudchewie.com" title="GitHub"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://picbed.cloudchewie.com/icon/github.svg" alt="GitHub"/><span class="back-menu-item-text">GitHub</span></a></div></div><div class="back-menu-list-group"><div class="back-menu-list-title">友链</div><div class="back-menu-list"><a class="back-menu-item" target="_blank" rel="noopener external nofollow noreferrer" href="https://bf.zzxworld.com/s/1152" title="Blog Finder"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://picbed.cloudchewie.com/icon/blogfinder.png!mini" alt="Blog Finder"/><span class="back-menu-item-text">Blog Finder</span></a><a class="back-menu-item" target="_blank" rel="noopener external nofollow noreferrer" href="https://www.travellings.cn/go.html" title="开往"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://picbed.cloudchewie.com/icon/travellings.png!mini" alt="开往"/><span class="back-menu-item-text">开往</span></a></div></div></div><div class="back-menu-list-groups collapse-menu"><div class="back-menu-list-group"><div class="back-menu-list-title">导航</div><div class="back-menu-list"><a class="back-menu-item" href="javascript:cloudchewieFn.trailingBlog()" rel="external nofollow noreferrer" title="开往"><i class="fas fa-subway"></i><span class="back-menu-item-text">开往</span></a><a class="back-menu-item" href="javascript:cloudchewieFn.randomPost()" rel="external nofollow noreferrer" title="随机文章"><i class="fas fa-dice"></i><span class="back-menu-item-text">随机文章</span></a><a class="back-menu-item" href="/love/" title="挚爱"><i class="fas fa-heart"></i><span class="back-menu-item-text">挚爱</span></a></div></div></div><div class="menus_items"><div class="menus_item"><a class="site-page group" href="javascript:void(0);" rel="external nofollow noreferrer"><span> 文章</span></a><ul class="menus_item_child"><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 专栏</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);" rel="external nofollow noreferrer"><span> 空间</span></a><ul class="menus_item_child"><li><a class="site-page child" href="/memos/"><i class="fa-fw fas fa-rocket"></i><span> 即刻</span></a></li><li><a class="site-page child" href="/gallery/"><i class="fa-fw fas fa-image"></i><span> 画廊</span></a></li><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 天籁</span></a></li><li><a class="site-page child" href="/air/"><i class="fa-fw fas fa-wind"></i><span> 小空调</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);" rel="external nofollow noreferrer"><span> 分享</span></a><ul class="menus_item_child"><li><a class="site-page child" href="/bangumi/"><i class="fa-fw fab fa-bilibili"></i><span> 追番</span></a></li><li><a class="site-page child" href="/video/"><i class="fa-fw fas fa-video"></i><span> 影视</span></a></li><li><a class="site-page child" href="/game/"><i class="fa-fw fas fa-gamepad"></i><span> 游戏</span></a></li><li><a class="site-page child" href="/equipment/"><i class="fa-fw fas fa-laptop-code"></i><span> 装备</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);" rel="external nofollow noreferrer"><span> 站点</span></a><ul class="menus_item_child"><li><a class="site-page child" href="/atom.xml"><i class="fa-fw fas fa-rss"></i><span> RSS</span></a></li><li><a class="site-page child" href="/log/"><i class="fa-fw fa-fw fas fa-wrench"></i><span> 日志</span></a></li><li><a class="site-page child" href="/term/"><i class="fa-fw fa-fw fas fa-balance-scale"></i><span> 协议</span></a></li><li><a class="site-page child" href="/help/"><i class="fa-fw fa-fw fas fa-circle-question"></i><span> 指南</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);" rel="external nofollow noreferrer"><span> 关于</span></a><ul class="menus_item_child"><li><a class="site-page child" href="/about/"><i class="fa-fw fas fa-circle-info"></i><span> 关于我</span></a></li><li><a class="site-page child" href="/guestbook/"><i class="fa-fw fas fa-address-book"></i><span> 留言板</span></a></li></ul></div></div></div></div><div id="keyboard-tips"><div class="keyboardTitle">键盘快捷键</div><div class="keybordList"><div class="keybordItem"><div class="keyGroup"><div class="key">shift ？</div></div><div class="keyContent"><div class="content">查看辅助功能</div></div></div><div class="keybordItem"><div class="keyGroup"><div class="key">shift S</div></div><div class="keyContent"><div class="content">站内搜索</div></div></div><div class="keybordItem"><div class="keyGroup"><div class="key">shift R</div></div><div class="keyContent"><div class="content">随机访问</div></div></div><div class="keybordItem"><div class="keyGroup"><div class="key">shift H</div></div><div class="keyContent"><div class="content">返回首页</div></div></div><div class="keybordItem"><div class="keyGroup"><div class="key">shift C</div></div><div class="keyContent"><div class="content">打开/关闭控制台</div></div></div><div class="keybordItem"><div class="keyGroup"><div class="key">shift P</div></div><div class="keyContent"><div class="content">播放/暂停音乐</div></div></div><div class="keybordItem"><div class="keyGroup"><div class="key">shift D</div></div><div class="keyContent"><div class="content">深色/浅色显示模式</div></div></div><div class="keybordItem"><div class="keyGroup"><div class="key">shift L</div></div><div class="keyContent"><div class="content">「挚爱」页面</div></div></div><div class="keybordItem"><div class="keyGroup"><div class="key">shift E</div></div><div class="keyContent"><div class="content">「即刻」页面</div></div></div><div class="keybordItem"><div class="keyGroup"><div class="key">shift G</div></div><div class="keyContent"><div class="content">「画廊」页面</div></div></div><div class="keybordItem"><div class="keyGroup"><div class="key">shift T</div></div><div class="keyContent"><div class="content">「藏宝」页面</div></div></div><div class="keybordItem"><div class="keyGroup"><div class="key">shift M</div></div><div class="keyContent"><div class="content">「天籁」页面</div></div></div><div class="keybordItem"><div class="keyGroup"><div class="key">shift A</div></div><div class="keyContent"><div class="content">「关于」页面</div></div></div></div></div><div class="js-pjax" id="rightside"><div id="rightside-button-list"><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><a id="switch_commentBarrage" href="javascript:cloudchewieFn.switchCommentBarrage();" rel="external nofollow noreferrer" title="打开/关闭评论弹幕"><i class="cloudchewiefont cloudchewie-icon-danmu"></i></a><button id="go-down" type="button" title="直达底部"><i class="fas fa-arrow-down"></i></button></div></div><div class="needEndHide" id="nav-music"><a id="nav-music-hoverTips" onclick="cloudchewieFn.toggleMusic()" accesskey="m">播放音乐</a><div id="console-music-bg"></div><meting-js type="playlist" mutex="true" preload="none" theme="var(--cloudchewie-theme)" lrc-margin="0" data-lrctype="0" order="random"></meting-js></div><div id="algolia-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="search-wrap"><div id="algolia-search-input"></div><hr/><div id="algolia-search-results"><div id="algolia-hits"></div><div id="algolia-pagination"></div><div id="algolia-info"><div class="algolia-stats"></div><div class="algolia-poweredBy"></div></div></div></div></div><div id="search-mask"></div></div><div id="rightMenu"><div class="rightMenu-group rightMenu-small"><a class="rightMenu-item" href="javascript:pjax.loadUrl(&quot;/&quot;);" rel="external nofollow noreferrer"><i class="fas fa-home"></i></a><a class="rightMenu-item" href="javascript:window.location.reload();" rel="external nofollow noreferrer"><i class="fa fa-refresh"></i></a><a class="rightMenu-item" href="javascript:consoleFn.showConsole();" rel="external nofollow noreferrer"><i class="fas fa-cog"></i></a><a class="rightMenu-item" href="javascript:cloudchewieFn.scrollToTop();" rel="external nofollow noreferrer"><i class="fa fa-arrow-up"></i></a></div><div class="rightMenu-group rightMenu-line" id="menu-general"><a class="rightMenu-item" href="javascript:window.location.href=&quot;/archives/&quot;;" rel="external nofollow noreferrer"><i class="fas fa-archive"></i><span>归档</span></a><a class="rightMenu-item" href="javascript:window.location.href=&quot;/tags/&quot;;" rel="external nofollow noreferrer"><i class="fas fa-tags"></i><span>标签</span></a><a class="rightMenu-item" href="javascript:window.location.href=&quot;/categories/&quot;;" rel="external nofollow noreferrer"><i class="fas fa-folder-open"></i><span>专栏</span></a></div><div class="rightMenu-group rightMenu-line" id="menu-text"><a class="rightMenu-item" href="javascript:utilsFn.copySelect();" rel="external nofollow noreferrer"><i class="fa fa-copy"></i><span>复制</span></a><a class="rightMenu-item" id="refer-to-comment" href="javascript:cloudchewieFn.referToComment(window.getSelection().toString());" rel="external nofollow noreferrer"><i class="fa fa-comment-medical"></i><span>引用至评论</span></a><a class="rightMenu-item" href="javascript:window.open(&quot;https://google.com/search?q=&quot;+window.getSelection().toString());" rel="external nofollow noreferrer"><i class="fas fa-magnifying-glass"></i><span>Google搜索</span></a><a class="rightMenu-item" href="javascript:window.open(&quot;https://www.bing.com/search?q=&quot;+window.getSelection().toString());" rel="external nofollow noreferrer"><i class="fas fa-magnifying-glass"></i><span>Bing搜索</span></a><a class="rightMenu-item" href="javascript:window.open(&quot;https://www.baidu.com/s?wd=&quot;+window.getSelection().toString());" rel="external nofollow noreferrer"><i class="fas fa-magnifying-glass"></i><span>百度搜索</span></a></div><div class="rightMenu-group rightMenu-line" id="menu-paste"><a class="rightMenu-item" href="javascript:cloudchewieFn.paste()" rel="external nofollow noreferrer"><i class="fa fa-copy"></i><span>粘贴</span></a></div><div class="rightMenu-group rightMenu-line" id="menu-post"><a class="rightMenu-item" href="#post-comment"><i class="fas fa-comments"></i><span>转到评论</span></a><a class="rightMenu-item" href="javascript:cloudchewieFn.copyArticleLink()" rel="external nofollow noreferrer"><i class="fa fa-link"></i><span>复制本文地址</span></a></div><div class="rightMenu-group rightMenu-line" id="menu-to"><a class="rightMenu-item" href="javascript:cloudchewieFn.openWithNewTab()" rel="external nofollow noreferrer"><i class="fa fa-window-restore"></i><span>在新标签页打开</span></a><a class="rightMenu-item" href="javascript:cloudchewieFn.copyLink()" rel="external nofollow noreferrer"><i class="fa fa-copy"></i><span>复制链接地址</span></a><a class="rightMenu-item" id="menu-too" href="javascript:cloudchewieFn.open()" rel="external nofollow noreferrer"><i class="fa fa-link"></i><span>转到链接</span></a></div><div class="rightMenu-group rightMenu-line" id="menu-img"><a class="rightMenu-item" id="fullscreen-image" href="javascript:cloudchewieFn.fullScreenImage()" rel="external nofollow noreferrer"><i class="fa fa-arrows-alt"></i><span>全屏显示</span></a><a class="rightMenu-item" href="javascript:cloudchewieFn.downloadImage()" rel="external nofollow noreferrer"><i class="fa fa-download"></i><span>保存图片</span></a><a class="rightMenu-item" href="javascript:cloudchewieFn.openWithNewTab()" rel="external nofollow noreferrer"><i class="fa fa-window-restore"></i><span>在新标签页打开</span></a><a class="rightMenu-item" href="javascript:cloudchewieFn.copyLink()" rel="external nofollow noreferrer"><i class="fa fa-copy"></i><span>复制图片链接地址</span></a></div><div class="rightMenu-group rightMenu-line" id="menu-other"><a class="rightMenu-item" href="javascript:cloudchewieFn.toggleReadMode();" rel="external nofollow noreferrer"><i class="fas fa-book-open"></i><span>阅读模式</span></a><a class="rightMenu-item" id="menuCommentBarrage" href="javascript:cloudchewieFn.switchCommentBarrage();" rel="external nofollow noreferrer"><i class="cloudchewiefont cloudchewie-icon-danmu"></i><span class="menu-commentBarrage-text">打开弹幕</span></a><a class="rightMenu-item" id="menuAside" href="javascript:cloudchewieFn.toggleAside();" rel="external nofollow noreferrer"><i class="fas fa-arrows-alt-h"></i><span class="menu-toggleAside-text">显示/隐藏侧栏</span></a></div><div class="rightMenu-group rightMenu-line" id="menu-global"><a class="rightMenu-item" id="menuMusic" href="javascript:cloudchewieFn.toggleMusic();" rel="external nofollow noreferrer"><i class="fas fa-play"></i><span>播放音乐</span></a><a class="rightMenu-item" href="javascript:cloudchewieFn.translate();" rel="external nofollow noreferrer"><i class="fas fa-language"></i><span class="menu-translate-text">轉為繁體</span></a><a class="rightMenu-item" href="javascript:cloudchewieFn.toggleDarkMode();" rel="external nofollow noreferrer"><i class="fas fa-adjust"></i><span class="menu-toggleDarkMode-text">深色/浅色模式</span></a><a class="rightMenu-item" href="javascript:pjax.loadUrl(&quot;/term/&quot;);" rel="external nofollow noreferrer"><i class="fa fa-info-circle"></i><span>协议声明</span></a></div></div><div><script src="https://cdn.cbd.int/jquery@3.6.3/dist/jquery.min.js"></script><script src="/js/posts.js"></script><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.cbd.int/hexo-theme-cloudchewie@3.2.6/source/js/third-party/qrcode.min.js"></script><script src="https://cdn.cbd.int/hexo-theme-cloudchewie@3.2.6/source/js/third-party/marked.min.js"></script><script async data-pjax src="https://cdn.cbd.int/hexo-theme-cloudchewie@3.2.6/source/js/third-party/waterfall.min.js"></script><script src="https://cdn.cbd.int/hexo-theme-cloudchewie@3.2.6/source/js/third-party/pace.min.js"></script><script src="https://cdn.cbd.int/hexo-theme-cloudchewie@3.2.6/source/js/third-party/color-thief.js"></script><script src="https://cdn.cbd.int/hexo-theme-cloudchewie@3.2.6/source/js/third-party/aplayer.min.js"></script><script src="https://cdn.cbd.int/hexo-theme-cloudchewie@3.2.6/source/js/third-party/meting.min.js"></script><script src="/js/third-party/aplayer.min.js"></script><script src="/js/third-party/meting.min.js"></script><script src="https://cdn.cbd.int/hexo-theme-cloudchewie@3.2.6/source/js/third-party/universe.min.js"></script><link rel="stylesheet" href="https://cdn.cbd.int/@fontsource/titillium-web@5.0.18/400.css"><link rel="stylesheet" href="https://npm.elemecdn.com/lxgw-wenkai-screen-webfont@1.7.0/lxgwwenkaiscreen.css"><script src="/js/tw_cn.js"></script><script src="https://cdn.cbd.int/@fancyapps/ui@5.0.20/dist/fancybox/fancybox.umd.js"></script><script src="https://cdn.cbd.int/instant.page@5.1.1/instantpage.js" type="module"></script><script src="https://cdn.cbd.int/vanilla-lazyload@17.3.1/dist/lazyload.iife.min.js"></script><script src="https://cdn.cbd.int/node-snackbar@0.1.16/dist/snackbar.min.js"></script><script src="https://cdn.cbd.int/vue@3.4.21/dist/vue.global.prod.js"></script><script src="https://cdn.cbd.int/algoliasearch@4.14.2/dist/algoliasearch-lite.umd.js"></script><script src="https://cdn.cbd.int/instantsearch.js@4.46.1/dist/instantsearch.production.min.js"></script><script src="/js/search/algolia.js"></script><div class="js-pjax"><script>if (!window.MathJax) {
+  window.MathJax = {
+    tex: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"]],
+      tags: 'ams'
+    },
+    chtml: {
+      scale: 1.2
+    },
+    options: {
+      renderActions: {
+        findScript: [10, doc => {
+          for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+            const display = !!node.type.match(/; *mode=display/)
+            const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display)
+            const text = document.createTextNode('')
+            node.parentNode.replaceChild(text, node)
+            math.start = {node: text, delim: '', n: 0}
+            math.end = {node: text, delim: '', n: 0}
+            doc.math.push(math)
+          }
+        }, ''],
+        insertScript: [200, () => {
+          document.querySelectorAll('mjx-container:not\([display]\)').forEach(node => {
+            const target = node.parentNode
+            if (target.nodeName.toLowerCase() === 'li') {
+              target.parentNode.classList.add('has-jax')
+            } else {
+              target.classList.add('has-jax')
+            }
+          });
+        }, '', false]
+      }
+    }
+  }
+  
+  const script = document.createElement('script')
+  script.src = 'https://cdn.cbd.int/mathjax@3.2.2/es5/tex-mml-chtml.js'
+  script.id = 'MathJax-script'
+  script.async = true
+  document.head.appendChild(script)
+} else {
+  MathJax.startup.document.state(0)
+  MathJax.texReset()
+  MathJax.typeset()
+}</script><script>(()=>{
+  const init = () => {
+    twikoo.init(Object.assign({
+      el: '#twikoo-wrap',
+      envId: 'https://api.cloudchewie.com/twikoo',
+      region: 'ap-shanghai',
+      onCommentLoaded: function () {
+        cloudchewieFn.loadLightbox(document.querySelectorAll('#twikoo .tk-content img:not(.tk-owo-emotion)'))
+      }
+    }, null))
+  }
+
+  const getCount = () => {
+    const countELement = document.getElementById('twikoo-count')
+    if(!countELement) return
+    twikoo.getCommentsCount({
+      envId: 'https://api.cloudchewie.com/twikoo',
+      region: 'ap-shanghai',
+      urls: [window.location.pathname],
+      includeReply: false
+    }).then(function (res) {
+      countELement.innerText = res[0].count
+    }).catch(function (err) {
+      utilsFn.snack("评论系统过载,请稍后访问");
+    });
+  }
+
+  const runFn = () => {
+    init()
+    GLOBAL_CONFIG_SITE.isPost && getCount()
+  }
+
+  const loadTwikoo = () => {
+    if (typeof twikoo === 'object') {
+      setTimeout(runFn,0)
+      return
+    }
+    getScript('https://cdn.cbd.int/twikoo@1.6.32/dist/twikoo.all.min.js').then(runFn)
+  }
+
+  if ('Twikoo' === 'Twikoo' || !false) {
+    if (false) cloudchewieFn.loadComment(document.getElementById('twikoo-wrap'), loadTwikoo)
+    else loadTwikoo()
+  } else {
+    window.loadOtherComment = () => {
+      loadTwikoo()
+    }
+  }
+})()</script></div><script>var visitorMail = "visitor@cloudchewie.com";
+</script><script data-pjax="true">if (document.querySelector(".comment-barrage")){
+  var commentBarrageConfig = {
+    maxBarrage: 1,
+    barrageTime: 4000,
+    twikooUrl: "https://api.cloudchewie.com/twikoo",
+    accessToken: "",
+    mailMd5: "",
+    pageUrl: window.location.pathname,
+    barrageTimer: [],
+    barrageList: [],
+    barrageIndex: 0,
+    dom: document.querySelector(".comment-barrage"),
+  };
+  var commentInterval = null;
+  var hoverOnCommentBarrage = false;
+
+  document.querySelector(".comment-barrage").addEventListener("mouseenter", function() {
+    hoverOnCommentBarrage = true;
+  });
+  document.querySelector(".comment-barrage").addEventListener("mouseleave", function() {
+    hoverOnCommentBarrage = false;
+  });
+
+  function initCommentBarrage() {
+    if (!commentBarrageConfig.dom) return;
+
+    var data = JSON.stringify({
+      event: "COMMENT_GET",
+      "commentBarrageConfig.accessToken": commentBarrageConfig.accessToken,
+      url: commentBarrageConfig.pageUrl,
+    });
+    var xhr = new XMLHttpRequest();
+    xhr.withCredentials = true;
+    xhr.addEventListener("readystatechange", function () {
+      if (this.readyState === 4 && this.responseText) {
+        commentBarrageConfig.barrageList = commentLinkFilter(JSON.parse(this.responseText).data);
+        commentBarrageConfig.dom.innerHTML = "";
+      }
+    });
+    xhr.addEventListener('error',()=>{
+     utilsFn.snack("评论系统过载,请稍后访问");
+    });
+    xhr.open("POST", commentBarrageConfig.twikooUrl);
+    xhr.setRequestHeader("Content-Type", "application/json");
+    xhr.send(data);
+
+    clearInterval(commentInterval);
+    commentInterval = null;
+
+    commentInterval = setInterval(() => {
+      if (commentBarrageConfig.barrageList.length && !hoverOnCommentBarrage) {
+        popCommentBarrage(commentBarrageConfig.barrageList[commentBarrageConfig.barrageIndex]);
+        commentBarrageConfig.barrageIndex += 1;
+        commentBarrageConfig.barrageIndex %= commentBarrageConfig.barrageList.length;
+      }
+      if (
+        commentBarrageConfig.barrageTimer.length >
+          (commentBarrageConfig.barrageList.length > commentBarrageConfig.maxBarrage
+            ? commentBarrageConfig.maxBarrage
+            : commentBarrageConfig.barrageList.length) &&
+        !hoverOnCommentBarrage
+      ) {
+        removeCommentBarrage(commentBarrageConfig.barrageTimer.shift());
+      }
+    }, commentBarrageConfig.barrageTime);
+  }
+
+  function commentLinkFilter(data) {
+    data.sort((a, b) => {
+      return a.created - b.created;
+    });
+    let newData = [];
+    data.forEach(item => {
+      newData.push(...getCommentReplies(item));
+    });
+    return newData;
+  }
+
+  function getCommentReplies(item) {
+    if (item.replies) {
+      let replies = [item];
+      item.replies.forEach(item => {
+        replies.push(...getCommentReplies(item));
+      });
+      return replies;
+    } else {
+      return [];
+    }
+  }
+
+  function popCommentBarrage(data) {
+    let barrage = document.createElement("div");
+    barrage.className = "comment-barrage-item";
+    barrage.innerHTML = `
+        <div class="barrageHead">
+          <a class="barrageTitle ${
+            data.mailMd5 === commentBarrageConfig.mailMd5 ? "barrageBloggerTitle" : ""
+          }" href="javascript:cloudchewieFn.scrollTo('#post-comment')"">
+            ${data.mailMd5 === commentBarrageConfig.mailMd5 ? "博主" : "热评"}
+          </a>
+          <div class="barrageNick">${data.nick}</div>
+          <img class="nolazyload barrageAvatar" src="https://cravatar.cn/avatar/${data.mailMd5}"/>
+          <a class="comment-barrage-close" href="javascript:cloudchewieFn.switchCommentBarrage()" rel="external nofollow noreferrer"><i class="cloudchewiefont cloudchewie-icon-xmark"></i></a>
+        </div>
+        <a class="barrageContent" href="#${data.id}">
+          <object>${data.comment}</object>
+        </a>
+      `;
+    commentBarrageConfig.barrageTimer.push(barrage);
+    commentBarrageConfig.dom.append(barrage);
+  }
+
+  function removeCommentBarrage(barrage) {
+    barrage.className = "comment-barrage-item out";
+
+    setTimeout(() => {
+      if (commentBarrageConfig.dom && commentBarrageConfig.dom.contains(barrage)) {
+        commentBarrageConfig.dom.removeChild(barrage);
+      }
+      }, 1000);
+    }
+
+    // 自动隐藏
+    const commentEntryCallback = (entries) => {
+      const commentBarrage = document.querySelector(".comment-barrage");
+      const postComment = document.getElementById("post-comment");
+
+      entries.forEach(entry => {
+        if (postComment && commentBarrage && document.body.clientWidth > 768) {
+          commentBarrage.style.bottom = entry.isIntersecting ? "-200px" : "0";
+        }
+      });
+    };
+    // 创建IntersectionObserver实例
+    const observer = new IntersectionObserver(commentEntryCallback, {
+      root: null,
+      rootMargin: "0px",
+      threshold: 0
+    });
+    // 监视目标元素
+    const postCommentTarget = document.getElementById("post-comment");
+    if (postCommentTarget) {
+      observer.observe(postCommentTarget);
+    }
+
+    initCommentBarrage();
+
+    if (utilsFn.getLocalStorage("enableCommentBarrage") == "true") {
+      document.querySelector(".comment-barrage").style.display = "flex";
+      document.querySelector(".menu-commentBarrage-text").textContent = "关闭弹幕";
+    } else {
+      document.querySelector(".comment-barrage").style.display = "none";
+      document.querySelector(".menu-commentBarrage-text").textContent = "打开弹幕";
+    }
+
+    document.addEventListener("pjax:send", function () {
+      clearInterval(commentInterval);
+    });
+
+    //- window.addEventListener("scroll", ()=>{
+    //-         if (
+    //-   cloudchewieFn.isInViewPortOfOne(document.getElementById("post-comment"))
+    //- ) {
+    //-   $("#con-barrage")!=null&&$("#con-barrage").hide();
+    //-   $("#switch_commentBarrage")!=null&&$("#switch_commentBarrage").hide();
+    //-   $("#menuCommentBarrage")!=null&&$("#menuCommentBarrage").hide();
+    //- } else {
+    //-   $("#con-barrage")!=null&&$("#con-barrage").show();
+    //-   $("#switch_commentBarrage")!=null&&$("#switch_commentBarrage").show();
+    //-   $("#menuCommentBarrage")!=null&&$("#menuCommentBarrage").show();
+    //- }
+    //- });
+
+  }</script><script>window.addEventListener('load', () => {
+  const changeContent = (content) => {
+    if (content === '') return content
+
+    content = content.replace(/<img.*?src="(.*?)"?[^\>]+>/ig, '[图片]') // replace image link
+    content = content.replace(/<a[^>]+?href=["']?([^"']+)["']?[^>]*>([^<]+)<\/a>/gi, '[链接]') // replace url
+    content = content.replace(/<pre><code>.*?<\/pre>/gi, '[代码]') // replace code
+    content = content.replace(/<[^>]+>/g,"") // remove html tag
+
+    if (content.length > 150) {
+      content = content.substring(0,150) + '...'
+    }
+    return content
+  }
+
+  const getComment = () => {
+    const runTwikoo = () => {
+      twikoo.getRecentComments({
+        envId: 'https://api.cloudchewie.com/twikoo',
+        region: 'ap-shanghai',
+        pageSize: 6,
+        includeReply: true
+      }).then(function (res) {
+        const twikooArray = res.map(e => {
+          return {
+            'content': changeContent(e.comment),
+            'avatar': e.avatar,
+            'nick': e.nick,
+            'url': e.url + '#' + e.id,
+            'date': new Date(e.created).toISOString()
+          }
+        })
+
+        saveToLocal.set('twikoo-newest-comments', JSON.stringify(twikooArray), 10/(60*24))
+        generateHtml(twikooArray)
+      }).catch(function (err) {
+        const $dom = document.querySelector('#card-newest-comments .aside-list')
+        if($dom!=null)
+          $dom.innerHTML= "无法获取评论，请确认相关配置是否正确"
+      })
+    }
+
+    if (typeof twikoo === 'object') {
+      runTwikoo()
+    } else {
+      getScript('https://cdn.cbd.int/twikoo@1.6.32/dist/twikoo.all.min.js').then(runTwikoo)
+    }
+  }
+
+  const generateHtml = array => {
+    let result = ''
+
+    if (array.length) {
+      for (let i = 0; i < array.length; i++) {
+        result += '<div class=\'aside-list-item\'>'
+
+        if (true) {
+          const name = 'data-lazy-src'
+          result += `<a href='${array[i].url}' class='thumbnail'><img ${name}='${array[i].avatar}' alt='${array[i].nick}'></a>`
+        }
+
+        result += `<div class='content'>
+        <a class='comment' href='${array[i].url}' title='${array[i].content}'>${array[i].content}</a>
+        <div class='name'><span>${array[i].nick} / </span><time datetime="${array[i].date}">${utilsFn.diffDate(array[i].date, true)}</time></div>
+        </div></div>`
+      }
+    } else {
+      result += '没有评论'
+    }
+
+    let $dom = document.querySelector('#card-newest-comments .aside-list')
+    $dom.innerHTML= result
+    window.lazyLoadInstance && window.lazyLoadInstance.update()
+    window.pjax && window.pjax.refresh($dom)
+  }
+
+  const newestCommentInit = () => {
+    if (document.querySelector('#card-newest-comments .aside-list')) {
+      const data = saveToLocal.get('twikoo-newest-comments')
+      if (data) {
+        generateHtml(JSON.parse(data))
+      } else {
+        getComment()
+      }
+    }
+  }
+
+  newestCommentInit()
+  document.addEventListener('pjax:complete', newestCommentInit)
+})</script><link rel="stylesheet" href="https://cdn.cbd.int/hexo-theme-cloudchewie@3.2.16/source/icon/iconfont.css"><script src="https://cdn.cbd.int/pjax@0.2.8/pjax.min.js"></script><script>let pjaxSelectors = ["head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: false,
+  scrollRestoration: false
+})
+
+document.addEventListener('pjax:send', function () {
+
+  // removeEventListener scroll
+  window.resolveTocScrollFunction && window.removeEventListener('scroll', window.resolveTocScrollFunction)
+  window.scrollCollect && window.removeEventListener('scroll', scrollCollect)
+
+  typeof preloader === 'object' && preloader.initLoading()
+  document.getElementById('rightside').style.cssText = "opacity: ''; transform: ''"
+
+  if (window.aplayers) {
+    for (let i = 0; i < window.aplayers.length; i++) {
+      if (!window.aplayers[i].options.fixed) {
+        window.aplayers[i].destroy()
+      }
+    }
+  }
+
+  typeof typed === 'object' && typed.destroy()
+
+  //reset readmode
+  const $bodyClassList = document.body.classList
+  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
+
+  typeof disqusjs === 'object' && disqusjs.destroy()
+})
+
+document.addEventListener('pjax:complete', function () {
+  window.refreshFunction()
+
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+  })
+
+  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+  typeof chatBtnFn === 'function' && chatBtnFn()
+  typeof panguInit === 'function' && panguInit()
+
+  // google analytics
+  typeof gtag === 'function' && gtag('config', '', {'page_path': window.location.pathname});
+
+  // baidu analytics
+  typeof _hmt === 'object' && _hmt.push(['_trackPageview',window.location.pathname]);
+
+  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+
+  // prismjs
+  typeof Prism === 'object' && Prism.highlightAll()
+
+  typeof preloader === 'object' && preloader.endLoading()
+})
+
+document.addEventListener('pjax:error', (e) => {
+  if (e.request.status === 404) {
+    pjax.loadUrl('/404.html')
+  }
+})</script><script async data-pjax src="//cdn.cbd.int/hexo-theme-cloudchewie@3.2.20/source/js/third-party/busuanzi.pure.mini.js"></script></div><!-- hexo injector body_end start --><script data-pjax>
+  function butterfly_clock_cloudchewie_injector_config(){
+    var parent_div_git = document.getElementsByClassName('sticky_layout')[0];
+    var item_html = '<div class="card-widget card-weather"><div class="card-glass"><div class="card-background"><div class="card-content"><div id="hexo-card-weather"><img class="entered loading" id="card-weather-loading" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://picbed.cloudchewie.com/blog/index/loading.svg" style="height: 120px; width: 100%;" data-ll-status="loading"/></div></div></div></div></div>';
+    if(parent_div_git) {
+      parent_div_git.insertAdjacentHTML("afterbegin",item_html)
+    }
+  }
+  var elist = '/posts/'.split(',');
+  var cpage = location.pathname;
+  var epage = 'all';
+  var qweather_key = 'undefined';
+  var endpoint = 'https://api.cloudchewie.com';
+  var flag = 0;
+  var default_latlng = '112.6534116,27.96920845';
+  var use_default_latlng = 'false';
+
+  for (var i=0;i<elist.length;i++){
+    if (cpage.includes(elist[i])){
+      flag++;
+    }
+  }
+
+  if ((epage ==='all')&&(flag == 0)){
+    butterfly_clock_cloudchewie_injector_config();
+  }
+  else if (epage === cpage){
+    butterfly_clock_cloudchewie_injector_config();
+  }
+  </script><script data-pjax src="https://cdn.cbd.int/hexo-theme-cloudchewie@3.2.22/source/js/third-party/weather.min.js"></script><!-- hexo injector body_end end --></body></html>

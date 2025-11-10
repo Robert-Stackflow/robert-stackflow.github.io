@@ -1,0 +1,461 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>Cloudchewie</title>
+  <icon>https://blog.cloudchewie.com/icon.png</icon>
+  <subtitle>我之心扉，早已蒙尘；幸有良人，辟尘生辉</subtitle>
+  <link href="https://blog.cloudchewie.com/atom.xml" rel="self"/>
+  
+  <link href="https://blog.cloudchewie.com/"/>
+  <updated>2025-11-10T07:39:33.652Z</updated>
+  <id>https://blog.cloudchewie.com/</id>
+  
+  <author>
+    <name>Robert-Stackflow</name>
+    
+  </author>
+  
+  <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>强化学习笔记（四）</title>
+    <link href="https://blog.cloudchewie.com/posts/2025/01/16/notes/Reinforcement-Learning-4/"/>
+    <id>https://blog.cloudchewie.com/posts/2025/01/16/notes/Reinforcement-Learning-4/</id>
+    <published>2025-01-16T01:13:56.000Z</published>
+    <updated>2025-11-10T07:39:33.652Z</updated>
+    
+    
+    <summary type="html">强化学习学习笔记，从MDP到动态规划，从MC方法到TD方法，从函数逼近到策略梯度，从DQN到PPO，从强化学习到大语言模型</summary>
+    
+    
+    
+    <category term="课程笔记" scheme="https://blog.cloudchewie.com/categories/%E8%AF%BE%E7%A8%8B%E7%AC%94%E8%AE%B0/"/>
+    
+    
+    <category term="大语言模型" scheme="https://blog.cloudchewie.com/tags/%E5%A4%A7%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B/"/>
+    
+    <category term="笔记" scheme="https://blog.cloudchewie.com/tags/%E7%AC%94%E8%AE%B0/"/>
+    
+    <category term="强化学习" scheme="https://blog.cloudchewie.com/tags/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>强化学习笔记（三）</title>
+    <link href="https://blog.cloudchewie.com/posts/2025/01/16/notes/Reinforcement-Learning-3/"/>
+    <id>https://blog.cloudchewie.com/posts/2025/01/16/notes/Reinforcement-Learning-3/</id>
+    <published>2025-01-16T01:10:08.000Z</published>
+    <updated>2025-11-10T07:39:33.652Z</updated>
+    
+    
+    <summary type="html">强化学习学习笔记，从MDP到动态规划，从MC方法到TD方法，从函数逼近到策略梯度，从DQN到PPO，从强化学习到大语言模型</summary>
+    
+    
+    
+    <category term="课程笔记" scheme="https://blog.cloudchewie.com/categories/%E8%AF%BE%E7%A8%8B%E7%AC%94%E8%AE%B0/"/>
+    
+    
+    <category term="大语言模型" scheme="https://blog.cloudchewie.com/tags/%E5%A4%A7%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B/"/>
+    
+    <category term="笔记" scheme="https://blog.cloudchewie.com/tags/%E7%AC%94%E8%AE%B0/"/>
+    
+    <category term="强化学习" scheme="https://blog.cloudchewie.com/tags/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>强化学习笔记（二）</title>
+    <link href="https://blog.cloudchewie.com/posts/2025/01/16/notes/Reinforcement-Learning-2/"/>
+    <id>https://blog.cloudchewie.com/posts/2025/01/16/notes/Reinforcement-Learning-2/</id>
+    <published>2025-01-16T01:08:28.000Z</published>
+    <updated>2025-11-10T07:39:33.652Z</updated>
+    
+    
+    <summary type="html">强化学习学习笔记，从MDP到动态规划，从MC方法到TD方法，从函数逼近到策略梯度，从DQN到PPO，从强化学习到大语言模型</summary>
+    
+    
+    
+    <category term="课程笔记" scheme="https://blog.cloudchewie.com/categories/%E8%AF%BE%E7%A8%8B%E7%AC%94%E8%AE%B0/"/>
+    
+    
+    <category term="大语言模型" scheme="https://blog.cloudchewie.com/tags/%E5%A4%A7%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B/"/>
+    
+    <category term="笔记" scheme="https://blog.cloudchewie.com/tags/%E7%AC%94%E8%AE%B0/"/>
+    
+    <category term="强化学习" scheme="https://blog.cloudchewie.com/tags/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>强化学习笔记（一）</title>
+    <link href="https://blog.cloudchewie.com/posts/2025/01/16/notes/Reinforcement-Learning-1/"/>
+    <id>https://blog.cloudchewie.com/posts/2025/01/16/notes/Reinforcement-Learning-1/</id>
+    <published>2025-01-16T01:07:08.000Z</published>
+    <updated>2025-11-10T07:39:33.652Z</updated>
+    
+    
+    <summary type="html">强化学习学习笔记，从MDP到动态规划，从MC方法到TD方法，从函数逼近到策略梯度，从DQN到PPO，从强化学习到大语言模型</summary>
+    
+    
+    
+    <category term="课程笔记" scheme="https://blog.cloudchewie.com/categories/%E8%AF%BE%E7%A8%8B%E7%AC%94%E8%AE%B0/"/>
+    
+    
+    <category term="大语言模型" scheme="https://blog.cloudchewie.com/tags/%E5%A4%A7%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B/"/>
+    
+    <category term="笔记" scheme="https://blog.cloudchewie.com/tags/%E7%AC%94%E8%AE%B0/"/>
+    
+    <category term="强化学习" scheme="https://blog.cloudchewie.com/tags/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>分布式训练</title>
+    <link href="https://blog.cloudchewie.com/posts/2025/01/05/llm/Distributed-Training/"/>
+    <id>https://blog.cloudchewie.com/posts/2025/01/05/llm/Distributed-Training/</id>
+    <published>2025-01-05T15:53:24.000Z</published>
+    <updated>2025-11-10T07:39:33.648Z</updated>
+    
+    
+    <summary type="html">分布式训练，包括训练的显存计算，分布式训练的基本概念、训练技术（DDP、FSDP、DeepSpeed）、分布式训练库（torchrun、Accelerate）</summary>
+    
+    
+    
+    <category term="大语言模型系列" scheme="https://blog.cloudchewie.com/categories/%E5%A4%A7%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B%E7%B3%BB%E5%88%97/"/>
+    
+    
+    <category term="大语言模型" scheme="https://blog.cloudchewie.com/tags/%E5%A4%A7%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B/"/>
+    
+    <category term="LLM" scheme="https://blog.cloudchewie.com/tags/LLM/"/>
+    
+    <category term="分布式" scheme="https://blog.cloudchewie.com/tags/%E5%88%86%E5%B8%83%E5%BC%8F/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>机器学习笔记</title>
+    <link href="https://blog.cloudchewie.com/posts/2025/01/04/notes/Machine-Learning/"/>
+    <id>https://blog.cloudchewie.com/posts/2025/01/04/notes/Machine-Learning/</id>
+    <published>2025-01-04T17:47:08.000Z</published>
+    <updated>2025-11-10T07:39:33.650Z</updated>
+    
+    
+    <summary type="html">机器学习学习笔记，包括概率分布、朴素贝叶斯、信息熵、隐马尔可夫模型、FNN、BP算法、RNN、CNN、Transformer</summary>
+    
+    
+    
+    <category term="课程笔记" scheme="https://blog.cloudchewie.com/categories/%E8%AF%BE%E7%A8%8B%E7%AC%94%E8%AE%B0/"/>
+    
+    
+    <category term="笔记" scheme="https://blog.cloudchewie.com/tags/%E7%AC%94%E8%AE%B0/"/>
+    
+    <category term="机器学习" scheme="https://blog.cloudchewie.com/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
+    
+    <category term="神经网络" scheme="https://blog.cloudchewie.com/tags/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>LLaMA-Factory参数说明</title>
+    <link href="https://blog.cloudchewie.com/posts/2024/11/22/documention/LLaMA-Factory-Parameters/"/>
+    <id>https://blog.cloudchewie.com/posts/2024/11/22/documention/LLaMA-Factory-Parameters/</id>
+    <published>2024-11-22T03:34:05.000Z</published>
+    <updated>2025-11-10T07:39:33.648Z</updated>
+    
+    
+    <summary type="html">LLaMA-Factory微调、推理等各阶段的参数说明</summary>
+    
+    
+    
+    <category term="大语言模型系列" scheme="https://blog.cloudchewie.com/categories/%E5%A4%A7%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B%E7%B3%BB%E5%88%97/"/>
+    
+    
+    <category term="大语言模型" scheme="https://blog.cloudchewie.com/tags/%E5%A4%A7%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B/"/>
+    
+    <category term="Fine-Tuning" scheme="https://blog.cloudchewie.com/tags/Fine-Tuning/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>大模型微调BUG记录</title>
+    <link href="https://blog.cloudchewie.com/posts/2024/11/19/bug/LLM-Finetuning-Bugs/"/>
+    <id>https://blog.cloudchewie.com/posts/2024/11/19/bug/LLM-Finetuning-Bugs/</id>
+    <published>2024-11-19T15:53:24.000Z</published>
+    <updated>2025-11-10T07:39:33.648Z</updated>
+    
+    
+    <summary type="html">大语言模型微调，有关微调的定义、分类、方法、加速等方面的综述。</summary>
+    
+    
+    
+    <category term="大语言模型系列" scheme="https://blog.cloudchewie.com/categories/%E5%A4%A7%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B%E7%B3%BB%E5%88%97/"/>
+    
+    
+    <category term="大语言模型" scheme="https://blog.cloudchewie.com/tags/%E5%A4%A7%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B/"/>
+    
+    <category term="LLM" scheme="https://blog.cloudchewie.com/tags/LLM/"/>
+    
+    <category term="微调" scheme="https://blog.cloudchewie.com/tags/%E5%BE%AE%E8%B0%83/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>大语言模型微调综述</title>
+    <link href="https://blog.cloudchewie.com/posts/2024/11/19/llm/Fine-Tuning-Survey/"/>
+    <id>https://blog.cloudchewie.com/posts/2024/11/19/llm/Fine-Tuning-Survey/</id>
+    <published>2024-11-19T15:53:24.000Z</published>
+    <updated>2025-11-10T07:39:33.648Z</updated>
+    
+    
+    <summary type="html">大语言模型微调，有关微调的定义、分类、方法、加速等方面的综述。</summary>
+    
+    
+    
+    <category term="大语言模型系列" scheme="https://blog.cloudchewie.com/categories/%E5%A4%A7%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B%E7%B3%BB%E5%88%97/"/>
+    
+    
+    <category term="大语言模型" scheme="https://blog.cloudchewie.com/tags/%E5%A4%A7%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B/"/>
+    
+    <category term="LLM" scheme="https://blog.cloudchewie.com/tags/LLM/"/>
+    
+    <category term="微调" scheme="https://blog.cloudchewie.com/tags/%E5%BE%AE%E8%B0%83/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>卸载小米系列机型的预装软件</title>
+    <link href="https://blog.cloudchewie.com/posts/2024/05/04/trick/Uninstall-Pre-installed-Apps-on-Xiaomi-Phones/"/>
+    <id>https://blog.cloudchewie.com/posts/2024/05/04/trick/Uninstall-Pre-installed-Apps-on-Xiaomi-Phones/</id>
+    <published>2024-05-04T08:11:14.000Z</published>
+    <updated>2025-11-10T07:39:33.652Z</updated>
+    
+    
+    <summary type="html">卸载小米系列机型的预装软件</summary>
+    
+    
+    
+    <category term="玩机技巧" scheme="https://blog.cloudchewie.com/categories/%E7%8E%A9%E6%9C%BA%E6%8A%80%E5%B7%A7/"/>
+    
+    
+    <category term="Android" scheme="https://blog.cloudchewie.com/tags/Android/"/>
+    
+    <category term="小米" scheme="https://blog.cloudchewie.com/tags/%E5%B0%8F%E7%B1%B3/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Anaconda安装教程及命令</title>
+    <link href="https://blog.cloudchewie.com/posts/2024/03/07/tutorial/Anaconda/"/>
+    <id>https://blog.cloudchewie.com/posts/2024/03/07/tutorial/Anaconda/</id>
+    <published>2024-03-07T09:46:35.000Z</published>
+    <updated>2025-11-10T07:39:33.652Z</updated>
+    
+    
+    <summary type="html">Anaconda是一个开源的Python发行版和包管理器，用于简化Python环境的安装和管理，特别是在数据科学和机器学习领域中广泛使用。</summary>
+    
+    
+    
+    <category term="环境配置教程" scheme="https://blog.cloudchewie.com/categories/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE%E6%95%99%E7%A8%8B/"/>
+    
+    
+    <category term="Anaconda" scheme="https://blog.cloudchewie.com/tags/Anaconda/"/>
+    
+    <category term="conda" scheme="https://blog.cloudchewie.com/tags/conda/"/>
+    
+    <category term="安装教程" scheme="https://blog.cloudchewie.com/tags/%E5%AE%89%E8%A3%85%E6%95%99%E7%A8%8B/"/>
+    
+    <category term="环境配置" scheme="https://blog.cloudchewie.com/tags/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>博客搭建指南(一)</title>
+    <link href="https://blog.cloudchewie.com/posts/2024/02/01/tutorial/Blog-Building-Guide-1/"/>
+    <id>https://blog.cloudchewie.com/posts/2024/02/01/tutorial/Blog-Building-Guide-1/</id>
+    <published>2024-02-01T10:32:11.000Z</published>
+    <updated>2025-11-10T07:39:33.652Z</updated>
+    
+    
+    <summary type="html">我的博客搭建指南之一，主要介绍博客功能的演变升级历程，如控制台、导航栏、右键菜单等实现过程。</summary>
+    
+    
+    
+    <category term="博客教程" scheme="https://blog.cloudchewie.com/categories/%E5%8D%9A%E5%AE%A2%E6%95%99%E7%A8%8B/"/>
+    
+    
+    <category term="Hexo" scheme="https://blog.cloudchewie.com/tags/Hexo/"/>
+    
+    <category term="博客搭建" scheme="https://blog.cloudchewie.com/tags/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Pytest文档学习笔记</title>
+    <link href="https://blog.cloudchewie.com/posts/2023/11/30/documention/Pytest-Learning/"/>
+    <id>https://blog.cloudchewie.com/posts/2023/11/30/documention/Pytest-Learning/</id>
+    <published>2023-11-30T03:15:05.000Z</published>
+    <updated>2025-11-10T07:39:33.648Z</updated>
+    
+    
+    <summary type="html">Pytest文档学习笔记，来自@华</summary>
+    
+    
+    
+    <category term="文档" scheme="https://blog.cloudchewie.com/categories/%E6%96%87%E6%A1%A3/"/>
+    
+    
+    <category term="API文档" scheme="https://blog.cloudchewie.com/tags/API%E6%96%87%E6%A1%A3/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Colorful Season</title>
+    <link href="https://blog.cloudchewie.com/posts/2023/11/20/essay/Colorful-Season/"/>
+    <id>https://blog.cloudchewie.com/posts/2023/11/20/essay/Colorful-Season/</id>
+    <published>2023-11-20T02:58:05.000Z</published>
+    <updated>2025-11-10T07:39:33.648Z</updated>
+    
+    
+    <summary type="html">世界是什么颜色的，你我又是什么颜色的。当我们相遇时，颜色是否能够相互交融晕染。</summary>
+    
+    
+    
+    <category term="珠玑" scheme="https://blog.cloudchewie.com/categories/%E7%8F%A0%E7%8E%91/"/>
+    
+    
+    <category term="散文" scheme="https://blog.cloudchewie.com/tags/%E6%95%A3%E6%96%87/"/>
+    
+    <category term="予挚爱" scheme="https://blog.cloudchewie.com/tags/%E4%BA%88%E6%8C%9A%E7%88%B1/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Windows下安装WSL 2</title>
+    <link href="https://blog.cloudchewie.com/posts/2023/09/11/tutorial/Install-WSL2-on-Windows/"/>
+    <id>https://blog.cloudchewie.com/posts/2023/09/11/tutorial/Install-WSL2-on-Windows/</id>
+    <published>2023-09-11T10:09:05.000Z</published>
+    <updated>2025-11-10T07:39:33.652Z</updated>
+    
+    
+    <summary type="html">Windows下安装Linux子系统教程</summary>
+    
+    
+    
+    <category term="环境配置教程" scheme="https://blog.cloudchewie.com/categories/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE%E6%95%99%E7%A8%8B/"/>
+    
+    
+    <category term="安装教程" scheme="https://blog.cloudchewie.com/tags/%E5%AE%89%E8%A3%85%E6%95%99%E7%A8%8B/"/>
+    
+    <category term="环境配置" scheme="https://blog.cloudchewie.com/tags/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/"/>
+    
+    <category term="WSL" scheme="https://blog.cloudchewie.com/tags/WSL/"/>
+    
+    <category term="Linux" scheme="https://blog.cloudchewie.com/tags/Linux/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>编译原理笔记</title>
+    <link href="https://blog.cloudchewie.com/posts/2023/07/24/notes/Compilation-Principle/"/>
+    <id>https://blog.cloudchewie.com/posts/2023/07/24/notes/Compilation-Principle/</id>
+    <published>2023-07-24T08:04:23.000Z</published>
+    <updated>2025-11-10T07:39:33.649Z</updated>
+    
+    
+    <summary type="html">华中科技大学计算机科学与技术学院编译笔记，包括文法与语言、词法分析、语法分析、语义分析、中间代码生成、代码优化、目标代码生成</summary>
+    
+    
+    
+    <category term="课程笔记" scheme="https://blog.cloudchewie.com/categories/%E8%AF%BE%E7%A8%8B%E7%AC%94%E8%AE%B0/"/>
+    
+    
+    <category term="课程笔记" scheme="https://blog.cloudchewie.com/tags/%E8%AF%BE%E7%A8%8B%E7%AC%94%E8%AE%B0/"/>
+    
+    <category term="编译原理" scheme="https://blog.cloudchewie.com/tags/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>凸凹</title>
+    <link href="https://blog.cloudchewie.com/posts/2023/07/17/essay/Concave/"/>
+    <id>https://blog.cloudchewie.com/posts/2023/07/17/essay/Concave/</id>
+    <published>2023-07-17T09:59:05.000Z</published>
+    <updated>2025-11-10T07:39:33.648Z</updated>
+    
+    
+    <summary type="html">自此，无人理解的诗歌拥有了读者。</summary>
+    
+    
+    
+    <category term="珠玑" scheme="https://blog.cloudchewie.com/categories/%E7%8F%A0%E7%8E%91/"/>
+    
+    
+    <category term="小说" scheme="https://blog.cloudchewie.com/tags/%E5%B0%8F%E8%AF%B4/"/>
+    
+    <category term="哲思" scheme="https://blog.cloudchewie.com/tags/%E5%93%B2%E6%80%9D/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>操作系统原理笔记(一)</title>
+    <link href="https://blog.cloudchewie.com/posts/2023/03/12/notes/Operating-System-Principles-1/"/>
+    <id>https://blog.cloudchewie.com/posts/2023/03/12/notes/Operating-System-Principles-1/</id>
+    <published>2023-03-12T04:29:45.000Z</published>
+    <updated>2025-11-10T07:39:33.651Z</updated>
+    
+    
+    <summary type="html">华中科技大学计算机科学与技术学院操作系统原理课程笔记，包括绪论、操作系统的结构和硬件支持、进程管理</summary>
+    
+    
+    
+    <category term="课程笔记" scheme="https://blog.cloudchewie.com/categories/%E8%AF%BE%E7%A8%8B%E7%AC%94%E8%AE%B0/"/>
+    
+    
+    <category term="课程笔记" scheme="https://blog.cloudchewie.com/tags/%E8%AF%BE%E7%A8%8B%E7%AC%94%E8%AE%B0/"/>
+    
+    <category term="操作系统" scheme="https://blog.cloudchewie.com/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>操作系统原理笔记(二)</title>
+    <link href="https://blog.cloudchewie.com/posts/2023/03/12/notes/Operating-System-Principles-2/"/>
+    <id>https://blog.cloudchewie.com/posts/2023/03/12/notes/Operating-System-Principles-2/</id>
+    <published>2023-03-12T04:29:40.000Z</published>
+    <updated>2025-11-10T07:39:33.651Z</updated>
+    
+    
+    <summary type="html">华中科技大学计算机科学与技术学院操作系统原理课程笔记，包括资源管理、处理机管理、主存管理</summary>
+    
+    
+    
+    <category term="课程笔记" scheme="https://blog.cloudchewie.com/categories/%E8%AF%BE%E7%A8%8B%E7%AC%94%E8%AE%B0/"/>
+    
+    
+    <category term="课程笔记" scheme="https://blog.cloudchewie.com/tags/%E8%AF%BE%E7%A8%8B%E7%AC%94%E8%AE%B0/"/>
+    
+    <category term="操作系统" scheme="https://blog.cloudchewie.com/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>操作系统原理笔记(三)</title>
+    <link href="https://blog.cloudchewie.com/posts/2023/03/12/notes/Operating-System-Principles-3/"/>
+    <id>https://blog.cloudchewie.com/posts/2023/03/12/notes/Operating-System-Principles-3/</id>
+    <published>2023-03-12T04:29:33.000Z</published>
+    <updated>2025-11-10T07:39:33.651Z</updated>
+    
+    
+    <summary type="html">华中科技大学计算机科学与技术学院操作系统原理课程笔记，包括设备管理、文件管理</summary>
+    
+    
+    
+    <category term="课程笔记" scheme="https://blog.cloudchewie.com/categories/%E8%AF%BE%E7%A8%8B%E7%AC%94%E8%AE%B0/"/>
+    
+    
+    <category term="课程笔记" scheme="https://blog.cloudchewie.com/tags/%E8%AF%BE%E7%A8%8B%E7%AC%94%E8%AE%B0/"/>
+    
+    <category term="操作系统" scheme="https://blog.cloudchewie.com/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/"/>
+    
+  </entry>
+  
+</feed>
