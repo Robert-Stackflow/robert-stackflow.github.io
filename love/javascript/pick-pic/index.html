@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pick Pic!</title>
+    <link rel="shortcut icon" href="https://picbed.cloudchewie.com/icon/blog-transparent.png!mini" type="image/x-icon">
+    <link rel="stylesheet" href="./common.css">
+</head>
+
+<body>
+    <div class="box">
+        <h1>Pick a picture!</h1>
+        <div class="img"></div>
+        <button class="start">Start</button>
+        <button class="stop" disabled>Stop</button>
+        <button class="reset" disabled>Reset</button>
+    </div>
+    <script>
+        const start = document.querySelector('.start')
+        const stop = document.querySelector('.stop')
+        const reset = document.querySelector('.reset')
+        const img = document.querySelector('.img')
+        let ptr=["https://picbed.cloudchewie.com/blog/gallery/shoto/shoto1.png",
+        "https://picbed.cloudchewie.com/blog/gallery/shoto/shoto2.jpg",
+        "https://picbed.cloudchewie.com/blog/gallery/cute/cute10.jpg",
+        "https://picbed.cloudchewie.com/blog/gallery/kaedehara-kazuha/wanye1.jpeg",
+        "https://picbed.cloudchewie.com/blog/gallery/kaedehara-kazuha/wanye2.jpg",
+        "https://picbed.cloudchewie.com/blog/gallery/kaedehara-kazuha/wanye3.jpg",
+        "https://picbed.cloudchewie.com/blog/gallery/xiao/xiao1.jpeg",
+        "https://picbed.cloudchewie.com/blog/gallery/umibe-no-etranger/yibang1.jpg",]
+        let random = 0
+        let timeId
+        start.addEventListener('click', function () {
+            timeId = setInterval(function () {
+                random = Math.floor(Math.random() * ptr.length)
+                img.style.backgroundImage = `url('${ptr[random]}')`
+            }, 50)
+            start.disabled = true
+            stop.disabled = false
+            if (ptr.length <= 1) {
+                stop.disabled = true
+                clearInterval(timeId)
+            }
+        })
+        stop.addEventListener('click', function () {
+            clearInterval(timeId)
+            ptr.splice(random, 1)
+            stop.disabled = true
+            start.disabled = false
+            reset.disabled = false
+        })
+        reset.addEventListener('click', function () {
+            ptr=["https://picbed.cloudchewie.com/blog/gallery/shoto/shoto1.png",
+        "https://picbed.cloudchewie.com/blog/gallery/shoto/shoto2.jpg",
+        "https://picbed.cloudchewie.com/blog/gallery/cute/tinali1.png",
+        "https://picbed.cloudchewie.com/blog/gallery/kaedehara-kazuha/wanye1.jpeg",
+        "https://picbed.cloudchewie.com/blog/gallery/kaedehara-kazuha/wanye2.jpg",
+        "https://picbed.cloudchewie.com/blog/gallery/kaedehara-kazuha/wanye3.jpg",
+        "https://picbed.cloudchewie.com/blog/gallery/xiao/xiao1.jpeg",
+        "https://picbed.cloudchewie.com/blog/gallery/umibe-no-etranger/yibang1.jpg",]
+            start.disabled = false
+            stop.disabled = true
+            reset.disabled = true
+        })
+    </script>
+</body>
+
+</html>

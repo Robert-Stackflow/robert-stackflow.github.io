@@ -1,0 +1,15 @@
+# hexo robots.txt
+User-agent: *
+
+Disallow: /vendors/
+Disallow: /js/
+Disallow: /css/
+Disallow: /img/
+Disallow: /fonts/
+Disallow: /vendors/
+Disallow: /fancybox/
+Disallow: /*.css
+Disallow: /*.js
+
+Sitemap: sitemap.xml
+Sitemap: baidusitemap.xml
