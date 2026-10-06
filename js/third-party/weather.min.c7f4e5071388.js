@@ -1,0 +1,117 @@
+function updateData(info, city) {
+  var card_weather_box = document.getElementById("hexo-card-weather");
+  if (card_weather_box == null || card_weather_box == undefined) return;
+  var weather_detail = "";
+  if (info == null) {
+    weather_detail = "获取天气数据中...";
+  } else if (info.lives.length >= 1 && info.lives[0].weather != undefined) {
+    weather_detail = `${city} ${info.lives[0].weather} ${info.lives[0].temperature} ℃ ${info.lives[0].humidity}% ${info.lives[0].winddirection} ${info.lives[0].windpower}`;
+  } else {
+    weather_detail = "获取天气数据失败，请稍后再试！";
+  }
+  var card_weather_box_html = `
+    <div class="clock-row clock-row-top">
+      <span id="card-weather-clockdate" class="card-weather-clockdate"></span>
+    </div>
+    <div class="clock-row clock-row-center">
+      <span id="card-weather-time" class="card-weather-time"></span>
+    </div>
+    <div class="clock-row clock-row-bottom">
+      <span class="card-weather-location">${weather_detail}</span>
+    </div>
+    `;
+  var week = [
+    "星期天",
+    "星期一",
+    "星期二",
+    "星期三",
+    "星期四",
+    "星期五",
+    "星期六",
+  ];
+  var loading_dom = document.getElementById("card-weather-loading");
+  if (loading_dom) {
+    loading_dom.innerHTML = "";
+  }
+  card_weather_box.innerHTML = card_weather_box_html;
+  function updateTime() {
+    var cd = new Date();
+    var card_clock_time =
+      zeroPadding(cd.getHours(), 2) +
+      ":" +
+      zeroPadding(cd.getMinutes(), 2) +
+      ":" +
+      zeroPadding(cd.getSeconds(), 2);
+    var card_clock_date =
+      zeroPadding(cd.getFullYear(), 4) +
+      " 年 " +
+      zeroPadding(cd.getMonth() + 1, 2) +
+      " 月 " +
+      zeroPadding(cd.getDate(), 2) +
+      " 日 " +
+      week[cd.getDay()];
+    var card_clock_dackorlight = cd.getHours();
+    var card_clock_dackorlight_str;
+    if (card_clock_dackorlight > 12) {
+      card_clock_dackorlight -= 12;
+      card_clock_dackorlight_str = " PM";
+    } else {
+      card_clock_dackorlight_str = " AM";
+    }
+    if (document.getElementById("card-weather-time")) {
+      var card_clock_time_dom = document.getElementById("card-weather-time");
+      var card_clock_date_dom = document.getElementById(
+        "card-weather-clockdate"
+      );
+      card_clock_time_dom.innerHTML = card_clock_time;
+      card_clock_date_dom.innerHTML =
+        card_clock_date + card_clock_dackorlight_str;
+    }
+  }
+  function zeroPadding(num, digit) {
+    var zero = "";
+    for (var i = 0; i < digit; i++) {
+      zero += "0";
+    }
+    return (zero + num).slice(-digit);
+  }
+  var timerID = setInterval(updateTime, 1000);
+  updateTime();
+}
+async function getIpInfo() {
+  if (!document.getElementById("hexo-card-weather")) return;
+  var final_latlng = default_latlng;
+  var city = "";
+  var ip = "";
+  await fetch(`${endpoint}/location/amap/ip`)
+    .then((res) => res.json())
+    .then((data) => {
+      ip = data.ip;
+      if (use_default_latlng !== "true") {
+        final_latlng = Array.isArray(data.rectangle)
+          ? default_latlng
+          : data.rectangle.split(";")[0];
+      }
+    });
+
+  fetch(`${endpoint}/location/amap/regeo?location=${final_latlng}`)
+    .then((regeo_res) => regeo_res.json())
+    .then((regeo_data) => {
+      if (regeo_data.status === "1") {
+        const addressComponent = regeo_data.regeocode.addressComponent;
+        city = addressComponent.city;
+        return addressComponent.adcode;
+      }
+    })
+    .then((adcode) => {
+      fetch(`${endpoint}/location/amap/weather?city=${adcode}`)
+        .then((res) => res.json())
+        .then((data) => {
+          if (document.getElementById("hexo-card-weather")) {
+            updateData(data, city);
+          }
+        });
+    });
+}
+getIpInfo();
+updateData(null, null);
